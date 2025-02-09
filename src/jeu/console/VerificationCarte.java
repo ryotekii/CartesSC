@@ -1,4 +1,4 @@
-package jeu;
+package jeu.console;
 
 /*
 Classe pour vérifier que les cartes peuvent être posées

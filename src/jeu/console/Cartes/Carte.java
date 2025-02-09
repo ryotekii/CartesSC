@@ -1,4 +1,4 @@
-package jeu.Cartes;
+package jeu.console.Cartes;
 
 abstract public class Carte {
     protected final String couleur;

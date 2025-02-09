@@ -1,4 +1,4 @@
-package jeu.Cartes;
+package jeu.console.Cartes;
 
 public class Tdah extends CarteSpeciale {
     public Tdah(String c){

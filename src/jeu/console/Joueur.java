@@ -1,16 +1,17 @@
-package jeu;
+package jeu.console;
 
 import java.util.Scanner;
 
 public class Joueur {
     private final String pseudo;
-    
+    private PaquetJoueur main;
     /*
     Fonction qui demande le pseudo à chaque joueur.
     A modifier plus tard pour vérifier qu'un pseudo n'est pas déjà pris.
     */
     private final Partie partie;
-    public static String demanderPseudo() {
+    
+    private String demanderPseudo() {
         String n;
         do {
             Scanner nom =new Scanner(System.in);
@@ -20,8 +21,10 @@ public class Joueur {
         return n;
     }
    
-    public Joueur(){
-        this.pseudo = Joueur.demanderPseudo();
+    public Joueur(Partie p){
+        this.pseudo = demanderPseudo();
+        this.partie = p;
+        this.main = new PaquetJoueur(this);
     }
     
     @Override

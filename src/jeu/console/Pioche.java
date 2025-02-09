@@ -1,13 +1,13 @@
-package jeu;
+package jeu.console;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import jeu.Cartes.Carte;
-import jeu.Cartes.CarteSimple;
+import jeu.console.Cartes.Carte;
+import jeu.console.Cartes.CarteSimple;
 
 public class Pioche {
     private static Pioche instance;
-    private final static ArrayList pioche = new ArrayList<Carte>();
+    private final static ArrayList<Carte> pioche = new ArrayList<>();
     
     public Pioche(){
         this.init();
@@ -43,8 +43,12 @@ public class Pioche {
         if (pioche.isEmpty()){
             refairePaquet();
         }
-        return (Carte) pioche.remove(0);
+        return pioche.remove(0);
     }
+    
+    /*
+    Faire une méthode pour distribuer le paquet en début de partie.
+    */
     
     private static void refairePaquet(){
         /*

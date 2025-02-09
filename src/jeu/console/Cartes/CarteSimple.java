@@ -1,4 +1,4 @@
-package jeu.Cartes;
+package jeu.console.Cartes;
 
 public class CarteSimple extends Carte {
     private final int numero;
