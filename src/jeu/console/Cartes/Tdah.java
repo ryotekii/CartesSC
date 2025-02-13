@@ -1,8 +1,8 @@
 package jeu.console.Cartes;
 
 public class Tdah extends CarteSpeciale {
-    // le joueur joue deux fois 
-    public Tdah(String c){
-        super(c);
+    //Le joueur joue une deuxième carte au choix après avoir posé celle-là.
+    public Tdah(){
+        super("Joker");
     }
 }

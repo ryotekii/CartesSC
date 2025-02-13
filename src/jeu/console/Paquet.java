@@ -1,8 +1,32 @@
 package jeu.console;
 
+import java.util.ArrayList;
+import jeu.console.Cartes.Carte;
+
 /*
 La pile de cartes sur la table.
 */
 public class Paquet {
+    private Partie partie;
+    private ArrayList<Carte> paquet = new ArrayList<>();
+    
+    public Paquet(Partie p){
+        this.partie = p;
+    }
+    
+    private void poserCarte(Carte c){
+        this.paquet.addFirst(c);
+    }
+    
+    private Carte voirCarteSup(){
+        return paquet.getFirst();
+    }
+    
+    public ArrayList<Carte> viderPaquet(){
+        ArrayList<Carte> provisoire = new ArrayList(this.paquet);
+        this.paquet.clear();
+        this.paquet.addFirst(provisoire.removeFirst());
+        return provisoire;
+    }
     
 }

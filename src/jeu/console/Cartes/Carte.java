@@ -1,5 +1,9 @@
 package jeu.console.Cartes;
 
+/*
+Pour toutes les cartes du jeu.
+*/
+
 abstract public class Carte {
     protected final String couleur;
     

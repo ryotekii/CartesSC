@@ -1,8 +1,8 @@
 package jeu.console.Cartes;
 
 public class Paralysie extends CarteSpeciale {
-    // le joueur suivant pioche 4 cartes et change de couleur 
-    public Paralysie(String c){
-        super(c);
+    //Le joueur suivant pioche 4 cartes et celui qui pose la carte choisit la couleur.
+    public Paralysie(){
+        super("Joker");
     }
 }

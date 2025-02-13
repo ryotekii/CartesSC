@@ -8,12 +8,19 @@ import java.util.Scanner;
 public class Partie {
     private Joueur[] joueurs;
     private final Paquet paquet;
+    private final Pioche pioche;
     private OrdreDeJeu ordre;
+    /*
+    Pour garder en mémoire la couleur actuelle, en particulier avec
+    l'utilisation de joker.
+    */
+    private String couleurActuelle;
 
     public Partie(Paquet p) {
         this.paquet = p;
         this.ajouterJoueurs(this.nbJoueurs());
         this.ordre = new OrdreDeJeu(this);
+        this.pioche = new Pioche(this);
     }
     
     public boolean pseudoDispo(String s){
@@ -27,6 +34,10 @@ public class Partie {
             }   
         }
         return true;
+    }
+    
+    public Paquet getPaquet(){
+        return this.paquet;
     }
     
     private int nbJoueurs(){
@@ -53,6 +64,10 @@ public class Partie {
             j = new Joueur(this);
             joueurs[i] = j;
         }
+    }
+    
+    public Pioche getPioche(){
+        return this.pioche;
     }
     
     private Joueur[] listeJoueurs(){
