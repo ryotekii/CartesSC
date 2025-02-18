@@ -30,12 +30,21 @@ public class FXMLController implements Initializable {
     }
 
     public void afficherCartesJoueur(FlowPane fp,boolean visible,ArrayList<Carte> cartes){
+        int nb = cartes.size();
+        /*
+        Ajouter un chevauchement dynamique qui s'adapte au nombre de cartes et à la taille du fp.
+        */
+        int maxChevauchement = -45;
+        /*
+        Trouver la taille de la fenêtre.
+        */
+        fp.setHgap(-45);
+        
         for (Carte carte:cartes){
-            Image imageCarte = new Image(carte.nomImage());
-            ImageView view = new ImageView(imageCarte);
-            view.setFitWidth(100);
-            view.setPreserveRatio(true);
-            fp.getChildren().add(view);
+            ImageView image = new ImageView(new Image(carte.nomImage()));
+            image.setFitWidth(90);
+            image.setPreserveRatio(true);
+            fp.getChildren().add(image);
         }
     }
 }

@@ -21,6 +21,7 @@ public class Partie {
         this.ajouterJoueurs(this.nbJoueurs());
         this.ordre = new OrdreDeJeu(this);
         this.pioche = new Pioche(this);
+        this.distribuer(7,null);
     }
     
     public boolean pseudoDispo(String s){
@@ -49,10 +50,22 @@ public class Partie {
                 nb = nombre.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Erreur : Veuillez entrer un nombre valide !");
-                nombre.next();
             }
         } while (!this.nbJValide(nb));
         return nb;
+    }
+    
+    /*
+    Distribue n cartes à tous les joueurs sauf j.
+    */
+    private void distribuer(int n,Joueur j){
+        for (int i=0;i<n;i++){
+            for (Joueur joueur:this.joueurs){
+                if (joueur != j){
+                    joueur.piocher();
+                }
+            }
+        }
     }
     
     /*
@@ -75,12 +88,12 @@ public class Partie {
     }
     
     /*
-    Vérifie si le nombre de joueurs est bien compris entre 2 et 6.
+    Vérifie si le nombre de joueurs est bien compris entre 2 et 4.
     */
     private boolean nbJValide(int n){
         if (n<2){
             return false;
-        } else return n < 6;
+        } else return n <= 4;
     }
     
 }

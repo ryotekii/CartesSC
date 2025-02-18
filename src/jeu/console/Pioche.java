@@ -62,14 +62,9 @@ public final class Pioche {
     }
     
     /*
-    Faire une méthode pour distribuer le paquet en début de partie.
+    Reprend toutes les cartes du paquet (sauf la première) et les remet dans la pioche.
     */
-    
     private void refairePaquet(){
-        /*
-        Modifier la fonction pour reprendre les cartes de la table de jeu (sauf
-        la premiere) et les ajouter à la pioche.
-        */
         ArrayList<Carte> provisoire = this.partie.getPaquet().viderPaquet();
         this.pioche.addAll(provisoire);
         this.melanger();

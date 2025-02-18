@@ -7,7 +7,6 @@ public class Joueur {
     private PaquetJoueur main;
     /*
     Fonction qui demande le pseudo à chaque joueur.
-    A modifier plus tard pour vérifier qu'un pseudo n'est pas déjà pris.
     */
     private final Partie partie;
     
@@ -25,6 +24,10 @@ public class Joueur {
         this.pseudo = demanderPseudo();
         this.partie = p;
         this.main = new PaquetJoueur(this);
+    }
+    
+    public void piocher(){
+        main.ajouterCarte(partie.getPioche().piocher());
     }
     
     @Override
