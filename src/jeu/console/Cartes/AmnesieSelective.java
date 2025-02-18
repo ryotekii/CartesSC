@@ -5,4 +5,9 @@ public class AmnesieSelective extends CarteSpeciale {
     public AmnesieSelective(String c){
         super("Joker");
     } 
+    
+    @Override
+    public String toString(){
+        return "Amnésie sélective";
+    }
 }

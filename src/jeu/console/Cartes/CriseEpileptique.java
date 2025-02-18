@@ -8,4 +8,9 @@ public class CriseEpileptique extends CarteSpeciale {
     public CriseEpileptique(){
         super("Joker");
     }
+    
+    @Override
+    public String toString(){
+        return "Crise épileptique";
+    }
 }

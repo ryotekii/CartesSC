@@ -5,4 +5,9 @@ public class NeuropathieO extends CarteSpeciale {
     public NeuropathieO(){
         super("Joker");
     }
+    
+    @Override
+    public String toString(){
+        return "Neuropathie optique";
+    }
 }

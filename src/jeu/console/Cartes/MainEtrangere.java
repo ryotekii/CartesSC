@@ -8,4 +8,9 @@ public class MainEtrangere extends CarteSpeciale {
     public MainEtrangere(String c){
         super(c);
     }
+    
+        @Override
+    public String toString(){
+        return "Main étrangère";
+    }
 }

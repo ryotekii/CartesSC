@@ -5,4 +5,9 @@ public class Narcolepsie extends CarteSpeciale {
     public Narcolepsie(String c){
         super(c);
     }
+    
+    @Override
+    public String toString(){
+        return "Narcolepsie";
+    }
 }

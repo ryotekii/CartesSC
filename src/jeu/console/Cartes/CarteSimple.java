@@ -15,4 +15,9 @@ public class CarteSimple extends Carte {
     public int getNumero(){
         return this.numero;
     }
+    
+    @Override
+    public String toString(){
+        return this.numero+" "+this.couleur;
+    }
 }

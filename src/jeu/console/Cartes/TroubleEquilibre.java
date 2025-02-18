@@ -5,4 +5,9 @@ public class TroubleEquilibre extends CarteSpeciale {
     public TroubleEquilibre(String c){
         super(c);
     }
+    
+    @Override
+    public String toString(){
+        return "Trouble de l'équilibre";
+    }
 }

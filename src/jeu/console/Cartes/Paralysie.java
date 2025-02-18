@@ -5,4 +5,9 @@ public class Paralysie extends CarteSpeciale {
     public Paralysie(){
         super("Joker");
     }
+    
+    @Override
+    public String toString(){
+        return "Paralysie du sommeil";
+    }
 }

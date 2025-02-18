@@ -5,4 +5,9 @@ public class Tdah extends CarteSpeciale {
     public Tdah(){
         super("Joker");
     }
+    
+        @Override
+    public String toString(){
+        return "TDAH";
+    }
 }

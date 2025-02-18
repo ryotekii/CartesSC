@@ -5,4 +5,9 @@ public class BlocageMoteur extends CarteSpeciale {
     public BlocageMoteur(String c){
         super(c);
     }
+    
+        @Override
+    public String toString(){
+        return "Blocage moteur";
+    }
 }
