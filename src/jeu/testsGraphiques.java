@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeu.console.Cartes.Carte;
 import jeu.console.Cartes.CarteSimple;
@@ -23,25 +25,29 @@ public class testsGraphiques extends Application {
     Carte c5 = new CarteSimple(2,"vert");
     ArrayList<Carte> paquet = new ArrayList<>(List.of(c1,c2,c3,c4,c5,c5,c5,c5,c5,c5,c5,c5,c5,c5,c5,c5));
     
-    private FlowPane cartesJoueurPrincipal;
+    private HBox cartesJoueurPrincipal;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Charger le fichier FXML
+        
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/FXML.fxml").toURI().toURL());
 
-        // Créer la scène avec l'FXML chargé
         AnchorPane root = loader.load();
 
-        // Récupérer le contrôleur du FXML
-        // Récupérer le contrôleur du FXML
         FXMLController controller = loader.getController();
 
-        // Récupérer le FlowPane dans le fichier FXML
-        FlowPane cartesJoueurPrincipal = (FlowPane) root.lookup("#cartesJoueurPrincipal");
 
-        // Appeler la fonction de test directement
-        controller.afficherCartesJoueur(cartesJoueurPrincipal,true, paquet);
+        HBox cartesJoueurPrincipal = (HBox) root.lookup("#cartesJoueurPrincipal");
+        controller.afficherCartesJoueurPrincipal(cartesJoueurPrincipal, paquet);
+        
+        HBox cartesJoueurDevant = (HBox) root.lookup("#cartesJoueurDevant");
+        controller.afficherCartesJoueurDevant(cartesJoueurDevant,1);
+        
+        VBox cartesJoueurGauche = (VBox) root.lookup("#cartesJoueurGauche");
+        controller.afficherCartesJoueurGauche(cartesJoueurGauche,5);
+        
+        VBox cartesJoueurDroit = (VBox) root.lookup("#cartesJoueurDroit");
+        controller.afficherCartesJoueurDroit(cartesJoueurDroit,8);
 
         // Créer et afficher la scène
         Scene scene = new Scene(root, 800, 600);
