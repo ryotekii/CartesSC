@@ -41,16 +41,18 @@ public class testsGraphiques extends Application {
         controller.afficherCartesJoueurPrincipal(cartesJoueurPrincipal, paquet);
         
         HBox cartesJoueurDevant = (HBox) root.lookup("#cartesJoueurDevant");
-        controller.afficherCartesJoueurDevant(cartesJoueurDevant,1);
+        controller.afficherCartesJoueurDevant(cartesJoueurDevant,35);
         
         VBox cartesJoueurGauche = (VBox) root.lookup("#cartesJoueurGauche");
-        controller.afficherCartesJoueurGauche(cartesJoueurGauche,5);
+        controller.afficherCartesJoueurGauche(cartesJoueurGauche,3);
         
         VBox cartesJoueurDroit = (VBox) root.lookup("#cartesJoueurDroit");
-        controller.afficherCartesJoueurDroit(cartesJoueurDroit,8);
+        controller.afficherCartesJoueurDroit(cartesJoueurDroit,30);
 
         // Créer et afficher la scène
         Scene scene = new Scene(root, 800, 600);
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(600);
         primaryStage.setTitle("Test FXML");
         primaryStage.setScene(scene);
         primaryStage.show();
