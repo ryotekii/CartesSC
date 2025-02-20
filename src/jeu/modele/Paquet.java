@@ -22,6 +22,10 @@ public class Paquet {
         return paquet.getFirst();
     }
     
+    public ArrayList<Carte> getPaquet(){
+        return this.paquet;
+    }
+    
     public ArrayList<Carte> viderPaquet(){
         ArrayList<Carte> provisoire = new ArrayList(this.paquet);
         this.paquet.clear();

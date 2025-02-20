@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Joueur {
     private String pseudo;
-    private PaquetJoueur main;
+    private final PaquetJoueur main;
     /*
     Fonction qui demande le pseudo à chaque joueur.
     */
@@ -31,6 +31,10 @@ public class Joueur {
     
     public void piocher(){
         main.ajouterCarte(partie.getPioche().piocher());
+    }
+    
+    public PaquetJoueur getPaquetJoueur(){
+        return this.main;
     }
     
     @Override

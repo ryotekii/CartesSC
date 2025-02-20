@@ -109,8 +109,20 @@ public class Partie {
         return this.pioche;
     }
     
-    private Joueur[] listeJoueurs(){
+    private Joueur[] getListeJoueurs(){
         return joueurs;
+    }
+    
+    public int getNombreJoueurs(){
+        return joueurs.length;
+    }
+    
+    public ArrayList<Carte> getListeCartesJoueur(int i){
+        return this.joueurs[i].getPaquetJoueur().getListeCartes();
+    }
+    
+    public int getNombreCartesJoueur(int i){
+        return this.joueurs[i].getPaquetJoueur().getListeCartes().size();
     }
     
     /*

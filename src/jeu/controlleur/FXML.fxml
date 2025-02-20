@@ -19,9 +19,20 @@
                   <Image url="@../images/fleche.png" />
                </image>
             </ImageView>
-            <ImageView id="pioche" fitHeight="181.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-120.0" StackPane.alignment="CENTER">
+            <ImageView id="imagePioche" fx:id="imagePioche" fitHeight="181.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-130.0" StackPane.alignment="CENTER">
                <image>
                   <Image url="@../images/dos.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView id="imagePaquet" fx:id="imagePaquet" fitHeight="181.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="130.0">
+               <image>
+                  <Image url="@../images/blocagemoteur-vert.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -53,9 +64,9 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <HBox id="cartesJoueurDevant" prefHeight="121.0" prefWidth="400.0" rotate="180.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="-30.0" />
-      <VBox id="cartesJoueurGauche" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="-20.0" AnchorPane.topAnchor="150.0" />
-      <VBox id="cartesJoueurDroit" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="200.0" AnchorPane.rightAnchor="-20.0" AnchorPane.topAnchor="150.0" />
-      <HBox id="cartesJoueurPrincipal" layoutX="28.0" layoutY="412.0" prefHeight="121.0" prefWidth="650.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="120.0" />
+      <HBox id="cartesJoueurDevant" fx:id="paquetJoueurDevant" prefHeight="121.0" prefWidth="400.0" rotate="180.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="-30.0" />
+      <VBox id="cartesJoueurGauche" fx:id="paquetJoueurGauche" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="-20.0" AnchorPane.topAnchor="150.0" />
+      <VBox id="cartesJoueurDroit" fx:id="paquetJoueurDroit" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="200.0" AnchorPane.rightAnchor="-20.0" AnchorPane.topAnchor="150.0" />
+      <HBox id="cartesJoueurPrincipal" fx:id="paquetJoueurPrincipal" layoutX="28.0" layoutY="412.0" prefHeight="121.0" prefWidth="650.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="120.0" />
    </children>
 </AnchorPane>

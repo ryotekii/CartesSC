@@ -1,16 +1,12 @@
 package jeu.controlleur;
 
-import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeu.modele.Cartes.Carte;
 import jeu.modele.Cartes.CarteSimple;
@@ -34,19 +30,11 @@ public class testsGraphiques extends Application {
         AnchorPane root = loader.load();
 
         FXMLController controller = loader.getController();
-
-
-        HBox cartesJoueurPrincipal = (HBox) root.lookup("#cartesJoueurPrincipal");
-        controller.afficherCartesJoueurPrincipal(cartesJoueurPrincipal, paquet);
         
-        HBox cartesJoueurDevant = (HBox) root.lookup("#cartesJoueurDevant");
-        controller.afficherCartesJoueurDevant(cartesJoueurDevant,35);
-        
-        VBox cartesJoueurGauche = (VBox) root.lookup("#cartesJoueurGauche");
-        controller.afficherCartesJoueurGauche(cartesJoueurGauche,3);
-        
-        VBox cartesJoueurDroit = (VBox) root.lookup("#cartesJoueurDroit");
-        controller.afficherCartesJoueurDroit(cartesJoueurDroit,30);
+        controller.afficherCartesJoueurPrincipal();
+        controller.afficherCartesJoueurDevant();
+        controller.afficherCartesJoueurGauche();
+        controller.afficherCartesJoueurDroit();
 
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setMinWidth(800);
