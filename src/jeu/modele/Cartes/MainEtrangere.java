@@ -1,4 +1,4 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
 public class MainEtrangere extends CarteSpeciale {
     /*

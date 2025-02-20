@@ -1,4 +1,4 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
 public class Narcolepsie extends CarteSpeciale {
     // Pioche 2 cartes.

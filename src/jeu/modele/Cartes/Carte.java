@@ -1,7 +1,7 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
 import java.text.Normalizer;
-import jeu.console.Parametres;
+import jeu.modele.Parametres;
 
 /*
 Pour toutes les cartes du jeu.

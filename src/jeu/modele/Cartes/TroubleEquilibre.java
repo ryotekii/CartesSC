@@ -1,4 +1,4 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
 public class TroubleEquilibre extends CarteSpeciale {
     // changement de sens 

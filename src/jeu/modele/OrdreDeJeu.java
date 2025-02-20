@@ -1,4 +1,4 @@
-package jeu.console;
+package jeu.modele;
 
 /*
 Classe qui gère l'ordre de jeu, changements de sens, passages de tours.

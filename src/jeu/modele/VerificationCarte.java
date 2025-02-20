@@ -1,7 +1,7 @@
-package jeu.console;
+package jeu.modele;
 
-import jeu.console.Cartes.Carte;
-import jeu.console.Cartes.CarteSimple;
+import jeu.modele.Cartes.Carte;
+import jeu.modele.Cartes.CarteSimple;
 
 /*
 Classe pour vérifier que les cartes peuvent être posées

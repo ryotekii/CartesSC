@@ -1,4 +1,4 @@
-package jeu.console;
+package jeu.modele;
 
 public class Parametres {
     public static final String[] COULEURS = {"Rouge","Bleu","Vert"};

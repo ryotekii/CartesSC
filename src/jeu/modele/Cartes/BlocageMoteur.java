@@ -1,4 +1,4 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
 public class BlocageMoteur extends CarteSpeciale {
     //Empêche le prochain joueur de jouer (équivalent passe ton tour).

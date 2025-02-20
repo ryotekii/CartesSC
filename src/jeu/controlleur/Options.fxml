@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button id="boutonReprendre" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Reprendre" />
+      <Button id="boutonSauvegarder" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Sauvegarder" translateY="30.0" />
+      <SplitMenuButton alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="       Thème" textAlignment="CENTER" translateY="60.0">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Thème 1" />
+          <MenuItem mnemonicParsing="false" text="Thème 2" />
+        </items>
+      </SplitMenuButton>
+      <Button id="boutonQuitter" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Quitter" translateY="90.0" />
+   </children>
+</VBox>

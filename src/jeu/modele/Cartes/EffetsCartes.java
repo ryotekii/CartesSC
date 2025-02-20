@@ -1,6 +1,6 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
-import jeu.console.Partie;
+import jeu.modele.Partie;
 
 public class EffetsCartes {
     private Partie partie;

@@ -1,7 +1,7 @@
-package jeu.console;
+package jeu.modele;
 
 import java.util.ArrayList;
-import jeu.console.Cartes.Carte;
+import jeu.modele.Cartes.Carte;
 
 /*
 La pile de cartes sur la table.

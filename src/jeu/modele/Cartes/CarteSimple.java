@@ -1,4 +1,4 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
 /*
 Les cartes sans effet, de 0 à 9 dans chaque couleur.

@@ -1,4 +1,4 @@
-package jeu.console.Cartes;
+package jeu.modele.Cartes;
 
 public class NeuropathieO extends CarteSpeciale {
     //Change la couleur en jeu.

@@ -1,6 +1,6 @@
-package jeu.console;
+package jeu.modele;
 
-import jeu.console.Cartes.Carte;
+import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,18 +10,25 @@ public class Partie {
     private final Paquet paquet;
     private final Pioche pioche;
     private OrdreDeJeu ordre;
+    private Carte carteSelectionnee;
     /*
     Pour garder en mémoire la couleur actuelle, en particulier avec
     l'utilisation de joker.
     */
     private String couleurActuelle;
 
-    public Partie(Paquet p) {
-        this.paquet = p;
+    public Partie() {
+        this.paquet = new Paquet(this);
         this.ajouterJoueurs(this.nbJoueurs());
+        int i = 1;
+        for (Joueur j:joueurs){
+            j.setPseudo(i);
+            i++;
+        }
         this.ordre = new OrdreDeJeu(this);
         this.pioche = new Pioche(this);
         this.distribuer(7,null);
+        this.carteSelectionnee=null;
     }
     
     public boolean pseudoDispo(String s){
@@ -41,18 +48,36 @@ public class Partie {
         return this.paquet;
     }
     
-    private int nbJoueurs(){
-        int nb = 0;
+    private int nbJoueurs(){        
         Scanner nombre = new Scanner(System.in);
+        int nb = 0;
+
         do {
-            try {
-                System.out.println("Entrez le nombre de joueurs : ");
-                nb = nombre.nextInt();
-            } catch (InputMismatchException e) {
+            System.out.print("Entrez le nombre de joueurs : ");
+            while (!nombre.hasNextInt()) {  // Vérifie si l'entrée est un entier
                 System.out.println("Erreur : Veuillez entrer un nombre valide !");
+                nombre.next();  // Vide l'entrée incorrecte
             }
-        } while (!this.nbJValide(nb));
+            nb = nombre.nextInt();
+        } while (!nbJValide(nb));
+
         return nb;
+    }
+
+    
+    public void setCarteSelectionnee(Carte carte){
+        this.carteSelectionnee=carte;
+    }
+    
+    public Carte getCarteSelectionnee(){
+        return this.carteSelectionnee;
+    }
+    
+    public boolean carteDifferente(Carte carte) {
+        if (this.carteSelectionnee == null) {
+            return true;
+        }
+        return !this.carteSelectionnee.equals(carte);
     }
     
     /*
@@ -73,6 +98,7 @@ public class Partie {
     */
     private void ajouterJoueurs(int n){
         Joueur j;
+        joueurs = new Joueur[n];
         for (int i=0;i<n;i++){
             j = new Joueur(this);
             joueurs[i] = j;

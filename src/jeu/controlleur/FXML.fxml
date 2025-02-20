@@ -2,7 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,24 +10,24 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="558.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="558.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.FXMLController">
    <children>
       <StackPane id="fenetre" prefHeight="558.0" prefWidth="817.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView id="fleche" fitHeight="105.0" fitWidth="292.0" opacity="0.15" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/fleche.png" />
+                  <Image url="@../images/fleche.png" />
                </image>
             </ImageView>
             <ImageView id="pioche" fitHeight="181.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-120.0" StackPane.alignment="CENTER">
                <image>
-                  <Image url="@images/dos.png" />
+                  <Image url="@../images/dos.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <effect>
-                  <Glow level="0.2" />
+                  <DropShadow />
                </effect>
             </ImageView>
          </children>
@@ -41,7 +41,7 @@
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/retour.png" />
+                  <Image url="@../images/retour.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -49,7 +49,7 @@
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/parametres.png" />
+                  <Image url="@../images/parametres.png" />
                </image>
             </ImageView>
          </graphic></Button>

@@ -1,18 +1,18 @@
-package jeu.console;
+package jeu.modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import jeu.console.Cartes.AmnesieSelective;
-import jeu.console.Cartes.BlocageMoteur;
-import jeu.console.Cartes.Carte;
-import jeu.console.Cartes.CarteSimple;
-import jeu.console.Cartes.CriseEpileptique;
-import jeu.console.Cartes.MainEtrangere;
-import jeu.console.Cartes.Narcolepsie;
-import jeu.console.Cartes.NeuropathieO;
-import jeu.console.Cartes.Paralysie;
-import jeu.console.Cartes.Tdah;
-import jeu.console.Cartes.TroubleEquilibre;
+import jeu.modele.Cartes.AmnesieSelective;
+import jeu.modele.Cartes.BlocageMoteur;
+import jeu.modele.Cartes.Carte;
+import jeu.modele.Cartes.CarteSimple;
+import jeu.modele.Cartes.CriseEpileptique;
+import jeu.modele.Cartes.MainEtrangere;
+import jeu.modele.Cartes.Narcolepsie;
+import jeu.modele.Cartes.NeuropathieO;
+import jeu.modele.Cartes.Paralysie;
+import jeu.modele.Cartes.Tdah;
+import jeu.modele.Cartes.TroubleEquilibre;
 
 public final class Pioche {
     private final ArrayList<Carte> pioche = new ArrayList<>();
