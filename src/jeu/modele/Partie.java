@@ -4,6 +4,7 @@ import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import jeu.controlleur.FXMLController;
 
 public class Partie {
     private Joueur[] joueurs;
@@ -11,13 +12,14 @@ public class Partie {
     private final Pioche pioche;
     private OrdreDeJeu ordre;
     private Carte carteSelectionnee;
+    private FXMLController controller;
     /*
     Pour garder en mémoire la couleur actuelle, en particulier avec
     l'utilisation de joker.
     */
     private String couleurActuelle;
 
-    public Partie() {
+    public Partie(FXMLController c) {
         this.paquet = new Paquet(this);
         this.ajouterJoueurs(this.nbJoueurs());
         int i = 1;
@@ -29,6 +31,7 @@ public class Partie {
         this.pioche = new Pioche(this);
         this.distribuer(7,null);
         this.carteSelectionnee=null;
+        this.controller=c;
     }
     
     public boolean pseudoDispo(String s){
@@ -109,12 +112,19 @@ public class Partie {
         return this.pioche;
     }
     
-    private Joueur[] getListeJoueurs(){
+    public Joueur[] getListeJoueurs(){
         return joueurs;
     }
     
     public int getNombreJoueurs(){
         return joueurs.length;
+    }
+    
+    public void poserCarteSelectionnee(){
+        if (this.carteSelectionnee != null) {
+            this.ordre.getJoueurActuel().getPaquetJoueur().jouerCarte(this.carteSelectionnee);
+            controller.mettreAJourAffichage();
+        }
     }
     
     public ArrayList<Carte> getListeCartesJoueur(int i){

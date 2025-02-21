@@ -58,7 +58,9 @@ public final class Pioche {
         if (pioche.isEmpty()){
             refairePaquet();
         }
-        return pioche.remove(0);
+        Carte temp = pioche.remove(0);
+        System.out.println(temp.nomImage());
+        return temp;
     }
     
     /*

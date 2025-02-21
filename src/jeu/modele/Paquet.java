@@ -14,11 +14,11 @@ public class Paquet {
         this.partie = p;
     }
     
-    private void poserCarte(Carte c){
+    public void poserCarte(Carte c){
         this.paquet.addFirst(c);
     }
     
-    private Carte voirCarteSup(){
+    public Carte voirCarteSup(){
         return paquet.getFirst();
     }
     

@@ -5,7 +5,7 @@ Classe qui gère l'ordre de jeu, changements de sens, passages de tours.
 */
 public class OrdreDeJeu {
     private boolean inverse = false;
-    private Partie partie;
+    private final Partie partie;
     
     public OrdreDeJeu(Partie p){
         this.partie = p;
@@ -18,6 +18,10 @@ public class OrdreDeJeu {
         } else {
             return ("Le jeu tourne dans le sens horaire.");
         }
+    }
+    
+    public Joueur getJoueurActuel(){
+        return this.partie.getListeJoueurs()[0];
     }
     
     public void changerSens(){

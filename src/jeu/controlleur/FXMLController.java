@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
@@ -33,11 +34,12 @@ public class FXMLController implements Initializable {
     @FXML private VBox paquetJoueurDroit;
     @FXML private VBox paquetJoueurGauche;
     @FXML private HBox paquetJoueurDevant;
+    @FXML private HBox boxPaquet;
     
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        partie = new Partie();
+        partie = new Partie(this);
         // TODO
         cartesJoueurPrincipal = partie.getListeCartesJoueur(0);
         switch (partie.getNombreJoueurs()) {
@@ -65,18 +67,6 @@ public class FXMLController implements Initializable {
         surbrillance.setRadius(20);
         surbrillance.setSpread(0.6);
         
-        imagePaquet.setOnMouseEntered(event ->{
-            imagePaquet.setScaleX(1.1);
-            imagePaquet.setScaleY(1.1);
-            imagePaquet.setEffect(surbrillance);
-        });
-
-        imagePaquet.setOnMouseExited(event ->{
-            imagePaquet.setScaleX(1);
-            imagePaquet.setScaleY(1);
-            imagePaquet.setEffect(ombreCarte);
-        });
-        
         imagePioche.setOnMouseEntered(event ->{
             imagePioche.setScaleX(1.1);
             imagePioche.setScaleY(1.1);
@@ -91,19 +81,75 @@ public class FXMLController implements Initializable {
         
         imagePioche.setOnMouseClicked(event ->{
             remettreCarteEnPlace();
+            partie.getListeJoueurs()[0].piocher();
+            this.mettreAJourAffichage();
         });
+        redefinirEffetsBox();
         
     }
     
-    public void afficherCartesJoueurPrincipal(){
+    private void remplacerCarteViewPaquet() {
+        System.out.println(partie.getCarteSelectionnee());
+        if (partie.getCarteSelectionnee()!=null){
+            CarteView nouvelleCarteView = new CarteView(partie.getCarteSelectionnee(),500);
+            boxPaquet.getChildren().clear();
+            ImageView nouvelleImageView = nouvelleCarteView.getImageView();
+            nouvelleImageView.setFitHeight(200);
+            nouvelleImageView.setPreserveRatio(true);
+            boxPaquet.setPrefWidth(141);
+            boxPaquet.setPrefHeight(200);
+            boxPaquet.setEffect(ombreCarte);
+            boxPaquet.getChildren().add(nouvelleImageView);
+        }
+        mettreAJourAffichage();
+        System.out.println("défini");
+    }
+    
+    public void mettreAJourAffichage(){
+        this.afficherCartesJoueurPrincipal();
+        this.afficherCartesJoueurDroit();
+        this.afficherCartesJoueurDevant();
+        this.afficherCartesJoueurGauche();
+        this.redefinirEffetsBox();
+    }
+    
+    private void redefinirEffetsBox(){
+        boxPaquet.setOnMouseEntered(null);
+        boxPaquet.setOnMouseExited(null);
+        boxPaquet.setOnMouseClicked(null);
+        
+        boxPaquet.setOnMouseEntered(event ->{
+            System.out.println("entré");
+            boxPaquet.setScaleX(1.1);
+            boxPaquet.setScaleY(1.1);
+            boxPaquet.setEffect(surbrillance);
+        });
+
+        boxPaquet.setOnMouseExited(event ->{
+            System.out.println("sorti");
+            boxPaquet.setScaleX(1);
+            boxPaquet.setScaleY(1);
+            boxPaquet.setEffect(ombreCarte);
+        });
+        
+        boxPaquet.setOnMouseClicked(event ->{
+            partie.poserCarteSelectionnee();
+            remplacerCarteViewPaquet();
+            partie.setCarteSelectionnee(null);
+        });    
+    }
+    
+    private void afficherCartesJoueurPrincipal(){
         HBox hb = paquetJoueurPrincipal;
         int nb = cartesJoueurPrincipal.size();
         int largeurCarte = 85;
         int maxEcart = -15;
+        double espace = Math.min(((hb.getWidth() - largeurCarte) / (nb - 1)) - largeurCarte, maxEcart);
+        hb.setSpacing(espace); 
 
         hb.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            double espace = Math.min(((newWidth.doubleValue()-largeurCarte)/(nb-1))-largeurCarte,maxEcart);
-            hb.setSpacing(espace);
+            double espace2 = Math.min(((newWidth.doubleValue()-largeurCarte)/(nb-1))-largeurCarte,maxEcart);
+            hb.setSpacing(espace2);
         });
 
 
@@ -116,6 +162,7 @@ public class FXMLController implements Initializable {
             image.setUserData(carteView);
             image.setOnMouseClicked(event -> clickCarte(event));
             image.setEffect(ombreCarte);
+            image.setCursor(Cursor.HAND);
             
             image.setOnMouseEntered(event -> {
                 if (image.getScaleX()==1){
@@ -141,11 +188,13 @@ public class FXMLController implements Initializable {
 
         if (partie.getCarteSelectionnee() == null) {
             partie.setCarteSelectionnee(carteCliquee);
+            System.out.println(partie.getCarteSelectionnee());
             faireMonterCarte(imageView);
         } else {
             if (partie.carteDifferente(carteCliquee)) {
-                    remettreCarteEnPlace();
+                remettreCarteEnPlace();
                 partie.setCarteSelectionnee(carteCliquee);
+                System.out.println(partie.getCarteSelectionnee());
                 faireMonterCarte(imageView);
             } else {
                 partie.setCarteSelectionnee(null);
@@ -153,6 +202,13 @@ public class FXMLController implements Initializable {
             }
         }
     }
+    
+    private void mettreAJourImagePaquet(Carte carteJouee) {
+        if (carteJouee != null) {
+            Image nouvelleImage = new Image(carteJouee.nomImage());
+            imagePaquet.setImage(nouvelleImage);
+    }
+}
 
     
     private void faireMonterCarte(ImageView iv) {
@@ -175,7 +231,7 @@ public class FXMLController implements Initializable {
     }
     
     
-    public void afficherCartesJoueurDevant(){
+    private void afficherCartesJoueurDevant(){
         HBox hb = paquetJoueurDevant;
         int nb = cartesJoueurDevant;
         int largeurCarte = 85;
@@ -198,7 +254,7 @@ public class FXMLController implements Initializable {
         }
     }
     
-        public void afficherCartesJoueurGauche(){
+        private void afficherCartesJoueurGauche(){
             VBox vb = paquetJoueurGauche;
             int nb = cartesJoueurGauche;
             int largeurCarte = 85;
@@ -223,7 +279,7 @@ public class FXMLController implements Initializable {
         }
         
             
-        public void afficherCartesJoueurDroit(){
+        private void afficherCartesJoueurDroit(){
             VBox vb = paquetJoueurDroit;
             int nb = cartesJoueurDroit;
             int largeurCarte = 85;

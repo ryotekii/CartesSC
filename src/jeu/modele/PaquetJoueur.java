@@ -18,12 +18,12 @@ public class PaquetJoueur {
         return this.cartes;
     }
     
-    public void ajouterCarte(Carte c){
-        this.cartes.add(c);
+    public void jouerCarte(Carte carte){
+        cartes.removeIf(c -> c.equals(carte));
     }
     
-    public Carte jouerCarte(int n){
-        return cartes.remove(n);
+    public void ajouterCarte(Carte c){
+        this.cartes.add(c);
     }
     
 }

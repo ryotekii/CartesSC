@@ -8,9 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jeu.modele.Cartes.BlocageMoteur;
 import jeu.modele.Cartes.Carte;
 import jeu.modele.Cartes.CarteSimple;
 import jeu.modele.Cartes.CriseEpileptique;
+import jeu.modele.Cartes.Narcolepsie;
+import jeu.modele.Cartes.NeuropathieO;
+import jeu.modele.Cartes.Paralysie;
+import jeu.modele.Cartes.Tdah;
 import jeu.modele.Cartes.TroubleEquilibre;
 
 public class testsGraphiques extends Application {
@@ -31,10 +36,7 @@ public class testsGraphiques extends Application {
 
         FXMLController controller = loader.getController();
         
-        controller.afficherCartesJoueurPrincipal();
-        controller.afficherCartesJoueurDevant();
-        controller.afficherCartesJoueurGauche();
-        controller.afficherCartesJoueurDroit();
+        controller.mettreAJourAffichage();
 
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setMinWidth(800);
@@ -45,7 +47,7 @@ public class testsGraphiques extends Application {
     }
 
     public static void main(String[] args) {
-        Carte c3 = new CriseEpileptique();
+        Carte c3 = new CarteSimple(0,"vert");
         System.out.println(c3.nomImage());
         launch(args);
     }
