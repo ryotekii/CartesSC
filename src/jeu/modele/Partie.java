@@ -1,5 +1,6 @@
 package jeu.modele;
 
+import java.io.IOException;
 import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -19,18 +20,23 @@ public class Partie {
     */
     private String couleurActuelle;
 
-    public Partie(FXMLController c) {
+    public Partie() {
         this.paquet = new Paquet(this);
+        /*
         this.ajouterJoueurs(this.nbJoueurs());
         int i = 1;
         for (Joueur j:joueurs){
             j.setPseudo(i);
             i++;
         }
+        */
         this.ordre = new OrdreDeJeu(this);
         this.pioche = new Pioche(this);
-        this.distribuer(7,null);
+        // this.distribuer(7,null);
         this.carteSelectionnee=null;
+    }
+    
+    public void setController(FXMLController c){
         this.controller=c;
     }
     
@@ -49,6 +55,14 @@ public class Partie {
     
     public Paquet getPaquet(){
         return this.paquet;
+    }
+    
+    public String getCouleur(){
+        return this.couleurActuelle;
+    }
+    
+    public void setCouleur(String c){
+        this.couleurActuelle=c;
     }
     
     private int nbJoueurs(){        
@@ -120,9 +134,14 @@ public class Partie {
         return joueurs.length;
     }
     
-    public void poserCarteSelectionnee(){
+    public void poserCarteSelectionnee() throws IOException{
         if (this.carteSelectionnee != null) {
             this.ordre.getJoueurActuel().getPaquetJoueur().jouerCarte(this.carteSelectionnee);
+            this.paquet.poserCarte(this.carteSelectionnee);
+            this.couleurActuelle=carteSelectionnee.getCouleur();
+            if (this.carteSelectionnee.getCouleur().equals("Joker")){
+                controller.ouvrirPopupCouleur();
+            }
             controller.mettreAJourAffichage();
         }
     }

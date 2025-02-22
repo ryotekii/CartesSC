@@ -3,11 +3,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.DemarrageController">
    <children>
-      <Button id="boutonReprendre" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Nouvelle partie" />
+      <Button id="boutonReprendre" fx:id="nouvellePartie" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Nouvelle partie" />
       <Button id="boutonSauvegarder" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Reprendre" translateY="30.0" />
       <Button id="boutonSauvegarder" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Classement" translateY="60.0" />
-      <Button id="boutonQuitter" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Quitter" translateY="90.0" />
+      <Button id="boutonReprendre" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Rejoindre" translateY="90.0" />
+      <Button id="boutonQuitter" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Quitter" translateY="120.0" />
    </children>
 </VBox>

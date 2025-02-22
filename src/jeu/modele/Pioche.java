@@ -23,11 +23,7 @@ public final class Pioche {
         this.melanger();
         this.partie = p;
     }
-    /*
-    Ajoute dans le paquet 2 cartes de chaque couleur.
-    A modifier pour ajouter un nombre défini de cartes spéciales
-    en fonction des parametres du mode de jeu.
-    */
+
     private void init(){
         Carte temp;
         for (String couleur : Parametres.COULEURS) {
@@ -37,7 +33,7 @@ public final class Pioche {
                 pioche.add(temp);
             }
             for (int i=0;i<2;i++){
-                pioche.add(new AmnesieSelective(couleur));
+                pioche.add(new AmnesieSelective());
                 pioche.add(new BlocageMoteur(couleur));
                 pioche.add(new MainEtrangere(couleur));
                 pioche.add(new Narcolepsie(couleur));
@@ -64,12 +60,13 @@ public final class Pioche {
     }
     
     /*
-    Reprend toutes les cartes du paquet (sauf la première) et les remet dans la pioche.
+    OK - Reprend toutes les cartes du paquet (sauf la première) et les remet dans la pioche.
     */
     private void refairePaquet(){
         ArrayList<Carte> provisoire = this.partie.getPaquet().viderPaquet();
         this.pioche.addAll(provisoire);
         this.melanger();
+        System.out.println("La pioche a été refaite.");
     }
     
 }
