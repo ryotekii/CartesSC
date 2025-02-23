@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import javafx.scene.paint.Color;
 import javafx.scene.input.MouseEvent;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Pos;
@@ -17,6 +14,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -29,8 +27,8 @@ import jeu.modele.Parametres;
 import jeu.modele.Partie;
 import jeu.vue.CarteView;
 
-public class FXMLController implements Initializable {
-    private final Partie partie;
+public class FXMLController {
+    private Partie partie;
     private ArrayList<Carte> cartesJoueurPrincipal;
     private int cartesJoueurDroit = 0;
     private int cartesJoueurDevant = 0;
@@ -44,28 +42,36 @@ public class FXMLController implements Initializable {
     @FXML private HBox paquetJoueurDevant;
     @FXML private HBox boxPaquet;
     @FXML private Rectangle carreCouleur;
+    @FXML private Label pseudoDevant;
+    @FXML private Label pseudoGauche;
+    @FXML private Label pseudoDroit;
+    @FXML private Label pseudoPrincipal;
     
-    public FXMLController(Partie p){
-        this.partie = p;
-    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //partie = new Partie(this);
+    public void init() {
         this.partie.setController(this);
         cartesJoueurPrincipal = partie.getListeCartesJoueur(0);
         switch (partie.getNombreJoueurs()) {
             case 4 -> {
+                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 cartesJoueurDroit = partie.getNombreCartesJoueur(1);
+                pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
                 cartesJoueurDevant = partie.getNombreCartesJoueur(2);
+                pseudoDevant.setText(partie.getListeJoueurs()[2].getPseudo());
                 cartesJoueurGauche = partie.getNombreCartesJoueur(3);
+                pseudoGauche.setText(partie.getListeJoueurs()[3].getPseudo());
             }
             case 3 -> {
+                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 cartesJoueurDroit = partie.getNombreCartesJoueur(1);
+                pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
                 cartesJoueurGauche = partie.getNombreCartesJoueur(2);
+                pseudoGauche.setText(partie.getListeJoueurs()[2].getPseudo());
             }
             case 2 -> {
+                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 cartesJoueurDevant = partie.getNombreCartesJoueur(1);
+                pseudoDevant.setText(partie.getListeJoueurs()[1].getPseudo());
             }
         }
         
@@ -96,8 +102,12 @@ public class FXMLController implements Initializable {
             partie.getListeJoueurs()[0].piocher();
             this.mettreAJourAffichage();
         });
-        redefinirEffetsBox();
+        mettreAJourAffichage();
         
+    }
+    
+    public void setPartie(Partie p){
+        this.partie = p;
     }
     
     private void remplacerCarteViewPaquet() {

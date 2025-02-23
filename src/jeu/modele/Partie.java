@@ -14,6 +14,7 @@ public class Partie {
     private OrdreDeJeu ordre;
     private Carte carteSelectionnee;
     private FXMLController controller;
+    private VerificationCarte verification;
     /*
     Pour garder en mémoire la couleur actuelle, en particulier avec
     l'utilisation de joker.
@@ -34,17 +35,22 @@ public class Partie {
         this.pioche = new Pioche(this);
         // this.distribuer(7,null);
         this.carteSelectionnee=null;
+        this.verification = new VerificationCarte(this);
+        /*this.paquet.poserCarte(pioche.piocher());
+        this.couleurActuelle=paquet.getPaquet().getFirst().getCouleur();
+        */
     }
     
     public void setController(FXMLController c){
         this.controller=c;
     }
     
+    /*
     public boolean pseudoDispo(String s){
         for (Joueur j: this.joueurs){
-            /*
-            Vérifie si le pseudo n'existe pas déjà dans la liste des joueurs.
-            */
+            
+            // Vérifie si le pseudo n'existe pas déjà dans la liste des joueurs.
+            
             if (j.toString().equals(s)){
                 System.out.println("Ce pseudo est déjà pris. Veuillez en choisir un autre.");
                 return false;
@@ -52,6 +58,7 @@ public class Partie {
         }
         return true;
     }
+    */
     
     public Paquet getPaquet(){
         return this.paquet;
@@ -65,6 +72,7 @@ public class Partie {
         this.couleurActuelle=c;
     }
     
+    /*
     private int nbJoueurs(){        
         Scanner nombre = new Scanner(System.in);
         int nb = 0;
@@ -80,7 +88,11 @@ public class Partie {
 
         return nb;
     }
-
+    */
+    
+    public void setPseudo(int i,String p){
+        this.joueurs[i].setPseudo(p);
+    }
     
     public void setCarteSelectionnee(Carte carte){
         this.carteSelectionnee=carte;
@@ -100,7 +112,7 @@ public class Partie {
     /*
     Distribue n cartes à tous les joueurs sauf j.
     */
-    private void distribuer(int n,Joueur j){
+    public void distribuer(int n,Joueur j){
         for (int i=0;i<n;i++){
             for (Joueur joueur:this.joueurs){
                 if (joueur != j){
@@ -113,7 +125,7 @@ public class Partie {
     /*
     Ajoute n joueurs dans le paquet (demande leurs pseudos).
     */
-    private void ajouterJoueurs(int n){
+    public void ajouterJoueurs(int n){
         Joueur j;
         joueurs = new Joueur[n];
         for (int i=0;i<n;i++){
@@ -135,7 +147,7 @@ public class Partie {
     }
     
     public void poserCarteSelectionnee() throws IOException{
-        if (this.carteSelectionnee != null) {
+        if (this.carteSelectionnee != null){
             this.ordre.getJoueurActuel().getPaquetJoueur().jouerCarte(this.carteSelectionnee);
             this.paquet.poserCarte(this.carteSelectionnee);
             this.couleurActuelle=carteSelectionnee.getCouleur();

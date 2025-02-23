@@ -3,6 +3,8 @@ package jeu.controlleur;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +23,8 @@ public class PseudosJoueursController implements Initializable {
     @FXML private Button boutonRetour;
     @FXML private VBox boxJoueurs;
     @FXML private Button boutonAjouter;
-    private final ArrayList<HBox> joueurs = new ArrayList<>();
+    @FXML private Button boutonValider;
+    private final ArrayList<TextField> joueurs = new ArrayList<>();
     
     
     private Partie partie;
@@ -35,9 +38,24 @@ public class PseudosJoueursController implements Initializable {
                 System.out.println("erreur retour demarrage");
             }
         });
+        ajouterJoueur();
+        ajouterJoueur();
         boutonAjouter.setOnMouseClicked(event ->{
             ajouterJoueur();
         });
+        boutonValider.setOnMouseClicked(event ->{
+            System.out.println(partie);
+            defNbJoueurs();
+            creerListeJoueurs();
+            partie.distribuer(7,null);
+            try{
+                lancerPartie();
+            }catch(Exception e){
+                System.out.println("erreur lancement partie");
+                e.printStackTrace();
+            }
+        });
+        
     }
     
     public void setPartie(Partie p){
@@ -45,23 +63,75 @@ public class PseudosJoueursController implements Initializable {
     }
     
     private void ajouterJoueur(){
-        HBox joueur = new HBox(20);
-        TextField zoneTexte = new TextField();
-        zoneTexte.setPromptText("Joueur " + (joueurs.size() + 1));
-        joueurs.add(joueur);
-        boxJoueurs.getChildren().remove(boutonAjouter);
-        boxJoueurs.getChildren().addAll(joueur,boutonAjouter);
-
-        if (joueurs.size() > 2) {
-            Button enlever = new Button("-");
-            enlever.setOnAction(e -> {
-                joueurs.remove(joueur);
-                boxJoueurs.getChildren().remove(joueur);
+        if(joueurs.size()<4){
+            HBox joueur = new HBox(20);
+            joueur.setStyle("-fx-alignment: center;"); 
+            TextField zoneTexte = new TextField();
+            zoneTexte.textProperty().addListener((observable, oldValue, newValue) -> {
+                boutonValider.setDisable(!verifierPseudos());
             });
-            joueur.getChildren().add(enlever);
-        }
+            zoneTexte.setPromptText("Pseudo du joueur " + (joueurs.size() + 1));
+            joueurs.add(zoneTexte);
+            boxJoueurs.getChildren().remove(boutonAjouter);
+            boxJoueurs.getChildren().add(joueur);
 
-        joueur.getChildren().add(zoneTexte);
+            if (joueurs.size() > 2) {
+                Button enlever = new Button("-");
+                enlever.setOnAction(e -> {
+                    supprimerJoueur();
+                    if(!boxJoueurs.getChildren().contains(boutonAjouter)){
+                        boxJoueurs.getChildren().add(boutonAjouter);
+                    }
+            
+                });
+                joueur.getChildren().add(enlever);
+            }
+            joueur.getChildren().add(zoneTexte);
+            if(joueurs.size()<4){
+                boxJoueurs.getChildren().add(boutonAjouter);
+            }
+        }
+        boutonValider.setDisable(true);
+    }
+    
+    private boolean verifierPseudos(){
+        HashSet<String> pseudos = new HashSet<>();
+        
+        for (TextField joueur : joueurs) {
+                    String pseudo = joueur.getText().trim();
+                    if (pseudo.isEmpty() || !pseudos.add(pseudo)) {
+                        return false;
+                    }
+                }        
+        return true;
+    }
+    
+    private void creerListeJoueurs(){
+        int i=0;
+        for(TextField joueur:joueurs){
+            String pseudo = joueur.getText();
+            partie.setPseudo(i, pseudo);
+            i++;
+        }
+    }
+    
+    private void defNbJoueurs(){
+        this.partie.ajouterJoueurs(joueurs.size());
+        System.out.println(partie.getNombreJoueurs());
+    }
+
+    private void supprimerJoueur(){
+        System.out.println(joueurs);
+        joueurs.removeLast();
+        System.out.println(joueurs);
+        System.out.println(boxJoueurs.getChildren());
+        if (boxJoueurs.getChildren().contains(boutonAjouter)){
+            boxJoueurs.getChildren().remove(2);
+        } else {
+            boxJoueurs.getChildren().remove(3);
+        }
+        System.out.println(boxJoueurs.getChildren());
+        /*boutonValider.setDisable(!verifierPseudos());*/
     }
     
     private void retournerDemarrage() throws Exception {
@@ -73,6 +143,25 @@ public class PseudosJoueursController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Démarrage");
         stage.setScene(new Scene(root,800,600));
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonRetour.getScene().getWindow();
+        fenetreBase.close();
+    }
+    
+    private void lancerPartie() throws Exception {
+        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/FXML.fxml").toURI().toURL());
+        Parent root = loader.load();
+    
+        FXMLController controller = loader.getController();
+        controller.setPartie(partie);
+        controller.init();
+
+        Stage stage = new Stage();
+        stage.setTitle("Partie");
+        stage.setScene(new Scene(root,800,600));
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
         
         stage.show();
         Stage fenetreBase = (Stage) boutonRetour.getScene().getWindow();

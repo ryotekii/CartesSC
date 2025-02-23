@@ -19,19 +19,7 @@ public class VerificationCarte {
     Permet d'adapter la couleur lorsqu'on en choisit une avec un joker.
     */
     public static boolean verifCouleur(Carte main,String couleur){
-        if (main.getCouleur().equals("Joker")){
-            return true;
-        } else if (main.getCouleur().equals(couleur)){
-            return true;
-        /*
-        Lorsqu'on joue le tdah, on peut poser une carte au choix sans
-        avoir à choisir la couleur avant, la variable couleur prend
-        alors pour valeur "Joker".
-        */
-        } else if (couleur.equals("Joker")){
-            return true;
-        }
-        return false;
+        return main.getCouleur().equals("Joker") || main.getCouleur().equals(couleur) || couleur.equals("Joker");
     }
     
     public static boolean verifNombre(Carte main,Carte table){

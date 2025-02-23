@@ -17,15 +17,15 @@
       </Text>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" spacing="30.0" translateY="10.0">
          <children>
-            <Rectangle fx:id="choisirBleu" arcHeight="5.0" arcWidth="5.0" fill="#0057cb" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+            <Rectangle fx:id="choisirBleu" arcHeight="5.0" arcWidth="5.0" fill="#0057cb" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0">
                <effect>
                   <DropShadow />
                </effect></Rectangle>
-            <Rectangle fx:id="choisirRouge" arcHeight="5.0" arcWidth="5.0" fill="#ff3131" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+            <Rectangle fx:id="choisirRouge" arcHeight="5.0" arcWidth="5.0" fill="#ff3131" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0">
                <effect>
                   <DropShadow />
                </effect></Rectangle>
-            <Rectangle fx:id="choisirVert" arcHeight="5.0" arcWidth="5.0" fill="#00bf63" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+            <Rectangle fx:id="choisirVert" arcHeight="5.0" arcWidth="5.0" fill="#00bf63" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0">
                <effect>
                   <DropShadow />
                </effect></Rectangle>
