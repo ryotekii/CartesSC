@@ -3,9 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.PseudosJoueursController">
    <children>
-      <Button id="boutonQuitter" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Retour" translateY="90.0" />
-      <Button id="boutonQuitter" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Valider" />
+      <VBox fx:id="boxJoueurs" alignment="BOTTOM_RIGHT" prefHeight="300.0" prefWidth="100.0" spacing="45.0" translateY="-10.0">
+         <children>
+            <Button fx:id="boutonAjouter" alignment="BOTTOM_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="+" />
+         </children>
+      </VBox>
+      <Button id="boutonQuitter" fx:id="boutonValider" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Valider" translateY="50.0" />
+      <Button id="boutonQuitter" fx:id="boutonRetour" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Retour" translateY="80.0" />
    </children>
 </VBox>

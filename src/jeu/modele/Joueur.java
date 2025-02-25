@@ -1,7 +1,5 @@
 package jeu.modele;
 
-import java.util.Scanner;
-
 public class Joueur {
     private String pseudo;
     private final PaquetJoueur main;
@@ -10,7 +8,7 @@ public class Joueur {
     */
     private final Partie partie;
     
-    private String demanderPseudo(int num) {
+    /*private String demanderPseudo(int num) {
         String n;
         do {
             Scanner nom = new Scanner(System.in);
@@ -18,15 +16,19 @@ public class Joueur {
             n = nom.nextLine();
         } while (!partie.pseudoDispo(n));
         return n;
-    }
+    }*/
     
-    public void setPseudo(int n){
-        this.pseudo=demanderPseudo(n);
+    public void setPseudo(String p){
+        this.pseudo=p;
     }
    
     public Joueur(Partie p){
         this.partie = p;
         this.main = new PaquetJoueur(this);
+    }
+    
+    public String getPseudo(){
+        return this.pseudo;
     }
     
     public void piocher(){

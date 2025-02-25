@@ -16,6 +16,8 @@ public class Paquet {
     
     public void poserCarte(Carte c){
         this.paquet.addFirst(c);
+        System.out.println(this.getPaquet());
+        System.out.println("ici");
     }
     
     public Carte voirCarteSup(){

@@ -1,5 +1,6 @@
 package jeu.modele;
 
+import java.io.IOException;
 import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -13,32 +14,43 @@ public class Partie {
     private OrdreDeJeu ordre;
     private Carte carteSelectionnee;
     private FXMLController controller;
+    private VerificationCarte verification;
     /*
     Pour garder en mémoire la couleur actuelle, en particulier avec
     l'utilisation de joker.
     */
     private String couleurActuelle;
 
-    public Partie(FXMLController c) {
+    public Partie() {
         this.paquet = new Paquet(this);
+        /*
         this.ajouterJoueurs(this.nbJoueurs());
         int i = 1;
         for (Joueur j:joueurs){
             j.setPseudo(i);
             i++;
         }
+        */
         this.ordre = new OrdreDeJeu(this);
         this.pioche = new Pioche(this);
-        this.distribuer(7,null);
+        // this.distribuer(7,null);
         this.carteSelectionnee=null;
+        this.verification = new VerificationCarte(this);
+        /*this.paquet.poserCarte(pioche.piocher());
+        this.couleurActuelle=paquet.getPaquet().getFirst().getCouleur();
+        */
+    }
+    
+    public void setController(FXMLController c){
         this.controller=c;
     }
     
+    /*
     public boolean pseudoDispo(String s){
         for (Joueur j: this.joueurs){
-            /*
-            Vérifie si le pseudo n'existe pas déjà dans la liste des joueurs.
-            */
+            
+            // Vérifie si le pseudo n'existe pas déjà dans la liste des joueurs.
+            
             if (j.toString().equals(s)){
                 System.out.println("Ce pseudo est déjà pris. Veuillez en choisir un autre.");
                 return false;
@@ -46,11 +58,21 @@ public class Partie {
         }
         return true;
     }
+    */
     
     public Paquet getPaquet(){
         return this.paquet;
     }
     
+    public String getCouleur(){
+        return this.couleurActuelle;
+    }
+    
+    public void setCouleur(String c){
+        this.couleurActuelle=c;
+    }
+    
+    /*
     private int nbJoueurs(){        
         Scanner nombre = new Scanner(System.in);
         int nb = 0;
@@ -66,7 +88,11 @@ public class Partie {
 
         return nb;
     }
-
+    */
+    
+    public void setPseudo(int i,String p){
+        this.joueurs[i].setPseudo(p);
+    }
     
     public void setCarteSelectionnee(Carte carte){
         this.carteSelectionnee=carte;
@@ -86,7 +112,7 @@ public class Partie {
     /*
     Distribue n cartes à tous les joueurs sauf j.
     */
-    private void distribuer(int n,Joueur j){
+    public void distribuer(int n,Joueur j){
         for (int i=0;i<n;i++){
             for (Joueur joueur:this.joueurs){
                 if (joueur != j){
@@ -99,7 +125,7 @@ public class Partie {
     /*
     Ajoute n joueurs dans le paquet (demande leurs pseudos).
     */
-    private void ajouterJoueurs(int n){
+    public void ajouterJoueurs(int n){
         Joueur j;
         joueurs = new Joueur[n];
         for (int i=0;i<n;i++){
@@ -120,9 +146,14 @@ public class Partie {
         return joueurs.length;
     }
     
-    public void poserCarteSelectionnee(){
-        if (this.carteSelectionnee != null) {
+    public void poserCarteSelectionnee() throws IOException{
+        if (this.carteSelectionnee != null){
             this.ordre.getJoueurActuel().getPaquetJoueur().jouerCarte(this.carteSelectionnee);
+            this.paquet.poserCarte(this.carteSelectionnee);
+            this.couleurActuelle=carteSelectionnee.getCouleur();
+            if (this.carteSelectionnee.getCouleur().equals("Joker")){
+                controller.ouvrirPopupCouleur();
+            }
             controller.mettreAJourAffichage();
         }
     }

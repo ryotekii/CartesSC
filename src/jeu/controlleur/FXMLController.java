@@ -1,32 +1,38 @@
 package jeu.controlleur;
 
+import java.io.File;
+import java.io.IOException;
 import javafx.scene.paint.Color;
 import javafx.scene.input.MouseEvent;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import jeu.modele.Cartes.Carte;
 import jeu.modele.Parametres;
 import jeu.modele.Partie;
 import jeu.vue.CarteView;
 
-public class FXMLController implements Initializable {
+public class FXMLController {
     private Partie partie;
     private ArrayList<Carte> cartesJoueurPrincipal;
     private int cartesJoueurDroit = 0;
     private int cartesJoueurDevant = 0;
     private int cartesJoueurGauche = 0;
-    @FXML private ImageView imagePaquet;
     @FXML private ImageView imagePioche;
     private final DropShadow surbrillance = new DropShadow();
     private final DropShadow ombreCarte = new DropShadow();
@@ -35,25 +41,37 @@ public class FXMLController implements Initializable {
     @FXML private VBox paquetJoueurGauche;
     @FXML private HBox paquetJoueurDevant;
     @FXML private HBox boxPaquet;
+    @FXML private Rectangle carreCouleur;
+    @FXML private Label pseudoDevant;
+    @FXML private Label pseudoGauche;
+    @FXML private Label pseudoDroit;
+    @FXML private Label pseudoPrincipal;
     
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        partie = new Partie(this);
-        // TODO
+    public void init() {
+        this.partie.setController(this);
         cartesJoueurPrincipal = partie.getListeCartesJoueur(0);
         switch (partie.getNombreJoueurs()) {
             case 4 -> {
+                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 cartesJoueurDroit = partie.getNombreCartesJoueur(1);
+                pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
                 cartesJoueurDevant = partie.getNombreCartesJoueur(2);
+                pseudoDevant.setText(partie.getListeJoueurs()[2].getPseudo());
                 cartesJoueurGauche = partie.getNombreCartesJoueur(3);
+                pseudoGauche.setText(partie.getListeJoueurs()[3].getPseudo());
             }
             case 3 -> {
+                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 cartesJoueurDroit = partie.getNombreCartesJoueur(1);
+                pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
                 cartesJoueurGauche = partie.getNombreCartesJoueur(2);
+                pseudoGauche.setText(partie.getListeJoueurs()[2].getPseudo());
             }
             case 2 -> {
+                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 cartesJoueurDevant = partie.getNombreCartesJoueur(1);
+                pseudoDevant.setText(partie.getListeJoueurs()[1].getPseudo());
             }
         }
         
@@ -84,8 +102,12 @@ public class FXMLController implements Initializable {
             partie.getListeJoueurs()[0].piocher();
             this.mettreAJourAffichage();
         });
-        redefinirEffetsBox();
+        mettreAJourAffichage();
         
+    }
+    
+    public void setPartie(Partie p){
+        this.partie = p;
     }
     
     private void remplacerCarteViewPaquet() {
@@ -102,7 +124,6 @@ public class FXMLController implements Initializable {
             boxPaquet.getChildren().add(nouvelleImageView);
         }
         mettreAJourAffichage();
-        System.out.println("défini");
     }
     
     public void mettreAJourAffichage(){
@@ -111,6 +132,7 @@ public class FXMLController implements Initializable {
         this.afficherCartesJoueurDevant();
         this.afficherCartesJoueurGauche();
         this.redefinirEffetsBox();
+        this.mettreAJourCouleur();
     }
     
     private void redefinirEffetsBox(){
@@ -119,24 +141,59 @@ public class FXMLController implements Initializable {
         boxPaquet.setOnMouseClicked(null);
         
         boxPaquet.setOnMouseEntered(event ->{
-            System.out.println("entré");
             boxPaquet.setScaleX(1.1);
             boxPaquet.setScaleY(1.1);
             boxPaquet.setEffect(surbrillance);
         });
 
         boxPaquet.setOnMouseExited(event ->{
-            System.out.println("sorti");
             boxPaquet.setScaleX(1);
             boxPaquet.setScaleY(1);
             boxPaquet.setEffect(ombreCarte);
         });
         
         boxPaquet.setOnMouseClicked(event ->{
-            partie.poserCarteSelectionnee();
-            remplacerCarteViewPaquet();
-            partie.setCarteSelectionnee(null);
+            try {
+                partie.poserCarteSelectionnee();
+                remplacerCarteViewPaquet();
+                partie.setCarteSelectionnee(null);
+            } catch (IOException e) {
+                System.out.println("erreur pose carte");
+            }
         });    
+    }
+    
+    private void mettreAJourCouleur(){
+        if (partie.getCouleur() == null || partie.getCouleur().isEmpty()) {
+            carreCouleur.setFill(Color.WHITE);
+        } else if (partie.getCouleur().equalsIgnoreCase("bleu")) {
+            carreCouleur.setFill(Color.web("#0057cb"));
+        } else if (partie.getCouleur().equalsIgnoreCase("rouge")) {
+            carreCouleur.setFill(Color.web("#ff3131"));
+        } else if (partie.getCouleur().equalsIgnoreCase("vert")) {
+            carreCouleur.setFill(Color.web("#00bf63"));
+        } else {
+            carreCouleur.setFill(Color.WHITE);
+        }
+    }
+    
+    public void ouvrirPopupCouleur() throws IOException {
+        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/ChoisirCouleur.fxml").toURI().toURL());
+        Parent root = loader.load();
+    
+        ChoisirCouleurController controller = loader.getController();
+    
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setTitle("Choisissez une couleur");
+        popupStage.setScene(new Scene(root));
+        popupStage.initStyle(StageStyle.UTILITY);
+        popupStage.setOnCloseRequest(event -> event.consume());
+    
+        controller.setPopupStage(popupStage);
+        popupStage.showAndWait();
+
+        partie.setCouleur(controller.getCouleur());
     }
     
     private void afficherCartesJoueurPrincipal(){
@@ -202,15 +259,7 @@ public class FXMLController implements Initializable {
             }
         }
     }
-    
-    private void mettreAJourImagePaquet(Carte carteJouee) {
-        if (carteJouee != null) {
-            Image nouvelleImage = new Image(carteJouee.nomImage());
-            imagePaquet.setImage(nouvelleImage);
-    }
-}
 
-    
     private void faireMonterCarte(ImageView iv) {
         iv.setTranslateY(-20);
         iv.setScaleX(1.2);
@@ -229,7 +278,6 @@ public class FXMLController implements Initializable {
             }
         }
     }
-    
     
     private void afficherCartesJoueurDevant(){
         HBox hb = paquetJoueurDevant;
@@ -254,7 +302,7 @@ public class FXMLController implements Initializable {
         }
     }
     
-        private void afficherCartesJoueurGauche(){
+    private void afficherCartesJoueurGauche(){
             VBox vb = paquetJoueurGauche;
             int nb = cartesJoueurGauche;
             int largeurCarte = 85;
@@ -277,9 +325,8 @@ public class FXMLController implements Initializable {
                 vb.getChildren().add(image);
             }
         }
-        
-            
-        private void afficherCartesJoueurDroit(){
+                
+    private void afficherCartesJoueurDroit(){
             VBox vb = paquetJoueurDroit;
             int nb = cartesJoueurDroit;
             int largeurCarte = 85;
@@ -301,4 +348,4 @@ public class FXMLController implements Initializable {
                 vb.getChildren().add(image);
             }
         }
-    }
+}
