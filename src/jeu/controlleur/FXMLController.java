@@ -14,6 +14,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
@@ -46,7 +47,8 @@ public class FXMLController {
     @FXML private Label pseudoGauche;
     @FXML private Label pseudoDroit;
     @FXML private Label pseudoPrincipal;
-    
+    @FXML private Button boutonOptions;
+    @FXML private Button boutonFinir;
 
     public void init() {
         this.partie.setController(this);
@@ -104,6 +106,14 @@ public class FXMLController {
         });
         mettreAJourAffichage();
         
+        boutonOptions.setOnMouseClicked(event ->{
+            try{
+                ouvrirOptions();
+            }catch(Exception e){
+                System.out.println("erreur ouverture options");
+            }
+        });
+        
     }
     
     public void setPartie(Partie p){
@@ -124,6 +134,25 @@ public class FXMLController {
             boxPaquet.getChildren().add(nouvelleImageView);
         }
         mettreAJourAffichage();
+    }
+    
+    public void ouvrirOptions() throws Exception {
+        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Options.fxml").toURI().toURL());
+        Parent root = loader.load();
+    
+        OptionsController controller = loader.getController();
+        controller.setPartie(this.partie);
+        controller.setBoutonFinir(this.boutonFinir);
+
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setTitle("Options");
+        popupStage.setScene(new Scene(root,800,600));
+        popupStage.initStyle(StageStyle.UTILITY);
+        popupStage.setOnCloseRequest(event -> event.consume());
+    
+        controller.setPopupStage(popupStage);
+        popupStage.showAndWait();
     }
     
     public void mettreAJourAffichage(){

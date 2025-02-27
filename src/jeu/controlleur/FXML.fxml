@@ -54,7 +54,7 @@
             </HBox>
          </children>
       </StackPane>
-      <Button id="boutonFinir" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="182.0" mnemonicParsing="false" text="Finir" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="25.0">
+      <Button id="boutonFinir" fx:id="boutonFinir" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="182.0" mnemonicParsing="false" text="Finir" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="25.0">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
@@ -67,7 +67,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button id="boutonOptions" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="13.0">
+      <Button id="boutonOptions" fx:id="boutonOptions" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="13.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>

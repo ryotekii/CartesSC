@@ -7,8 +7,8 @@
    <children>
       <Button id="boutonReprendre" fx:id="nouvellePartie" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Nouvelle partie" />
       <Button id="boutonSauvegarder" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Reprendre" translateY="30.0" />
-      <Button id="boutonSauvegarder" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Classement" translateY="60.0" />
+      <Button id="boutonSauvegarder" fx:id="boutonClassement" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Classement" translateY="60.0" />
       <Button id="boutonReprendre" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Rejoindre" translateY="90.0" />
-      <Button id="boutonQuitter" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Quitter" translateY="120.0" />
+      <Button id="boutonQuitter" fx:id="boutonQuitter" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Quitter" translateY="120.0" />
    </children>
 </VBox>

@@ -18,6 +18,8 @@ import jeu.modele.Partie;
 public class DemarrageController implements Initializable {
     @FXML private Button nouvellePartie;
     private Partie partie;
+    @FXML private Button boutonQuitter;
+    @FXML private Button boutonClassement;
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -30,6 +32,19 @@ public class DemarrageController implements Initializable {
                 System.out.println("erreur de chargement pseudos");
             }
         });
+        
+        boutonQuitter.setOnAction(event ->{
+            Stage stage = (Stage) boutonQuitter.getScene().getWindow();
+            stage.close();
+        });
+        
+        boutonClassement.setOnAction(event ->{
+            try{
+                ouvrirClassement();
+            }catch(Exception e){
+                System.out.println("erreur affichage classement");
+            }
+        });
     }
     
     public void creerPartie(){
@@ -38,6 +53,21 @@ public class DemarrageController implements Initializable {
     
     public Partie getPartie(){
         return this.partie;
+    }
+    
+    private void ouvrirClassement() throws Exception {
+        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Classement.fxml").toURI().toURL());
+        Parent root = loader.load();
+    
+        //DemarrageController controller = loader.getController();
+
+        Stage stage = new Stage();
+        stage.setTitle("Classement");
+        stage.setScene(new Scene(root,800,600));
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonClassement.getScene().getWindow();
+        fenetreBase.close();
     }
     
     private void ouvrirFenetrePseudos() throws Exception {
