@@ -1,12 +1,16 @@
 package jeu.modele;
 
-/*
-Classe qui gère l'ordre de jeu, changements de sens, passages de tours.
+/**
+* Classe qui gère l'ordre de jeu, changements de sens, passages de tours.
 */
 public class OrdreDeJeu {
     private boolean inverse = false;
     private final Partie partie;
     
+    /**
+     * Le constructeur.
+     * @param p la partie associée.
+     */
     public OrdreDeJeu(Partie p){
         this.partie = p;
     }

@@ -3,8 +3,6 @@ package jeu.modele;
 import java.io.IOException;
 import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import jeu.controlleur.FXMLController;
 
 public class Partie {
@@ -15,93 +13,86 @@ public class Partie {
     private Carte carteSelectionnee;
     private FXMLController controller;
     private VerificationCarte verification;
-    /*
-    Pour garder en mémoire la couleur actuelle, en particulier avec
-    l'utilisation de joker.
+    /**
+    * Pour garder en mémoire la couleur actuelle, en particulier avec
+    * l'utilisation de joker.
     */
     private String couleurActuelle;
-
+    
+    /**
+     * Le constructeur. Créé le paquet, la pioche, l'ordre de jeu et
+     * des variables qui gardent en mémoire la couleur de jeu et la prochaine
+     * carte à poser.
+     */
     public Partie() {
         this.paquet = new Paquet(this);
-        /*
-        this.ajouterJoueurs(this.nbJoueurs());
-        int i = 1;
-        for (Joueur j:joueurs){
-            j.setPseudo(i);
-            i++;
-        }
-        */
         this.ordre = new OrdreDeJeu(this);
         this.pioche = new Pioche(this);
-        // this.distribuer(7,null);
         this.carteSelectionnee=null;
         this.verification = new VerificationCarte(this);
-        /*this.paquet.poserCarte(pioche.piocher());
-        this.couleurActuelle=paquet.getPaquet().getFirst().getCouleur();
-        */
     }
     
+    /**
+     * Définit le controlleur associé.
+     * @param c le controlleur.
+     */
     public void setController(FXMLController c){
         this.controller=c;
     }
     
-    /*
-    public boolean pseudoDispo(String s){
-        for (Joueur j: this.joueurs){
-            
-            // Vérifie si le pseudo n'existe pas déjà dans la liste des joueurs.
-            
-            if (j.toString().equals(s)){
-                System.out.println("Ce pseudo est déjà pris. Veuillez en choisir un autre.");
-                return false;
-            }   
-        }
-        return true;
-    }
-    */
-    
+    /**
+     * Retourne le paquet associé à la partie.
+     * @return le paquet.
+     */
     public Paquet getPaquet(){
         return this.paquet;
     }
     
+    /**
+     * Définit la couleur de jeu.
+     * @param c la couleur à définir.
+     */
+    public void setCouleur(String c){
+        this.couleurActuelle=c;
+    }
+    /**
+     * Retourne la couleur de jeu.
+     * @return la couleur de jeu.
+     */
     public String getCouleur(){
         return this.couleurActuelle;
     }
     
-    public void setCouleur(String c){
-        this.couleurActuelle=c;
-    }
-    
-    /*
-    private int nbJoueurs(){        
-        Scanner nombre = new Scanner(System.in);
-        int nb = 0;
-
-        do {
-            System.out.print("Entrez le nombre de joueurs : ");
-            while (!nombre.hasNextInt()) {  // Vérifie si l'entrée est un entier
-                System.out.println("Erreur : Veuillez entrer un nombre valide !");
-                nombre.next();  // Vide l'entrée incorrecte
-            }
-            nb = nombre.nextInt();
-        } while (!nbJValide(nb));
-
-        return nb;
-    }
-    */
-    
+    /**
+     * Définit le pseudo du joueur i.
+     * @param i l'index du joueur dans la liste des joueurs.
+     * @param p la pseudo du joueur.
+     */
     public void setPseudo(int i,String p){
         this.joueurs[i].setPseudo(p);
     }
     
+    /**
+     * Définit la carte en paramètre comme carte provisoire dans la partie.
+     * @param carte la carte à mettre en mémoire.
+     */
     public void setCarteSelectionnee(Carte carte){
         this.carteSelectionnee=carte;
     }
     
+    /**
+     * Renvoie la carte sélectionnée.
+     * @return la carte sélectionnée.
+     */
     public Carte getCarteSelectionnee(){
         return this.carteSelectionnee;
     }
     
+    /**
+     * Compare la carte entrée en paramètre avec carteSelectionnée.
+     * @param carte la carte à comparer avec la carte gardée en mémoire dans la partie.
+     * @return <code>true</code> si les deux cartes sont les mêmes et <code>false</code> sinon.
+     */
     public boolean carteDifferente(Carte carte) {
         if (this.carteSelectionnee == null) {
             return true;
@@ -109,9 +100,11 @@ public class Partie {
         return !this.carteSelectionnee.equals(carte);
     }
     
-    /*
-    Distribue n cartes à tous les joueurs sauf j.
-    */
+    /**
+     * Distribue n cartes à tous les joueurs sauf j.
+     * @param n le nombre de cartes à distribuer.
+     * @param j le joueur à exclure de la distribution.
+     */
     public void distribuer(int n,Joueur j){
         for (int i=0;i<n;i++){
             for (Joueur joueur:this.joueurs){
@@ -122,9 +115,10 @@ public class Partie {
         }
     }
     
-    /*
-    Ajoute n joueurs dans le paquet (demande leurs pseudos).
-    */
+    /**
+     * Ajoute n joueurs dans la liste de joueurs de la partie.
+     * @param n le nombre de joueurs à ajouter.
+     */
     public void ajouterJoueurs(int n){
         Joueur j;
         joueurs = new Joueur[n];
@@ -134,18 +128,37 @@ public class Partie {
         }
     }
     
+    /**
+     * Renvoie la pioche.
+     * @return la pioche associée à la partie.
+     */
     public Pioche getPioche(){
         return this.pioche;
     }
     
+    /**
+     * Renvoie la liste de tous les joueurs.
+     * @return les joueurs.
+     */
     public Joueur[] getListeJoueurs(){
         return joueurs;
     }
     
+    /**
+     * Renvoie le nombre de joueurs.
+     * @return le nombre de joueurs.
+     */
     public int getNombreJoueurs(){
         return joueurs.length;
     }
     
+    /**
+     * Pose la carte sélectionnée par le joueur dans sa main sur le haut du paquet.
+     * Vérifie que la carte respecte les règles puis pose. 
+     * Si la carte permet de choisir une couleur, ouvre un popup. Met à jour
+     * l'affichage des cartes et du paquet.
+     * @throws IOException si le popup ne s'ouvre pas.
+     */
     public void poserCarteSelectionnee() throws IOException{
         if (this.carteSelectionnee != null){
             this.ordre.getJoueurActuel().getPaquetJoueur().jouerCarte(this.carteSelectionnee);
@@ -158,21 +171,21 @@ public class Partie {
         }
     }
     
+    /**
+     * Renvoie la liste de cartes du joueur i.
+     * @param i l'index du joueur dans la liste des joueurs.
+     * @return la liste de cartes du joueur.
+     */
     public ArrayList<Carte> getListeCartesJoueur(int i){
         return this.joueurs[i].getPaquetJoueur().getListeCartes();
     }
     
+    /**
+     * Renvoie le nombre de cartes du joueur i.
+     * @param i l'index du joueur dans la liste des joueurs.
+     * @return la liste de cartes du joueur.
+     */
     public int getNombreCartesJoueur(int i){
         return this.joueurs[i].getPaquetJoueur().getListeCartes().size();
     }
-    
-    /*
-    Vérifie si le nombre de joueurs est bien compris entre 2 et 4.
-    */
-    private boolean nbJValide(int n){
-        if (n<2){
-            return false;
-        } else return n <= 4;
-    }
-    
 }

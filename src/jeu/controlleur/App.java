@@ -13,8 +13,6 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
         Parent root = loader.load();
-    
-        // DemarrageController controller = loader.getController();
 
         Scene scene = new Scene(root, 800, 600);
         stage.setTitle("Démarrage");

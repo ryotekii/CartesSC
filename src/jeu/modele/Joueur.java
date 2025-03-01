@@ -18,23 +18,42 @@ public class Joueur {
         return n;
     }*/
     
+    /**
+     * Définit le pseudo du joueur.
+     * @param p le pseudo du joueur.
+     */
     public void setPseudo(String p){
         this.pseudo=p;
     }
-   
+    
+    /**
+     * Le constructeur.
+     * @param p la partie associée.
+     */
     public Joueur(Partie p){
         this.partie = p;
         this.main = new PaquetJoueur(this);
     }
     
+    /**
+     * Retourne le pseudo du joueur.
+     * @return le pseudo.
+     */
     public String getPseudo(){
         return this.pseudo;
     }
     
+    /**
+     * Ajoute la première carte de la pioche dans la main du joueur.
+     */
     public void piocher(){
         main.ajouterCarte(partie.getPioche().piocher());
     }
     
+    /**
+     * Retourne la main du joueur.
+     * @return la main.
+     */
     public PaquetJoueur getPaquetJoueur(){
         return this.main;
     }

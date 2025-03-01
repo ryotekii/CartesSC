@@ -14,16 +14,27 @@ import jeu.modele.Cartes.Paralysie;
 import jeu.modele.Cartes.Tdah;
 import jeu.modele.Cartes.TroubleEquilibre;
 
+/**
+ * Paquet de cartes au centre de la table.
+ */
 public final class Pioche {
     private final ArrayList<Carte> pioche = new ArrayList<>();
     private final Partie partie;
     
+    /**
+     * Le constructeur.
+     * @param p la partie à laquelle appartient la pioche.
+     */
     public Pioche(Partie p){
         this.init();
         this.melanger();
         this.partie = p;
     }
 
+    /**
+     * Initialise la pioche. Créé 10 cartes de chaque couleur allant de 0 à 9,
+     * 2 cartes "Joker couleur" de chaque couleur et 3 cartes "Joker" de chaque type.
+     */
     private void init(){
         Carte temp;
         for (String couleur : Parametres.COULEURS) {
@@ -46,10 +57,19 @@ public final class Pioche {
         }
     }
     
+    /**
+     * Mélange les cartes de la pioche.
+     */
     public void melanger(){
         Collections.shuffle(pioche);
     }
     
+    /**
+     * Renvoie la carte du dessus et la retire de la pioche. Si la pioche est vide,
+     * elle est reformée grâce au paquet.
+     * @return la carte piochée.
+     * @see refairePaquet().
+     */
     public Carte piocher(){
         if (pioche.isEmpty()){
             refairePaquet();
@@ -59,9 +79,10 @@ public final class Pioche {
         return temp;
     }
     
-    /*
-    OK - Reprend toutes les cartes du paquet (sauf la première) et les remet dans la pioche.
-    */
+    /**
+     * Reprend toutes les cartes du paquet excepté la première et les remet dans 
+     * la pioche.
+     */
     private void refairePaquet(){
         ArrayList<Carte> provisoire = this.partie.getPaquet().viderPaquet();
         this.pioche.addAll(provisoire);
