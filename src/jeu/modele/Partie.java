@@ -4,6 +4,7 @@ import java.io.IOException;
 import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
 import jeu.controlleur.FXMLController;
+import jeu.modele.Cartes.Tdah;
 
 public class Partie {
     private Joueur[] joueurs;
@@ -55,6 +56,7 @@ public class Partie {
     public void setCouleur(String c){
         this.couleurActuelle=c;
     }
+    
     /**
      * Retourne la couleur de jeu.
      * @return la couleur de jeu.
@@ -129,6 +131,24 @@ public class Partie {
     }
     
     /**
+     * Pose la première carte sur le paquet après avoir distribué.
+     * Continue jusqu'à ce que la couleur ne soit pas joker.
+     */
+    public void poserPremiereCarte(){
+        Carte premiereCarte;
+    
+        do {
+            premiereCarte = this.pioche.piocher();
+            paquet.poserCarte(premiereCarte);
+        } while (premiereCarte != null && "Joker".equals(premiereCarte.getCouleur()));
+
+        if (premiereCarte != null) {
+            this.couleurActuelle = premiereCarte.getCouleur();
+            System.out.println(premiereCarte);
+        }
+    }
+    
+    /**
      * Renvoie la pioche.
      * @return la pioche associée à la partie.
      */
@@ -160,14 +180,15 @@ public class Partie {
      * @throws IOException si le popup ne s'ouvre pas.
      */
     public void poserCarteSelectionnee() throws IOException{
-        if (this.carteSelectionnee != null){
+        if (this.carteSelectionnee != null && this.verification.peutPoser(carteSelectionnee)){
             this.ordre.getJoueurActuel().getPaquetJoueur().jouerCarte(this.carteSelectionnee);
             this.paquet.poserCarte(this.carteSelectionnee);
             this.couleurActuelle=carteSelectionnee.getCouleur();
-            if (this.carteSelectionnee.getCouleur().equals("Joker")){
+            if (this.carteSelectionnee.getCouleur().equals("Joker") && !(this.carteSelectionnee instanceof Tdah)){
                 controller.ouvrirPopupCouleur();
             }
             controller.mettreAJourAffichage();
+            System.out.println(this.couleurActuelle);
         }
     }
     

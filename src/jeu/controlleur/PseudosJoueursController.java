@@ -57,6 +57,7 @@ public class PseudosJoueursController implements Initializable {
             defNbJoueurs();
             creerListeJoueurs();
             partie.distribuer(7,null);
+            partie.poserPremiereCarte();
             try{
                 lancerPartie();
             }catch(Exception e){

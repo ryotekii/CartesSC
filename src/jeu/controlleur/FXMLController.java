@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Pos;
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,7 +25,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import jeu.modele.Cartes.AmnesieSelective;
+import jeu.modele.Cartes.BlocageMoteur;
 import jeu.modele.Cartes.Carte;
+import jeu.modele.Cartes.CarteSimple;
+import jeu.modele.Cartes.CriseEpileptique;
+import jeu.modele.Cartes.MainEtrangere;
+import jeu.modele.Cartes.Narcolepsie;
+import jeu.modele.Cartes.NeuropathieO;
+import jeu.modele.Cartes.Paralysie;
+import jeu.modele.Cartes.Tdah;
+import jeu.modele.Cartes.TroubleEquilibre;
 import jeu.modele.Parametres;
 import jeu.modele.Partie;
 import jeu.vue.CarteView;
@@ -53,6 +65,8 @@ public class FXMLController {
     @FXML private Label pseudoPrincipal;
     @FXML private Button boutonOptions;
     @FXML private Button boutonFinir;
+    @FXML private Button boutonInfos;
+    @FXML private Tooltip tooltipInfos;
 
     /**
      * Initialise la table de jeu. Créé les paquets à l'écran en fonction du
@@ -123,6 +137,15 @@ public class FXMLController {
             }
         });
         
+        boutonInfos.setOnMouseEntered(event ->{
+            Point2D p = boutonInfos.localToScreen(boutonInfos.getLayoutBounds().getMaxX(), boutonInfos.getLayoutBounds().getMaxY());
+            tooltipInfos.show(boutonInfos, p.getX(), p.getY());
+        });
+        
+        boutonInfos.setOnMouseExited(event ->{
+            tooltipInfos.hide();
+        });
+        
     }
     
     /**
@@ -134,23 +157,19 @@ public class FXMLController {
     }
     
     /**
-     * Remplace l'image au-dessus du paquet par l'image de la carte sélectionnée
-     * si on clique sur le paquet.
+     * Remplace l'image au-dessus du paquet par l'image de la carte la plus au-dessus du paquet.
      */
-    private void remplacerCarteViewPaquet() {
-        System.out.println(partie.getCarteSelectionnee());
-        if (partie.getCarteSelectionnee()!=null){
-            CarteView nouvelleCarteView = new CarteView(partie.getCarteSelectionnee(),500);
-            boxPaquet.getChildren().clear();
-            ImageView nouvelleImageView = nouvelleCarteView.getImageView();
-            nouvelleImageView.setFitHeight(200);
-            nouvelleImageView.setPreserveRatio(true);
-            boxPaquet.setPrefWidth(141);
-            boxPaquet.setPrefHeight(200);
-            boxPaquet.setEffect(ombreCarte);
-            boxPaquet.getChildren().add(nouvelleImageView);
-        }
-        mettreAJourAffichage();
+    public void mettreAJourViewPaquet() {
+        CarteView nouvelleCarteView = new CarteView(partie.getPaquet().voirCarteSup(),500);
+        boxPaquet.getChildren().clear();
+        ImageView nouvelleImageView = nouvelleCarteView.getImageView();
+        nouvelleImageView.setFitHeight(200);
+        nouvelleImageView.setPreserveRatio(true);
+        boxPaquet.setPrefWidth(141);
+        boxPaquet.setPrefHeight(200);
+        boxPaquet.setEffect(ombreCarte);
+        boxPaquet.getChildren().add(nouvelleImageView);
+        afficherInfosCarte();
     }
     
     /**
@@ -186,6 +205,7 @@ public class FXMLController {
         this.afficherCartesJoueurGauche();
         this.redefinirEffetsBox();
         this.mettreAJourCouleur();
+        this.mettreAJourViewPaquet();
     }
     
     /**
@@ -211,8 +231,8 @@ public class FXMLController {
         boxPaquet.setOnMouseClicked(event ->{
             try {
                 partie.poserCarteSelectionnee();
-                remplacerCarteViewPaquet();
                 partie.setCarteSelectionnee(null);
+                mettreAJourAffichage();
             } catch (IOException e) {
                 System.out.println("erreur pose carte");
             }
@@ -332,6 +352,7 @@ public class FXMLController {
                 remettreCarteEnPlace();
             }
         }
+        afficherInfosCarte();
     }
 
     /**
@@ -359,6 +380,7 @@ public class FXMLController {
                 imageView.setEffect(ombreCarte);
             }
         }
+        afficherInfosCarte();
     }
     
     /**
@@ -439,4 +461,31 @@ public class FXMLController {
                 vb.getChildren().add(image);
             }
         }
+    
+    private void afficherInfosCarte(){
+        if (partie.getCarteSelectionnee()==null){
+            tooltipInfos.setText("Sélectionnez une carte pour voir son effet !");
+        } else if (partie.getCarteSelectionnee() instanceof AmnesieSelective){
+            tooltipInfos.setText("Faites jouer une carte au hasard au prochain joueur, ignorant couleur et le numéro.");
+        } else if (partie.getCarteSelectionnee() instanceof BlocageMoteur){
+            tooltipInfos.setText("Empêchez le prochain joueur de jouer.");
+        } else if (partie.getCarteSelectionnee() instanceof CriseEpileptique){
+            tooltipInfos.setText("Faites piocher une carte à tout le monde (sauf vous) et choisissez la couleur.");
+        } else if (partie.getCarteSelectionnee() instanceof MainEtrangere){
+            tooltipInfos.setText("Faites piocher une carte au hasard au prochain joueur dans la main du joueur ayant le plus de cartes, il ne pourra pas jouer après cela.");
+        } else if (partie.getCarteSelectionnee() instanceof Narcolepsie){
+            tooltipInfos.setText("Faites piocher 2 cartes au joueur suivant. Les cartes Narcolepsie peuvent s'additionner.");
+        } else if (partie.getCarteSelectionnee() instanceof NeuropathieO){
+            tooltipInfos.setText("Changez la couleur de jeu.");
+        } else if (partie.getCarteSelectionnee() instanceof Paralysie){
+            tooltipInfos.setText("Changez de couleur et faites piocher 4 cartes au joueur suivant. Les cartes Paralysie du sommeil peuvent s'additionner.");
+        } else if (partie.getCarteSelectionnee() instanceof Tdah){
+            tooltipInfos.setText("Posez cette carte et rejouez instantanément sans vous soucier de la couleur.");
+        } else if (partie.getCarteSelectionnee() instanceof TroubleEquilibre){
+            tooltipInfos.setText("Changez le sens de jeu.");
+        } else if (partie.getCarteSelectionnee() instanceof CarteSimple){
+            tooltipInfos.setText("Cette carte n'a pas d'effet. Posez-la pour faire diminuer la taille de votre main.");
+        }
+        
+    }
 }

@@ -1,7 +1,12 @@
 package jeu.modele;
 
+import jeu.modele.Cartes.AmnesieSelective;
+import jeu.modele.Cartes.BlocageMoteur;
 import jeu.modele.Cartes.Carte;
 import jeu.modele.Cartes.CarteSimple;
+import jeu.modele.Cartes.MainEtrangere;
+import jeu.modele.Cartes.Narcolepsie;
+import jeu.modele.Cartes.TroubleEquilibre;
 
 /**
 * Classe pour vérifier que les cartes peuvent être posées
@@ -31,7 +36,8 @@ public class VerificationCarte {
     
     /**
      * Vérifie que le numéro de la carte à poser correspond au numéro de la carte
-     * supérieure du paquet. Si l'une des cartes est un joker, les numéros correspondent.
+     * supérieure du paquet. Si l'une des cartes est un joker noir, les numéros correspondent.
+     * Si les deux joker sont du même type, les numéros correspondent.
      * @param main la carte à poser.
      * @param table la carte au-dessus du paquet.
      * @return <code>true</code> si les nombres correspondent et <code>false</code> sinon.
@@ -41,6 +47,12 @@ public class VerificationCarte {
             return true;
         } else if (main instanceof CarteSimple c1 && table instanceof CarteSimple c2){
             return c1.getNumero() == c2.getNumero();
+        } else if ((main instanceof MainEtrangere && table instanceof MainEtrangere) || 
+                (main instanceof Narcolepsie && table instanceof Narcolepsie) || 
+                (main instanceof TroubleEquilibre && table instanceof TroubleEquilibre) || 
+                (main instanceof AmnesieSelective && table instanceof AmnesieSelective) ||
+                (main instanceof BlocageMoteur && table instanceof BlocageMoteur)){
+            return true;
         }
         return false;
     }

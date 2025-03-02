@@ -75,7 +75,6 @@ public final class Pioche {
             refairePaquet();
         }
         Carte temp = pioche.remove(0);
-        System.out.println(temp.nomImage());
         return temp;
     }
     

@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -96,5 +97,10 @@
       <Label fx:id="pseudoDevant" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="90.0" />
       <Label fx:id="pseudoPrincipal" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="50.0" />
       <Label fx:id="pseudoDroit" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" textAlignment="RIGHT" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0" />
+      <Button fx:id="boutonInfos" mnemonicParsing="false" text="?" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="50.0">
+         <tooltip>
+            <Tooltip fx:id="tooltipInfos" contentDisplay="CENTER" text="Sélectionnez une carte pour voir son effet !" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
+         </tooltip>
+      </Button>
    </children>
 </AnchorPane>

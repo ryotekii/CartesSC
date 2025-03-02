@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import jeu.modele.Cartes.Carte;
 
+/**
+ * Fait le lien entre Carte et les Imageview associées.
+ */
 public class CarteView {
     private final Carte carte;
     private final ImageView vue;

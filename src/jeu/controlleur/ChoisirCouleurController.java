@@ -54,7 +54,7 @@ public class ChoisirCouleurController implements Initializable{
         });
         
         r.setOnMouseClicked(event ->{
-            selectionnerCouleur(r.getId().substring(7).toLowerCase());
+            selectionnerCouleur(Character.toUpperCase(r.getId().charAt(7)) + r.getId().substring(8).toLowerCase());
         });
     }
     
