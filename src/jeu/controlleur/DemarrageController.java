@@ -47,14 +47,25 @@ public class DemarrageController implements Initializable {
         });
     }
     
+    /**
+     * Crée une nouvelle partie du modèle.
+     */
     public void creerPartie(){
         this.partie = new Partie();
     }
     
+    /**
+     * Renvoie la partie créée.
+     * @return la aprtie associée.
+     */
     public Partie getPartie(){
         return this.partie;
     }
     
+    /**
+     * Ouvre la page du classement et ferme celle du démarrage.
+     * @throws Exception si la page du classsement ne s'ouvre pas.
+     */
     private void ouvrirClassement() throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Classement.fxml").toURI().toURL());
         Parent root = loader.load();
@@ -70,6 +81,11 @@ public class DemarrageController implements Initializable {
         fenetreBase.close();
     }
     
+    /**
+     * Ouvre la page de sélection des pseudos et ferme celle de démarrage.
+     * Transmet la partie créée au controlleur des pseudos.
+     * @throws Exception si la fenêtre des pseudos ne s'ouvre pas.
+     */
     private void ouvrirFenetrePseudos() throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/PseudosJoueurs.fxml").toURI().toURL());
         Parent root = loader.load();

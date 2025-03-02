@@ -18,7 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeu.modele.Partie;
 
-
+/**
+ * Page de définition des pseudos des joueurs.
+ */
 public class PseudosJoueursController implements Initializable {
     @FXML private Button boutonRetour;
     @FXML private VBox boxJoueurs;
@@ -29,6 +31,13 @@ public class PseudosJoueursController implements Initializable {
     
     private Partie partie;
     
+    /**
+     * Initialise la saisie des pseudos. Créé deux champs de saisie et un bouton
+     * "+" pour ajouter des joueurs. Le bouton valider initialise la partie et
+     * lui donne les informations sur les joueurs.
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb){
         boutonRetour.setOnMouseClicked(event ->{
@@ -58,10 +67,19 @@ public class PseudosJoueursController implements Initializable {
         
     }
     
+    /**
+     * Définit la partie en cours.
+     * @param p la aprtie.
+     */
     public void setPartie(Partie p){
         this.partie=p;
     }
     
+    /**
+     * Créé une zone de saisie de pseudo, dans une limite de 4 à l'écran.
+     * S'il y en a plus de deux, ajoute un bouton supprimer. Ajoute les pseudos des
+     * joueurs dans une liste.
+     */
     private void ajouterJoueur(){
         if(joueurs.size()<4){
             HBox joueur = new HBox(20);
@@ -94,6 +112,10 @@ public class PseudosJoueursController implements Initializable {
         boutonValider.setDisable(true);
     }
     
+    /**
+     * Vérifie si les champs de pseudos sont remplis et s'ils sont tous différents.
+     * @return <code>true</code> si les pseudos sont remplis et différents, <code>false</code> finon.
+     */
     private boolean verifierPseudos(){
         HashSet<String> pseudos = new HashSet<>();
         
@@ -106,6 +128,9 @@ public class PseudosJoueursController implements Initializable {
         return true;
     }
     
+    /**
+     * Donne les pseudos à la partie pour qu'elle les associe les joueurs.
+     */
     private void creerListeJoueurs(){
         int i=0;
         for(TextField joueur:joueurs){
@@ -115,11 +140,17 @@ public class PseudosJoueursController implements Initializable {
         }
     }
     
+    /**
+     * Donne le nombre de joueurs à la partie pour qu'elle créée les joueurs.
+     */
     private void defNbJoueurs(){
         this.partie.ajouterJoueurs(joueurs.size());
         System.out.println(partie.getNombreJoueurs());
     }
 
+    /**
+     * Supprime le dernier joueur de la liste et de l'écran.
+     */
     private void supprimerJoueur(){
         System.out.println(joueurs);
         joueurs.removeLast();
@@ -134,6 +165,10 @@ public class PseudosJoueursController implements Initializable {
         /*boutonValider.setDisable(!verifierPseudos());*/
     }
     
+    /**
+     * Retourne à l'écran de démarrage et abandonne la saisie des pseudos.
+     * @throws Exception 
+     */
     private void retournerDemarrage() throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
         Parent root = loader.load();
@@ -149,6 +184,10 @@ public class PseudosJoueursController implements Initializable {
         fenetreBase.close();
     }
     
+    /**
+     * Lance l'affichage de la table de jeu avec les informations des joueurs.
+     * @throws Exception si la table de jeu ne s'affiche pas.
+     */
     private void lancerPartie() throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/FXML.fxml").toURI().toURL());
         Parent root = loader.load();

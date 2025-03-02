@@ -28,6 +28,10 @@ import jeu.modele.Parametres;
 import jeu.modele.Partie;
 import jeu.vue.CarteView;
 
+/**
+ * Controlleur de la page principale de la partie, affichant la table de jeu et
+ * les mouvements possibles.
+ */
 public class FXMLController {
     private Partie partie;
     private ArrayList<Carte> cartesJoueurPrincipal;
@@ -50,6 +54,11 @@ public class FXMLController {
     @FXML private Button boutonOptions;
     @FXML private Button boutonFinir;
 
+    /**
+     * Initialise la table de jeu. Créé les paquets à l'écran en fonction du
+     * nombre de joueurs, ajoute des effets à la pioche et relie le bouton options
+     * à la page correspondante.
+     */
     public void init() {
         this.partie.setController(this);
         cartesJoueurPrincipal = partie.getListeCartesJoueur(0);
@@ -116,10 +125,18 @@ public class FXMLController {
         
     }
     
+    /**
+     * Définit la partie associée.
+     * @param p la aprtie.
+     */
     public void setPartie(Partie p){
         this.partie = p;
     }
     
+    /**
+     * Remplace l'image au-dessus du paquet par l'image de la carte sélectionnée
+     * si on clique sur le paquet.
+     */
     private void remplacerCarteViewPaquet() {
         System.out.println(partie.getCarteSelectionnee());
         if (partie.getCarteSelectionnee()!=null){
@@ -136,6 +153,10 @@ public class FXMLController {
         mettreAJourAffichage();
     }
     
+    /**
+     * Ouvre la page des options.
+     * @throws Exception si la page ne s'ouvre pas.
+     */
     public void ouvrirOptions() throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Options.fxml").toURI().toURL());
         Parent root = loader.load();
@@ -155,6 +176,9 @@ public class FXMLController {
         popupStage.showAndWait();
     }
     
+    /**
+     * Met à jour l'affichage des paquets de carte et remet les effets qui disparaissent.
+     */
     public void mettreAJourAffichage(){
         this.afficherCartesJoueurPrincipal();
         this.afficherCartesJoueurDroit();
@@ -164,6 +188,9 @@ public class FXMLController {
         this.mettreAJourCouleur();
     }
     
+    /**
+     * Remet les effets visuels sur le paquet.
+     */
     private void redefinirEffetsBox(){
         boxPaquet.setOnMouseEntered(null);
         boxPaquet.setOnMouseExited(null);
@@ -192,6 +219,10 @@ public class FXMLController {
         });    
     }
     
+    /**
+     * Change la couleur de fond du rectangle couleur en fonction de l'attribut
+     * couleur de partie.
+     */
     private void mettreAJourCouleur(){
         if (partie.getCouleur() == null || partie.getCouleur().isEmpty()) {
             carreCouleur.setFill(Color.WHITE);
@@ -206,6 +237,10 @@ public class FXMLController {
         }
     }
     
+    /**
+     * Ouvre un popup pour choisir la couleur.
+     * @throws IOException si le popup ne s'ouvre pas.
+     */
     public void ouvrirPopupCouleur() throws IOException {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/ChoisirCouleur.fxml").toURI().toURL());
         Parent root = loader.load();
@@ -225,6 +260,10 @@ public class FXMLController {
         partie.setCouleur(controller.getCouleur());
     }
     
+    /**
+     * Affiche les cartes du joueur principal. Face visible, reliées à CarteView
+     * avec des effets au survol et à la sélection.
+     */
     private void afficherCartesJoueurPrincipal(){
         HBox hb = paquetJoueurPrincipal;
         int nb = cartesJoueurPrincipal.size();
@@ -267,6 +306,12 @@ public class FXMLController {
         }
     }
     
+    /**
+     * Effet lorsqu'on clique sur une carte dans la main du joueur principal.
+     * Sélectionne la carte pour l'envoyer à partie. Une seule carte à la fois, si
+     * une carte est déjà sélectionnée, remplace l'ancienne.
+     * @param event 
+     */
     private void clickCarte(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
         CarteView carteView = (CarteView) imageView.getUserData();
@@ -289,6 +334,10 @@ public class FXMLController {
         }
     }
 
+    /**
+     * Effet visuel qui fait monter et grossir une carte lorsqu'on clique dessus.
+     * @param iv l'image de la carte à faire monter.
+     */
     private void faireMonterCarte(ImageView iv) {
         iv.setTranslateY(-20);
         iv.setScaleX(1.2);
@@ -296,6 +345,10 @@ public class FXMLController {
         iv.setEffect(surbrillance);
     }
 
+    /**
+     * Remet toutes les cartes au même niveau et supprime les effets visuels
+     * de zoom ou de halo.
+     */
     private void remettreCarteEnPlace() {
         HBox hb = paquetJoueurPrincipal;
         for (Node node : hb.getChildren()) {
@@ -308,6 +361,9 @@ public class FXMLController {
         }
     }
     
+    /**
+     * Affiche le dos des cartes du joueur devant en fonction de son nombre de cartes.
+     */
     private void afficherCartesJoueurDevant(){
         HBox hb = paquetJoueurDevant;
         int nb = cartesJoueurDevant;
@@ -331,6 +387,9 @@ public class FXMLController {
         }
     }
     
+    /**
+     * Affiche le dos des cartes du joueur à gauche en fonction de son nombre de cartes.
+     */
     private void afficherCartesJoueurGauche(){
             VBox vb = paquetJoueurGauche;
             int nb = cartesJoueurGauche;
@@ -355,6 +414,9 @@ public class FXMLController {
             }
         }
                 
+    /**
+     * Affiche le dos des cartes du joueur à droite en fonction de son nombre de cartes.
+     */
     private void afficherCartesJoueurDroit(){
             VBox vb = paquetJoueurDroit;
             int nb = cartesJoueurDroit;

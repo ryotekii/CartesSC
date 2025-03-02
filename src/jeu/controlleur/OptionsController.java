@@ -12,6 +12,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import jeu.modele.Partie;
 
+/**
+ * La fenêtre d'options en partie.
+ */
 public class OptionsController implements Initializable {
     @FXML private Button boutonQuitter;
     @FXML private Button boutonReprendre;
@@ -19,6 +22,10 @@ public class OptionsController implements Initializable {
     private Stage popupStage;
     private Button boutonFinir;
     
+    /**
+     * Définit la partie en cours.
+     * @param p la aprtie.
+     */
     public void setPartie(Partie p){
         this.partie=p;
     }
@@ -31,9 +38,13 @@ public class OptionsController implements Initializable {
         });
     }
     
+    /**
+     * Définit le bouton associée à la partie pour garder en mémoire la fenêtre associée.
+     * @param b un bouton présent sur la table de jeu.
+     */
     public void setBoutonFinir(Button b){
         this.boutonFinir=b;
-                boutonQuitter.setOnAction(event ->{
+        boutonQuitter.setOnAction(event ->{
             try{
                 retourAccueil();
             }catch(Exception e){
@@ -48,6 +59,10 @@ public class OptionsController implements Initializable {
         this.popupStage = s;
     }
     
+    /**
+     * Retourne à la page d'accueil et quitte la partie en cours.
+     * @throws Exception 
+     */
     public void retourAccueil() throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
         Parent root = loader.load();

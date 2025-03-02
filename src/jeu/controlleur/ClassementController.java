@@ -25,6 +25,10 @@ public class ClassementController implements Initializable {
         });
     }
     
+    /**
+     * Ouvre la fenêtre de démarrage et ferme celle du classement.
+     * @throws Exception si la fenêtre de démarrage ne s'ouvre pas.
+     */
     private void retournerDemarrage() throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
         Parent root = loader.load();

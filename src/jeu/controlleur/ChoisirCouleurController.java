@@ -35,8 +35,12 @@ public class ChoisirCouleurController implements Initializable{
         setEffets(choisirVert);
     }
     
-    private void setEffets(Rectangle r){
-                
+    /**
+     * Ajoute les effets visuels et d'actions lorsqu'on passe la souris sur un rectangle.
+     * Ajoute un halo et un effet grossissant au survol de l'élément.
+     * @param r le rectangle.
+     */
+    private void setEffets(Rectangle r){                
         r.setOnMouseEntered(event ->{
             r.setScaleX(1.1);
             r.setScaleY(1.1);
@@ -54,15 +58,27 @@ public class ChoisirCouleurController implements Initializable{
         });
     }
     
+    /**
+     * Définit la couleur à sélectionner et ferme la fenêtre.
+     * @param c la couleur choisie.
+     */
     private void selectionnerCouleur(String c){
         couleur = c;
         popupStage.close();
     }
     
+    /**
+     * Renvoie la couleur sélectionnée.
+     * @return la couleur choisie.
+     */
     public String getCouleur(){
         return this.couleur;
     }
     
+    /**
+     * Définit la fenêtre associée au popup.
+     * @param s la fenêtre du popup.
+     */
     public void setPopupStage(Stage s){
         this.popupStage = s;
     }

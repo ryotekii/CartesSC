@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 public class App extends Application {
     
+    /**
+     * Lance l'interface graphique de la page d'accueil.
+     * @param stage
+     * @throws Exception si la fenêtre ne s'ouvre pas correctement.
+     */
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
