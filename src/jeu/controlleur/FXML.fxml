@@ -19,7 +19,7 @@
    <children>
       <StackPane id="fenetre" prefHeight="558.0" prefWidth="817.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView id="fleche" fitHeight="105.0" fitWidth="292.0" opacity="0.15" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="fleche" fx:id="flecheSens" fitHeight="105.0" fitWidth="292.0" opacity="0.15" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/fleche.png" />
                </image>

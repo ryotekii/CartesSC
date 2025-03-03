@@ -47,9 +47,9 @@ import jeu.vue.CarteView;
 public class FXMLController {
     private Partie partie;
     private ArrayList<Carte> cartesJoueurPrincipal;
-    private int cartesJoueurDroit = 0;
-    private int cartesJoueurDevant = 0;
-    private int cartesJoueurGauche = 0;
+    private int numJoueurDroit = -1;
+    private int numJoueurDevant = -1;
+    private int numJoueurGauche = -1;
     @FXML private ImageView imagePioche;
     private final DropShadow surbrillance = new DropShadow();
     private final DropShadow ombreCarte = new DropShadow();
@@ -67,6 +67,7 @@ public class FXMLController {
     @FXML private Button boutonFinir;
     @FXML private Button boutonInfos;
     @FXML private Tooltip tooltipInfos;
+    @FXML private ImageView flecheSens;
 
     /**
      * Initialise la table de jeu. Créé les paquets à l'écran en fonction du
@@ -79,23 +80,23 @@ public class FXMLController {
         switch (partie.getNombreJoueurs()) {
             case 4 -> {
                 pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
-                cartesJoueurDroit = partie.getNombreCartesJoueur(1);
+                numJoueurDroit = 1;
+                numJoueurDevant = 2;
+                numJoueurGauche = 3;
                 pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
-                cartesJoueurDevant = partie.getNombreCartesJoueur(2);
                 pseudoDevant.setText(partie.getListeJoueurs()[2].getPseudo());
-                cartesJoueurGauche = partie.getNombreCartesJoueur(3);
                 pseudoGauche.setText(partie.getListeJoueurs()[3].getPseudo());
             }
             case 3 -> {
                 pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
-                cartesJoueurDroit = partie.getNombreCartesJoueur(1);
+                numJoueurDroit = 1;
                 pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
-                cartesJoueurGauche = partie.getNombreCartesJoueur(2);
+                numJoueurGauche = 2;
                 pseudoGauche.setText(partie.getListeJoueurs()[2].getPseudo());
             }
             case 2 -> {
                 pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
-                cartesJoueurDevant = partie.getNombreCartesJoueur(1);
+                numJoueurDevant = 1;
                 pseudoDevant.setText(partie.getListeJoueurs()[1].getPseudo());
             }
         }
@@ -200,12 +201,29 @@ public class FXMLController {
      */
     public void mettreAJourAffichage(){
         this.afficherCartesJoueurPrincipal();
-        this.afficherCartesJoueurDroit();
-        this.afficherCartesJoueurDevant();
-        this.afficherCartesJoueurGauche();
+        try{
+            this.afficherCartesJoueurDroit();
+        }catch(Exception e){System.out.println("pas de joueur droit");}
+        try{
+            this.afficherCartesJoueurDevant();
+        }catch(Exception e){System.out.println("pas de joueur devant");}
+        try{
+            this.afficherCartesJoueurGauche();
+        }catch(Exception e){System.out.println("pas de joueur gauche");}
         this.redefinirEffetsBox();
         this.mettreAJourCouleur();
         this.mettreAJourViewPaquet();
+    }
+    
+    /**
+     * Retourne l'image de la flèche au centre de la table.
+     */
+    public void retournerFleche(){
+        if(flecheSens.getScaleX()==1){
+            flecheSens.setScaleX(-1);
+        } else {
+            flecheSens.setScaleX(1);
+        }
     }
     
     /**
@@ -388,7 +406,7 @@ public class FXMLController {
      */
     private void afficherCartesJoueurDevant(){
         HBox hb = paquetJoueurDevant;
-        int nb = cartesJoueurDevant;
+        int nb = partie.getNombreCartesJoueur(numJoueurDevant);
         int largeurCarte = 85;
         int maxEcart = -15;
 
@@ -414,7 +432,7 @@ public class FXMLController {
      */
     private void afficherCartesJoueurGauche(){
             VBox vb = paquetJoueurGauche;
-            int nb = cartesJoueurGauche;
+            int nb = partie.getNombreCartesJoueur(numJoueurGauche);
             int largeurCarte = 85;
             int maxEcart = -80;
 
@@ -441,7 +459,7 @@ public class FXMLController {
      */
     private void afficherCartesJoueurDroit(){
             VBox vb = paquetJoueurDroit;
-            int nb = cartesJoueurDroit;
+            int nb = partie.getNombreCartesJoueur(numJoueurDroit);
             int largeurCarte = 85;
             int maxEcart = -80;
         

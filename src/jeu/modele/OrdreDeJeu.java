@@ -4,7 +4,7 @@ package jeu.modele;
 * Classe qui gère l'ordre de jeu, changements de sens, passages de tours.
 */
 public class OrdreDeJeu {
-    private boolean inverse = false;
+    private boolean sens = true;
     private final Partie partie;
     
     /**
@@ -17,7 +17,7 @@ public class OrdreDeJeu {
     
     @Override
     public String toString(){
-        if (inverse){
+        if (!sens){
             return ("Le jeu tourne dans le sens inverse.");
         } else {
             return ("Le jeu tourne dans le sens horaire.");
@@ -29,6 +29,20 @@ public class OrdreDeJeu {
     }
     
     public void changerSens(){
-        inverse = !inverse;
+        sens = !sens;
+        partie.getController().retournerFleche();
+    }
+    
+    public Joueur getJoueurSuivant(){
+        if (sens){
+            return this.partie.getListeJoueurs()[1];
+        } else {
+            return this.partie.getListeJoueurs()[this.partie.getListeJoueurs().length - 1];
+        }
+    }
+    
+    public void passerTourSuivant(){
+        
     }
 }
+

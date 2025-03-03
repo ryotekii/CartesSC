@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jeu.modele.Cartes.Carte;
 import jeu.modele.Partie;
 
 /**
@@ -57,6 +58,7 @@ public class PseudosJoueursController implements Initializable {
             defNbJoueurs();
             creerListeJoueurs();
             partie.distribuer(7,null);
+            // partie.poserPremiereCarte();
             partie.poserPremiereCarte();
             try{
                 lancerPartie();

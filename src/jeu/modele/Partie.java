@@ -3,7 +3,11 @@ package jeu.modele;
 import java.io.IOException;
 import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
+import java.util.Random;
 import jeu.controlleur.FXMLController;
+import jeu.modele.Cartes.AmnesieSelective;
+import jeu.modele.Cartes.CarteSpeciale;
+import jeu.modele.Cartes.EffetsCartes;
 import jeu.modele.Cartes.Tdah;
 
 public class Partie {
@@ -19,6 +23,7 @@ public class Partie {
     * l'utilisation de joker.
     */
     private String couleurActuelle;
+    private EffetsCartes effets;
     
     /**
      * Le constructeur. Créé le paquet, la pioche, l'ordre de jeu et
@@ -30,7 +35,36 @@ public class Partie {
         this.ordre = new OrdreDeJeu(this);
         this.pioche = new Pioche(this);
         this.carteSelectionnee=null;
+        this.effets=new EffetsCartes(this);
         this.verification = new VerificationCarte(this);
+    }
+    
+    /**
+     * Renvoie la joueur ayant le plus de cartes. En cas d'égalité, choisit au
+     * hasard l'un des joueurs ayant le plus de cartes. Si le joueur ayant le plus de
+     * cartes est celui est entré en paramètre, retourne le deuxième joueur ayant
+     * le plus de cartes.
+     * @param j
+     * @return le joueur ayant le plus de cartes.
+     */
+    public Joueur getJoueurMax(Joueur j){
+        ArrayList<Joueur> listePossible = new ArrayList<>();
+        int maxCartes = -1;
+        for (Joueur joueur : joueurs) {
+            if (joueur == j){ 
+                continue;
+            }
+            int nb = joueur.getPaquetJoueur().getListeCartes().size();
+            if (nb > maxCartes) {
+                maxCartes = nb;
+                listePossible.clear();
+                listePossible.add(joueur);
+            } else if (nb == maxCartes) {
+                listePossible.add(joueur);
+            }
+        }
+        Random random = new Random();
+        return listePossible.get(random.nextInt(listePossible.size()));
     }
     
     /**
@@ -39,6 +73,10 @@ public class Partie {
      */
     public void setController(FXMLController c){
         this.controller=c;
+    }
+    
+    public EffetsCartes getEffets(){
+        return this.effets;
     }
     
     /**
@@ -63,6 +101,10 @@ public class Partie {
      */
     public String getCouleur(){
         return this.couleurActuelle;
+    }
+    
+    public FXMLController getController(){
+        return this.controller;
     }
     
     /**
@@ -132,7 +174,7 @@ public class Partie {
     
     /**
      * Pose la première carte sur le paquet après avoir distribué.
-     * Continue jusqu'à ce que la couleur ne soit pas joker.
+     * Continue jusqu'à ce que la carte ne soit pas une carte spéciale.
      */
     public void poserPremiereCarte(){
         Carte premiereCarte;
@@ -140,7 +182,7 @@ public class Partie {
         do {
             premiereCarte = this.pioche.piocher();
             paquet.poserCarte(premiereCarte);
-        } while (premiereCarte != null && "Joker".equals(premiereCarte.getCouleur()));
+        } while (premiereCarte != null && (premiereCarte instanceof CarteSpeciale));
 
         if (premiereCarte != null) {
             this.couleurActuelle = premiereCarte.getCouleur();
@@ -165,6 +207,13 @@ public class Partie {
     }
     
     /**
+     * Renvoie l'ordre de jeu associée à la partie.
+     * @return l'ordre de jeu.
+     */
+    public OrdreDeJeu getOrdreDeJeu(){
+        return this.ordre;
+    }
+    /**
      * Renvoie le nombre de joueurs.
      * @return le nombre de joueurs.
      */
@@ -184,9 +233,11 @@ public class Partie {
             this.ordre.getJoueurActuel().getPaquetJoueur().jouerCarte(this.carteSelectionnee);
             this.paquet.poserCarte(this.carteSelectionnee);
             this.couleurActuelle=carteSelectionnee.getCouleur();
-            if (this.carteSelectionnee.getCouleur().equals("Joker") && !(this.carteSelectionnee instanceof Tdah)){
+            if (this.carteSelectionnee.getCouleur().equals("Joker") && 
+                    !(this.carteSelectionnee instanceof Tdah) && !(this.carteSelectionnee instanceof AmnesieSelective)){
                 controller.ouvrirPopupCouleur();
             }
+            effets.appliquerEffets(carteSelectionnee);
             controller.mettreAJourAffichage();
             System.out.println(this.couleurActuelle);
         }
