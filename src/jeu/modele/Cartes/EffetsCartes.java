@@ -34,11 +34,11 @@ public class EffetsCartes {
             suivant.jouerCarte(aleatoire);
             partie.getPaquet().poserCarte(aleatoire);
             partie.setCouleur(aleatoire.getCouleur());
-            partie.getOrdreDeJeu().passerTourSuivant();
+            partie.getOrdreDeJeu().passerSuivant();
             partie.getEffets().appliquerEffets(aleatoire);
 //vérifier si possible ce qui se passe lorsque la carte jouée est à son tour amnésie sélective ?
         } else if (c instanceof BlocageMoteur){
-            partie.getOrdreDeJeu().passerTourSuivant();
+            partie.getOrdreDeJeu().passerSuivant();
         } /* else if (c instanceof ){
             
         } else if (c instanceof ){
@@ -48,5 +48,8 @@ public class EffetsCartes {
         /*
         Modifier main étrangère pour si elle est jouée en dernier ? Ou les rgèles d'effets ?
         */
+        partie.getOrdreDeJeu().passerSuivant();
+        partie.getController().mettreAJourAffichage();
     }
+    
 }

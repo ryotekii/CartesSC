@@ -41,8 +41,25 @@ public class OrdreDeJeu {
         }
     }
     
-    public void passerTourSuivant(){
-        
+    /**
+     * Passe au joueur suivant.
+     */
+    public void passerSuivant(){
+        Joueur[] joueurs = this.partie.getListeJoueurs();
+    
+        if (sens) {
+            Joueur premier = joueurs[0];
+            for (int i = 0; i < joueurs.length - 1; i++) {
+                joueurs[i] = joueurs[i + 1];
+            }
+            joueurs[joueurs.length - 1] = premier;
+        } else {
+            Joueur dernier = joueurs[joueurs.length - 1];
+            for (int i = joueurs.length - 1; i > 0; i--) {
+                joueurs[i] = joueurs[i - 1];
+            }
+            joueurs[0] = dernier;
+        }
     }
 }
 

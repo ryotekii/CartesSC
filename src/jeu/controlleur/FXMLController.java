@@ -79,25 +79,16 @@ public class FXMLController {
         cartesJoueurPrincipal = partie.getListeCartesJoueur(0);
         switch (partie.getNombreJoueurs()) {
             case 4 -> {
-                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 numJoueurDroit = 1;
                 numJoueurDevant = 2;
                 numJoueurGauche = 3;
-                pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
-                pseudoDevant.setText(partie.getListeJoueurs()[2].getPseudo());
-                pseudoGauche.setText(partie.getListeJoueurs()[3].getPseudo());
             }
             case 3 -> {
-                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 numJoueurDroit = 1;
-                pseudoDroit.setText(partie.getListeJoueurs()[1].getPseudo());
                 numJoueurGauche = 2;
-                pseudoGauche.setText(partie.getListeJoueurs()[2].getPseudo());
             }
             case 2 -> {
-                pseudoPrincipal.setText(partie.getListeJoueurs()[0].getPseudo());
                 numJoueurDevant = 1;
-                pseudoDevant.setText(partie.getListeJoueurs()[1].getPseudo());
             }
         }
         
@@ -126,6 +117,7 @@ public class FXMLController {
         imagePioche.setOnMouseClicked(event ->{
             remettreCarteEnPlace();
             partie.getListeJoueurs()[0].piocher();
+            partie.getOrdreDeJeu().passerSuivant();
             this.mettreAJourAffichage();
         });
         mettreAJourAffichage();
@@ -203,16 +195,30 @@ public class FXMLController {
         this.afficherCartesJoueurPrincipal();
         try{
             this.afficherCartesJoueurDroit();
-        }catch(Exception e){System.out.println("pas de joueur droit");}
+        }catch(Exception e){}
         try{
             this.afficherCartesJoueurDevant();
-        }catch(Exception e){System.out.println("pas de joueur devant");}
+        }catch(Exception e){}
         try{
             this.afficherCartesJoueurGauche();
-        }catch(Exception e){System.out.println("pas de joueur gauche");}
+        }catch(Exception e){}
         this.redefinirEffetsBox();
         this.mettreAJourCouleur();
         this.mettreAJourViewPaquet();
+        this.mettreAJourPseudos();
+    }
+    
+    private void mettreAJourPseudos(){
+        pseudoPrincipal.setText(partie.getOrdreDeJeu().getJoueurActuel().getPseudo());
+        try{
+            pseudoDroit.setText(partie.getListeJoueurs()[numJoueurDroit].getPseudo());
+        }catch(Exception e){}
+        try{
+            pseudoGauche.setText(partie.getListeJoueurs()[numJoueurGauche].getPseudo());
+        }catch(Exception e){}
+        try{
+            pseudoDevant.setText(partie.getListeJoueurs()[numJoueurDevant].getPseudo());
+        }catch(Exception e){}
     }
     
     /**
@@ -409,10 +415,12 @@ public class FXMLController {
         int nb = partie.getNombreCartesJoueur(numJoueurDevant);
         int largeurCarte = 85;
         int maxEcart = -15;
+        double espace = Math.min(((hb.getWidth() - largeurCarte) / (nb - 1)) - largeurCarte, maxEcart);
+        hb.setSpacing(espace);
 
         hb.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            double espace = Math.min(((newWidth.doubleValue()-largeurCarte)/(nb-1))-largeurCarte,maxEcart);
-            hb.setSpacing(espace);
+            double espace2 = Math.min(((newWidth.doubleValue()-largeurCarte)/(nb-1))-largeurCarte,maxEcart);
+            hb.setSpacing(espace2);
         });
 
         hb.getChildren().clear();
@@ -431,54 +439,58 @@ public class FXMLController {
      * Affiche le dos des cartes du joueur à gauche en fonction de son nombre de cartes.
      */
     private void afficherCartesJoueurGauche(){
-            VBox vb = paquetJoueurGauche;
-            int nb = partie.getNombreCartesJoueur(numJoueurGauche);
-            int largeurCarte = 85;
-            int maxEcart = -80;
+        VBox vb = paquetJoueurGauche;
+        int nb = partie.getNombreCartesJoueur(numJoueurGauche);
+        int largeurCarte = 85;
+        int maxEcart = -80;
+        double espace = Math.min(((vb.getHeight() - largeurCarte) / (nb - 1)) - 1.4*largeurCarte, maxEcart);
+        vb.setSpacing(espace);
 
-            vb.heightProperty().addListener((obs, oldHeight, newHeight) -> {
-            double espace = Math.min(((newHeight.doubleValue()-largeurCarte)/(nb-1))-1.4*largeurCarte,maxEcart);
-            vb.setSpacing(espace);
+        vb.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+            double espace2 = Math.min(((newHeight.doubleValue()-largeurCarte)/(nb-1))-1.4*largeurCarte,maxEcart);
+            vb.setSpacing(espace2);
         });
 
-            vb.getChildren().clear();
-            vb.setAlignment(Pos.CENTER);
-            for (int i=0;i<nb;i++) {
-                ImageView image = new ImageView(new Image(Parametres.IMAGES+"dos.png"));
-                image.setFitWidth(largeurCarte);
-                image.setPreserveRatio(true);
-                image.setEffect(ombreCarte);
-                image.setRotate(90);
-                image.setViewOrder(i);
-                vb.getChildren().add(image);
-            }
+        vb.getChildren().clear();
+        vb.setAlignment(Pos.CENTER);
+        for (int i=0;i<nb;i++) {
+            ImageView image = new ImageView(new Image(Parametres.IMAGES+"dos.png"));
+            image.setFitWidth(largeurCarte);
+            image.setPreserveRatio(true);
+            image.setEffect(ombreCarte);
+            image.setRotate(90);
+            image.setViewOrder(i);
+            vb.getChildren().add(image);
         }
+    }
                 
     /**
      * Affiche le dos des cartes du joueur à droite en fonction de son nombre de cartes.
      */
     private void afficherCartesJoueurDroit(){
-            VBox vb = paquetJoueurDroit;
-            int nb = partie.getNombreCartesJoueur(numJoueurDroit);
-            int largeurCarte = 85;
-            int maxEcart = -80;
+        VBox vb = paquetJoueurDroit;
+        int nb = partie.getNombreCartesJoueur(numJoueurDroit);
+        int largeurCarte = 85;
+        int maxEcart = -80;
+        double espace = Math.min(((vb.getHeight() - largeurCarte) / (nb - 1)) - 1.4*largeurCarte, maxEcart);
+        vb.setSpacing(espace);
+
+        vb.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+            double espace2 = Math.min(((newHeight.doubleValue()-largeurCarte)/(nb-1))-1.4*largeurCarte,maxEcart);
+            vb.setSpacing(espace2);
+        });
         
-            vb.heightProperty().addListener((obs, oldHeight, newHeight) -> {
-                double espace = Math.min(((newHeight.doubleValue()-largeurCarte)/(nb-1))-1.4*largeurCarte,maxEcart);
-                vb.setSpacing(espace);
-            });
-        
-            vb.getChildren().clear();
-            vb.setAlignment(Pos.CENTER);
-            for (int i=0;i<nb;i++) {
-                ImageView image = new ImageView(new Image(Parametres.IMAGES+"dos.png"));
-                image.setFitWidth(largeurCarte);
-                image.setPreserveRatio(true);
-                image.setEffect(ombreCarte);
-                image.setRotate(270);
-                vb.getChildren().add(image);
-            }
+        vb.getChildren().clear();
+        vb.setAlignment(Pos.CENTER);
+        for (int i=0;i<nb;i++) {
+            ImageView image = new ImageView(new Image(Parametres.IMAGES+"dos.png"));
+            image.setFitWidth(largeurCarte);
+            image.setPreserveRatio(true);
+            image.setEffect(ombreCarte);
+            image.setRotate(270);
+            vb.getChildren().add(image);
         }
+    }
     
     private void afficherInfosCarte(){
         if (partie.getCarteSelectionnee()==null){
