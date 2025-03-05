@@ -67,7 +67,7 @@ public class DemarrageController implements Initializable {
      * @throws Exception si la page du classsement ne s'ouvre pas.
      */
     private void ouvrirClassement() throws Exception {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Classement.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Classement.fxml"));
         Parent root = loader.load();
     
         //DemarrageController controller = loader.getController();
@@ -87,7 +87,7 @@ public class DemarrageController implements Initializable {
      * @throws Exception si la fenêtre des pseudos ne s'ouvre pas.
      */
     private void ouvrirFenetrePseudos() throws Exception {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/PseudosJoueurs.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PseudosJoueurs.fxml"));
         Parent root = loader.load();
     
         PseudosJoueursController controller = loader.getController();

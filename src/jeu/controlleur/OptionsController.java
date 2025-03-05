@@ -64,7 +64,7 @@ public class OptionsController implements Initializable {
      * @throws Exception 
      */
     public void retourAccueil() throws Exception {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Demarrage.fxml"));
         Parent root = loader.load();
     
         DemarrageController controller = loader.getController();

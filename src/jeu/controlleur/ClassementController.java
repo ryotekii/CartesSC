@@ -30,7 +30,7 @@ public class ClassementController implements Initializable {
      * @throws Exception si la fenêtre de démarrage ne s'ouvre pas.
      */
     private void retournerDemarrage() throws Exception {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Demarrage.fxml"));
         Parent root = loader.load();
     
         DemarrageController controller = loader.getController();

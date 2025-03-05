@@ -173,7 +173,7 @@ public class PseudosJoueursController implements Initializable {
      * @throws Exception 
      */
     private void retournerDemarrage() throws Exception {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Demarrage.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Demarrage.fxml"));
         Parent root = loader.load();
     
         DemarrageController controller = loader.getController();
@@ -192,7 +192,7 @@ public class PseudosJoueursController implements Initializable {
      * @throws Exception si la table de jeu ne s'affiche pas.
      */
     private void lancerPartie() throws Exception {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/FXML.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML.fxml"));
         Parent root = loader.load();
     
         FXMLController controller = loader.getController();

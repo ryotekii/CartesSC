@@ -158,7 +158,7 @@ public class FXMLController {
      * @throws Exception si la page ne s'ouvre pas.
      */
     public void ouvrirOptions() throws Exception {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/Options.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Options.fxml"));
         Parent root = loader.load();
     
         OptionsController controller = loader.getController();
@@ -304,7 +304,7 @@ public class FXMLController {
      * @throws IOException si le popup ne s'ouvre pas.
      */
     public void ouvrirPopupCouleur() throws IOException {
-        FXMLLoader loader = new FXMLLoader(new File("src/jeu/controlleur/ChoisirCouleur.fxml").toURI().toURL());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChoisirCouleur.fxml"));
         Parent root = loader.load();
     
         ChoisirCouleurController controller = loader.getController();
