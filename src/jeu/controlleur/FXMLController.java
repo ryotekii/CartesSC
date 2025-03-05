@@ -104,24 +104,6 @@ public class FXMLController {
         surbrillance.setRadius(20);
         surbrillance.setSpread(0.6);
         
-        imagePioche.setOnMouseEntered(event ->{
-            imagePioche.setScaleX(1.1);
-            imagePioche.setScaleY(1.1);
-            imagePioche.setEffect(surbrillance);
-        });
-
-        imagePioche.setOnMouseExited(event ->{
-            imagePioche.setScaleX(1);
-            imagePioche.setScaleY(1);
-            imagePioche.setEffect(ombreCarte);
-        });
-        
-        imagePioche.setOnMouseClicked(event ->{
-            remettreCarteEnPlace();
-            partie.getListeJoueurs()[0].piocher();
-            partie.getOrdreDeJeu().passerSuivant();
-            this.mettreAJourAffichage();
-        });
         mettreAJourAffichage();
         
         boutonOptions.setOnMouseClicked(event ->{
@@ -142,7 +124,8 @@ public class FXMLController {
         });
         
         boutonFinir.setOnAction(event ->{
-            griserMain();
+            partie.getOrdreDeJeu().passerSuivant();
+            this.mettreAJourAffichage();
         });
     }
     
@@ -197,6 +180,7 @@ public class FXMLController {
      * Met à jour l'affichage des paquets de carte et remet les effets qui disparaissent.
      */
     public void mettreAJourAffichage(){
+        System.out.println("MAJ");
         this.afficherCartesJoueurPrincipal();
         try{
             this.afficherCartesJoueurDroit();
@@ -211,8 +195,41 @@ public class FXMLController {
         this.mettreAJourCouleur();
         this.mettreAJourViewPaquet();
         this.mettreAJourPseudos();
+        this.redefinirEffetsPioche();
     }
     
+    /**
+     * Remet les effets sur la pioche.
+     */
+    private void redefinirEffetsPioche(){     
+        imagePioche.setEffect(ombreCarte);
+        imagePioche.setOnMouseEntered(event ->{
+            imagePioche.setScaleX(1.1);
+            imagePioche.setScaleY(1.1);
+            imagePioche.setEffect(surbrillance);
+        });
+
+        imagePioche.setOnMouseExited(event ->{
+            imagePioche.setScaleX(1);
+            imagePioche.setScaleY(1);
+            if (!imagePioche.isDisabled()){
+                imagePioche.setEffect(ombreCarte);
+            }
+        });
+        
+        imagePioche.setOnMouseClicked(event ->{
+            remettreCarteEnPlace();
+            partie.getListeJoueurs()[0].piocher();
+            this.mettreAJourAffichage();
+            this.griserMain();
+        });
+        
+        imagePioche.setDisable(false);
+    }
+    
+    /**
+     * Met à jour les labels de pseudos lorsque le joueur change.
+     */
     private void mettreAJourPseudos(){
         pseudoPrincipal.setText(partie.getOrdreDeJeu().getJoueurActuel().getPseudo());
         try{
@@ -241,10 +258,7 @@ public class FXMLController {
      * Remet les effets visuels sur le paquet.
      */
     private void redefinirEffetsBox(){
-        boxPaquet.setOnMouseEntered(null);
-        boxPaquet.setOnMouseExited(null);
-        boxPaquet.setOnMouseClicked(null);
-        
+        boxPaquet.setDisable(false);
         boxPaquet.setOnMouseEntered(event ->{
             boxPaquet.setScaleX(1.1);
             boxPaquet.setScaleY(1.1);
@@ -261,7 +275,6 @@ public class FXMLController {
             try {
                 partie.poserCarteSelectionnee();
                 partie.setCarteSelectionnee(null);
-                mettreAJourAffichage();
             } catch (IOException e) {
                 System.out.println("erreur pose carte");
             }
@@ -524,7 +537,7 @@ public class FXMLController {
         }
     }
     
-    private void griserMain(){
+    public void griserMain(){
         HBox hb = paquetJoueurPrincipal;
         ColorAdjust ca = new ColorAdjust(0,-0.5,-0.5,0);
         Blend blend = new Blend();
@@ -537,7 +550,8 @@ public class FXMLController {
                 imageView.setDisable(true);
             }
         }
-        boxPaquet.setEffect(blend);
+        boxPaquet.setEffect(ombreCarte);
+        boxPaquet.getChildren().get(0).setEffect(ca);
         boxPaquet.setDisable(true);
         imagePioche.setEffect(blend);
         imagePioche.setDisable(true);

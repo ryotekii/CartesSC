@@ -234,11 +234,11 @@ public class Partie {
             this.paquet.poserCarte(this.carteSelectionnee);
             this.couleurActuelle=carteSelectionnee.getCouleur();
             if (this.carteSelectionnee.getCouleur().equals("Joker") && 
-                    !(this.carteSelectionnee instanceof Tdah) && !(this.carteSelectionnee instanceof AmnesieSelective)){
+                    !(this.carteSelectionnee instanceof Tdah) && 
+                    !(this.carteSelectionnee instanceof AmnesieSelective)){
                 controller.ouvrirPopupCouleur();
             }
             effets.appliquerEffets(carteSelectionnee);
-            controller.mettreAJourAffichage();
             System.out.println(this.couleurActuelle);
         }
     }
