@@ -18,6 +18,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -76,7 +79,6 @@ public class FXMLController {
      */
     public void init() {
         this.partie.setController(this);
-        cartesJoueurPrincipal = partie.getListeCartesJoueur(0);
         switch (partie.getNombreJoueurs()) {
             case 4 -> {
                 numJoueurDroit = 1;
@@ -139,6 +141,9 @@ public class FXMLController {
             tooltipInfos.hide();
         });
         
+        boutonFinir.setOnAction(event ->{
+            griserMain();
+        });
     }
     
     /**
@@ -309,6 +314,7 @@ public class FXMLController {
      * avec des effets au survol et à la sélection.
      */
     private void afficherCartesJoueurPrincipal(){
+        cartesJoueurPrincipal = partie.getListeCartesJoueur(0);
         HBox hb = paquetJoueurPrincipal;
         int nb = cartesJoueurPrincipal.size();
         int largeurCarte = 85;
@@ -516,6 +522,24 @@ public class FXMLController {
         } else if (partie.getCarteSelectionnee() instanceof CarteSimple){
             tooltipInfos.setText("Cette carte n'a pas d'effet. Posez-la pour faire diminuer la taille de votre main.");
         }
-        
+    }
+    
+    private void griserMain(){
+        HBox hb = paquetJoueurPrincipal;
+        ColorAdjust ca = new ColorAdjust(0,-0.5,-0.5,0);
+        Blend blend = new Blend();
+        blend.setMode(BlendMode.MULTIPLY);
+        blend.setTopInput(ca);
+        blend.setBottomInput(ombreCarte);
+        for (Node node : hb.getChildren()) {
+            if (node instanceof ImageView imageView) {
+                imageView.setEffect(blend);
+                imageView.setDisable(true);
+            }
+        }
+        boxPaquet.setEffect(blend);
+        boxPaquet.setDisable(true);
+        imagePioche.setEffect(blend);
+        imagePioche.setDisable(true);
     }
 }
