@@ -8,24 +8,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.ChoisirCouleurController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="350.0" stylesheets="@clair.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.ChoisirCouleurController">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez votre couleur :" translateY="-30.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez votre couleur :" textAlignment="CENTER" translateY="-50.0">
          <font>
-            <Font name="System Bold Italic" size="14.0" />
+            <Font name="System Bold Italic" size="24.0" />
          </font>
       </Text>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" spacing="30.0" translateY="10.0">
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="250.0" spacing="30.0" translateY="15.0">
          <children>
-            <Rectangle fx:id="choisirBleu" arcHeight="5.0" arcWidth="5.0" fill="#0057cb" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0">
+            <Rectangle fx:id="choisirBleu" arcHeight="5.0" arcWidth="5.0" fill="#0057cb" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0">
                <effect>
                   <DropShadow />
                </effect></Rectangle>
-            <Rectangle fx:id="choisirRouge" arcHeight="5.0" arcWidth="5.0" fill="#ff3131" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0">
+            <Rectangle fx:id="choisirRouge" arcHeight="5.0" arcWidth="5.0" fill="#ff3131" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0">
                <effect>
                   <DropShadow />
                </effect></Rectangle>
-            <Rectangle fx:id="choisirVert" arcHeight="5.0" arcWidth="5.0" fill="#00bf63" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0">
+            <Rectangle fx:id="choisirVert" arcHeight="5.0" arcWidth="5.0" fill="#00bf63" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0">
                <effect>
                   <DropShadow />
                </effect></Rectangle>

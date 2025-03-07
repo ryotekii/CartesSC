@@ -9,10 +9,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ClassementController implements Initializable {
     @FXML private Button boutonRetour;
+    @FXML private VBox boxClassement;
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -42,5 +44,9 @@ public class ClassementController implements Initializable {
         stage.show();
         Stage fenetreBase = (Stage) boutonRetour.getScene().getWindow();
         fenetreBase.close();
+    }
+    
+    private void afficherClassement(){
+        
     }
 }

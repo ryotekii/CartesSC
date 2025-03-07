@@ -92,6 +92,7 @@ public class PseudosJoueursController implements Initializable {
                 boutonValider.setDisable(!verifierPseudos());
             });
             zoneTexte.setPromptText("Pseudo du joueur " + (joueurs.size() + 1));
+            
             joueurs.add(zoneTexte);
             boxJoueurs.getChildren().remove(boutonAjouter);
             boxJoueurs.getChildren().add(joueur);

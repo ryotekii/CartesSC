@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="558.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="558.0" prefWidth="817.0" stylesheets="@clair.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.FXMLController">
    <children>
       <StackPane id="fenetre" prefHeight="558.0" prefWidth="817.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -60,7 +60,7 @@
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button id="boutonRetour" layoutX="51.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="13.0">
+      <Button id="boutonRetour" layoutX="51.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="13.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -90,17 +90,20 @@
       </Rectangle>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Couleur actuelle :" textAlignment="RIGHT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <font>
-            <Font name="Cambria Bold Italic" size="14.0" />
+            <Font name="System Bold Italic" size="14.0" />
          </font>
       </Text>
       <Label fx:id="pseudoGauche" alignment="CENTER" contentDisplay="CENTER" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="200.0" />
       <Label fx:id="pseudoDevant" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="90.0" />
       <Label fx:id="pseudoPrincipal" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="50.0" />
       <Label fx:id="pseudoDroit" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" textAlignment="RIGHT" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0" />
-      <Button fx:id="boutonInfos" mnemonicParsing="false" text="?" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="50.0">
+      <Button fx:id="boutonInfos" mnemonicParsing="false" text="?" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="70.0">
          <tooltip>
             <Tooltip fx:id="tooltipInfos" contentDisplay="CENTER" text="Sélectionnez une carte pour voir son effet !" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
          </tooltip>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>
