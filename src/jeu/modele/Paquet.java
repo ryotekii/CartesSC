@@ -1,5 +1,6 @@
 package jeu.modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import jeu.modele.Cartes.Carte;
 
@@ -8,7 +9,7 @@ import jeu.modele.Cartes.Carte;
  * partie sur laquelle les cartes sont empilées.
  * @author salom
  */
-public class Paquet {
+public class Paquet implements Serializable{
     private Partie partie;
     private ArrayList<Carte> paquet = new ArrayList<>();
     

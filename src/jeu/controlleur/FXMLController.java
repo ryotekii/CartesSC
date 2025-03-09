@@ -2,6 +2,7 @@ package jeu.controlleur;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import javafx.scene.paint.Color;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;

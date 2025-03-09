@@ -17,7 +17,7 @@ public class Partie implements Serializable {
     private final Pioche pioche;
     private OrdreDeJeu ordre;
     private Carte carteSelectionnee;
-    private FXMLController controller;
+    private transient FXMLController controller;
     private VerificationCarte verification;
     /**
     * Pour garder en mémoire la couleur actuelle, en particulier avec

@@ -22,6 +22,7 @@ public class SauvegardesController{
     @FXML private Label label1;
     @FXML private Label label2;
     @FXML private Label label3;
+    private Partie partie;
     
     public void changerLabelPrincipal(String s){
         if (s.equals("sauvegarder")){
@@ -33,27 +34,31 @@ public class SauvegardesController{
     
     public void definirSauvegarde(int n,Partie p){
         Label[] labels = new Label[]{label1,label2,label3};
-        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM:yy HH:mm"));
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm"));
         String pseudos = "";
         for (Joueur joueur : p.getListeJoueurs()){
             pseudos += "\n"+joueur;
         }
-        labels[n+1].setText("Sauvegarde "+n+" :\n"+date+pseudos);
+        labels[n-1].setText("Sauvegarde "+n+" :\n"+date+pseudos);
+        Serialisation.serialiser(p,n);
     }
     
+    public void setPartie(Partie p){
+        this.partie=p;
+    }
     public void initSauvegarder(){
         changerLabelPrincipal("sauvegarder");
         boutonRetour.setOnAction(e ->{
             retournerOptions();
         });
         emplacement1.setOnAction(e ->{
-            
+            definirSauvegarde(1,partie);
         });
         emplacement2.setOnAction(e ->{
-            
+            definirSauvegarde(2,partie);
         });
         emplacement3.setOnAction(e ->{
-            
+            definirSauvegarde(3,partie);
         });
     }
     

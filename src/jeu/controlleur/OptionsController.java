@@ -100,13 +100,14 @@ public class OptionsController implements Initializable {
 
         SauvegardesController controller = loader.getController();
         controller.initSauvegarder();
+        controller.setPartie(partie);
         
         Stage stage = new Stage();
         stage.setTitle("Sauvegardes");
         stage.setScene(new Scene(root,800,600));
         
         stage.show();
-        Stage fenetreBase = (Stage) boutonReprendre.getScene().getWindow();
-        fenetreBase.close();
+        //Stage fenetreBase = (Stage) boutonReprendre.getScene().getWindow();
+        //fenetreBase.close();
     }
 }

@@ -28,17 +28,17 @@
          <children>
             <Button fx:id="emplacement3" maxHeight="400.0" maxWidth="230.0" minHeight="200.0" mnemonicParsing="false" StackPane.alignment="CENTER_RIGHT">
                <graphic>
-                  <Label fx:id="label3" text="Sauvegarde 3" />
+                  <Label fx:id="label3" alignment="CENTER" contentDisplay="CENTER" text="Sauvegarde 3" textAlignment="CENTER" />
                </graphic>
             </Button>
             <Button fx:id="emplacement2" maxHeight="400.0" maxWidth="230.0" minHeight="200.0" mnemonicParsing="false">
                <graphic>
-                  <Label fx:id="label2" text="Sauvegarde 2" />
+                  <Label fx:id="label2" alignment="CENTER" contentDisplay="CENTER" text="Sauvegarde 2" textAlignment="CENTER" />
                </graphic>
             </Button>
             <Button fx:id="emplacement1" maxHeight="400.0" maxWidth="230.0" minHeight="200.0" mnemonicParsing="false" StackPane.alignment="CENTER_LEFT">
                <graphic>
-                  <Label fx:id="label1" text="Sauvegarde 1" />
+                  <Label fx:id="label1" alignment="CENTER" contentDisplay="CENTER" text="Sauvegarde 1" textAlignment="CENTER" />
                </graphic>
             </Button>
          </children>
