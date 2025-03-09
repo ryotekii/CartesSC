@@ -1,12 +1,13 @@
 package jeu.modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import jeu.modele.Cartes.Carte;
 
 /**
 * La main du joueur.
 */
-public class PaquetJoueur {
+public class PaquetJoueur implements Serializable {
     private final Joueur joueur;
     private final ArrayList<Carte> cartes = new ArrayList<>();
     

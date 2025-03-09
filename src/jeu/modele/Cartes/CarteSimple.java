@@ -1,10 +1,12 @@
 package jeu.modele.Cartes;
 
+import java.io.Serializable;
+
 /*
 Les cartes sans effet, de 0 à 9 dans chaque couleur.
 */
 
-public class CarteSimple extends Carte {
+public class CarteSimple extends Carte implements Serializable {
     private final int numero;
     
     public CarteSimple(int i,String c){

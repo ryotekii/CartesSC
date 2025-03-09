@@ -20,6 +20,7 @@ public class DemarrageController implements Initializable {
     private Partie partie;
     @FXML private Button boutonQuitter;
     @FXML private Button boutonClassement;
+    @FXML private Button boutonReprendre;
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -43,6 +44,15 @@ public class DemarrageController implements Initializable {
                 ouvrirClassement();
             }catch(Exception e){
                 System.out.println("erreur affichage classement");
+            }
+        });
+        
+        boutonReprendre.setOnAction(event ->{
+            try{
+                ouvrirSauvegardes();
+            }catch(Exception e){
+                System.out.println("erreur affichage sauvegardes");
+                e.printStackTrace();
             }
         });
     }
@@ -99,6 +109,26 @@ public class DemarrageController implements Initializable {
         
         stage.show();
         Stage fenetreBase = (Stage) nouvellePartie.getScene().getWindow();
+        fenetreBase.close();
+    }
+    
+    /**
+     * Ouvre la page des sauvegardes et ferme celle du démarrage.
+     * @throws Exception si la page du classsement ne s'ouvre pas.
+     */
+    private void ouvrirSauvegardes() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Sauvegardes.fxml"));
+        Parent root = loader.load();
+
+        SauvegardesController controller = loader.getController();
+        controller.initReprendre();
+        
+        Stage stage = new Stage();
+        stage.setTitle("Sauvegardes");
+        stage.setScene(new Scene(root,800,600));
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonReprendre.getScene().getWindow();
         fenetreBase.close();
     }
 }

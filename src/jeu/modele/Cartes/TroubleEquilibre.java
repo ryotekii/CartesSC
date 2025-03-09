@@ -1,6 +1,8 @@
 package jeu.modele.Cartes;
 
-public class TroubleEquilibre extends CarteSpeciale {
+import java.io.Serializable;
+
+public class TroubleEquilibre extends CarteSpeciale implements Serializable {
     // changement de sens 
     public TroubleEquilibre(String c){
         super(c);

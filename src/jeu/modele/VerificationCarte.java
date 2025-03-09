@@ -1,5 +1,6 @@
 package jeu.modele;
 
+import java.io.Serializable;
 import jeu.modele.Cartes.AmnesieSelective;
 import jeu.modele.Cartes.BlocageMoteur;
 import jeu.modele.Cartes.Carte;
@@ -12,7 +13,7 @@ import jeu.modele.Cartes.TroubleEquilibre;
 * Classe pour vérifier que les cartes peuvent être posées
 * (vérification couleur/numéro).
 */
-public class VerificationCarte {
+public class VerificationCarte implements Serializable {
     private final Partie partie;
     
     /**

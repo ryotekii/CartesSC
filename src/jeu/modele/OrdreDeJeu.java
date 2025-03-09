@@ -1,9 +1,11 @@
 package jeu.modele;
 
+import java.io.Serializable;
+
 /**
 * Classe qui gère l'ordre de jeu, changements de sens, passages de tours.
 */
-public class OrdreDeJeu {
+public class OrdreDeJeu implements Serializable {
     private boolean sens = true;
     private final Partie partie;
     private int n = 1;

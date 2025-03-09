@@ -1,5 +1,6 @@
 package jeu.modele.Cartes;
 
+import java.io.Serializable;
 import java.text.Normalizer;
 import jeu.modele.Parametres;
 
@@ -7,7 +8,7 @@ import jeu.modele.Parametres;
 Pour toutes les cartes du jeu.
 */
 
-abstract public class Carte {
+abstract public class Carte implements Serializable {
     protected final String couleur;
     
     protected Carte(String c){

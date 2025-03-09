@@ -1,6 +1,7 @@
 package jeu.modele;
 
 import java.io.IOException;
+import java.io.Serializable;
 import jeu.modele.Cartes.Carte;
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,7 +11,7 @@ import jeu.modele.Cartes.CarteSpeciale;
 import jeu.modele.Cartes.EffetsCartes;
 import jeu.modele.Cartes.Tdah;
 
-public class Partie {
+public class Partie implements Serializable {
     private Joueur[] joueurs;
     private final Paquet paquet;
     private final Pioche pioche;

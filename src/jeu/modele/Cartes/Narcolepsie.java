@@ -1,6 +1,8 @@
 package jeu.modele.Cartes;
 
-public class Narcolepsie extends CarteSpeciale {
+import java.io.Serializable;
+
+public class Narcolepsie extends CarteSpeciale implements Serializable {
     // Pioche 2 cartes.
     public Narcolepsie(String c){
         super(c);

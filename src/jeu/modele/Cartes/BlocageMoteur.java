@@ -1,6 +1,8 @@
 package jeu.modele.Cartes;
 
-public class BlocageMoteur extends CarteSpeciale {
+import java.io.Serializable;
+
+public class BlocageMoteur extends CarteSpeciale implements Serializable {
     //Empêche le prochain joueur de jouer (équivalent passe ton tour).
     public BlocageMoteur(String c){
         super(c);

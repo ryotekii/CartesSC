@@ -1,5 +1,6 @@
 package jeu.modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import jeu.modele.Cartes.AmnesieSelective;
@@ -17,7 +18,7 @@ import jeu.modele.Cartes.TroubleEquilibre;
 /**
  * Paquet de cartes au centre de la table.
  */
-public final class Pioche {
+public final class Pioche implements Serializable {
     private final ArrayList<Carte> pioche = new ArrayList<>();
     private final Partie partie;
     

@@ -1,6 +1,8 @@
 package jeu.modele.Cartes;
 
-public class NeuropathieO extends CarteSpeciale {
+import java.io.Serializable;
+
+public class NeuropathieO extends CarteSpeciale implements Serializable {
     //Change la couleur en jeu.
     public NeuropathieO(){
         super("Joker");

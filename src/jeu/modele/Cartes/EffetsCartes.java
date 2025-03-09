@@ -1,11 +1,12 @@
 package jeu.modele.Cartes;
 
+import java.io.Serializable;
 import jeu.modele.Joueur;
 import jeu.modele.PaquetJoueur;
 import jeu.modele.Parametres;
 import jeu.modele.Partie;
 
-public class EffetsCartes {
+public class EffetsCartes implements Serializable {
     private Partie partie;
     
     public EffetsCartes(Partie p){

@@ -1,6 +1,8 @@
 package jeu.modele.Cartes;
 
-public class Tdah extends CarteSpeciale {
+import java.io.Serializable;
+
+public class Tdah extends CarteSpeciale implements Serializable {
     //Le joueur joue une deuxième carte au choix après avoir posé celle-là.
     public Tdah(){
         super("Joker");
