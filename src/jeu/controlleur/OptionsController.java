@@ -21,6 +21,7 @@ public class OptionsController implements Initializable {
     private Partie partie;
     private Stage popupStage;
     private Button boutonFinir;
+    @FXML private Button boutonSauvegarder;
     
     /**
      * Définit la partie en cours.
@@ -35,6 +36,15 @@ public class OptionsController implements Initializable {
         boutonReprendre.setOnAction(event ->{
             Stage stage = (Stage) boutonQuitter.getScene().getWindow();
             stage.close();
+        });
+        
+        boutonSauvegarder.setOnAction(event ->{
+            try{
+                ouvrirSauvegardes();
+            }catch(Exception e){
+                System.out.println("erreur affichage sauvegardes");
+                e.printStackTrace();
+            }
         });
     }
     
@@ -78,5 +88,25 @@ public class OptionsController implements Initializable {
         fenetreBase.close();
         Stage fenetreJeu = (Stage) boutonFinir.getScene().getWindow();
         fenetreJeu.close();
+    }
+    
+    /**
+     * Ouvre la page des sauvegardes et ferme celle du démarrage.
+     * @throws Exception si la page du classsement ne s'ouvre pas.
+     */
+    private void ouvrirSauvegardes() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Sauvegardes.fxml"));
+        Parent root = loader.load();
+
+        SauvegardesController controller = loader.getController();
+        controller.initSauvegarder();
+        
+        Stage stage = new Stage();
+        stage.setTitle("Sauvegardes");
+        stage.setScene(new Scene(root,800,600));
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonReprendre.getScene().getWindow();
+        fenetreBase.close();
     }
 }

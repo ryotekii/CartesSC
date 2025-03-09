@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import jeu.modele.Joueur;
 import jeu.modele.Partie;
+import jeu.modele.Serialisation;
 
 public class SauvegardesController{
     @FXML private Button boutonRetour;
@@ -57,6 +58,7 @@ public class SauvegardesController{
     }
     
     public void initReprendre(){
+        changerLabelPrincipal("reprendre");
         boutonRetour.setOnAction(e ->{
             try{
                 retournerDemarrage();
@@ -65,13 +67,25 @@ public class SauvegardesController{
             }
         });
         emplacement1.setOnAction(e ->{
-            
+            try{
+                relancerPartie(1);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         });
         emplacement2.setOnAction(e ->{
-            
+            try{
+                relancerPartie(2);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         });
         emplacement3.setOnAction(e ->{
-            
+            try{
+                relancerPartie(3);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         });
     }
     
@@ -95,5 +109,25 @@ public class SauvegardesController{
     private void retournerOptions(){
         Stage stage = (Stage) boutonRetour.getScene().getWindow();
         stage.close();
+    }
+    
+    private void relancerPartie(int n) throws Exception {
+        Partie partie = Serialisation.recuperer(n);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML.fxml"));
+        Parent root = loader.load();
+    
+        FXMLController controller = loader.getController();
+        controller.setPartie(partie);
+        controller.init();
+
+        Stage stage = new Stage();
+        stage.setTitle("Partie");
+        stage.setScene(new Scene(root,800,600));
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonRetour.getScene().getWindow();
+        fenetreBase.close();
     }
 }

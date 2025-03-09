@@ -60,7 +60,7 @@
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button id="boutonRetour" layoutX="51.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="13.0">
+      <Button id="boutonRetour" fx:id="annuler" layoutX="51.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="13.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -70,7 +70,7 @@
          </graphic></Button>
       <Button id="boutonOptions" fx:id="boutonOptions" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="13.0">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="parametres" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/parametres.png" />
                </image>

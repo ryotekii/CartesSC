@@ -19,7 +19,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="labelSauvegardes" alignment="CENTER" contentDisplay="CENTER" layoutX="372.0" layoutY="46.0" text="Sauvegardes" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="40.0">
+      <Label fx:id="labelSauvegardes" alignment="CENTER" contentDisplay="CENTER" layoutX="372.0" layoutY="46.0" text="Sauvegardes" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>
