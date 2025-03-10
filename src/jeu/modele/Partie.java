@@ -25,7 +25,7 @@ public class Partie implements Serializable {
     */
     private String couleurActuelle;
     private EffetsCartes effets;
-    
+    private boolean peutPoser = true;
     /**
      * Le constructeur. Créé le paquet, la pioche, l'ordre de jeu et
      * des variables qui gardent en mémoire la couleur de jeu et la prochaine
@@ -86,6 +86,14 @@ public class Partie implements Serializable {
      */
     public Paquet getPaquet(){
         return this.paquet;
+    }
+    
+    public void setPeutPoser(Boolean b){
+        peutPoser=b;
+    }
+    
+    public boolean getPeutPoser(){
+        return this.peutPoser;
     }
     
     /**

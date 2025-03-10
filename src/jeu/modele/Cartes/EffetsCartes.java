@@ -57,10 +57,10 @@ public class EffetsCartes implements Serializable {
         /*
         Modifier main étrangère pour si elle est jouée en dernier ? Ou les rgèles d'effets ?
         */
-        partie.getController().mettreAJourAffichage();
         if (!(c instanceof Tdah)){
-            partie.getController().griserMain();
+            partie.setPeutPoser(false);
         }
+        partie.getController().mettreAJourAffichage();
     }
     
 }

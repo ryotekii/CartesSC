@@ -41,12 +41,17 @@ public class SauvegardesController{
         }
         labels[n-1].setText("Sauvegarde "+n+" :\n"+date+pseudos);
         Serialisation.serialiser(p,n);
+        String[] textesLabels = {label1.getText(), label2.getText(), label3.getText()};
+        Serialisation.serialiserLabels(textesLabels);
     }
     
     public void setPartie(Partie p){
         this.partie=p;
     }
     public void initSauvegarder(){
+        try{
+            mettreAJourLabels();
+        }catch (Exception e){}
         changerLabelPrincipal("sauvegarder");
         boutonRetour.setOnAction(e ->{
             retournerOptions();
@@ -63,6 +68,9 @@ public class SauvegardesController{
     }
     
     public void initReprendre(){
+        try{
+            mettreAJourLabels();
+        }catch (Exception e){}
         changerLabelPrincipal("reprendre");
         boutonRetour.setOnAction(e ->{
             try{
@@ -114,6 +122,12 @@ public class SauvegardesController{
     private void retournerOptions(){
         Stage stage = (Stage) boutonRetour.getScene().getWindow();
         stage.close();
+    }
+    
+    private void mettreAJourLabels(){
+        label1.setText(Serialisation.recupererLabels()[0]);
+        label2.setText(Serialisation.recupererLabels()[1]);
+        label3.setText(Serialisation.recupererLabels()[2]);
     }
     
     private void relancerPartie(int n) throws Exception {

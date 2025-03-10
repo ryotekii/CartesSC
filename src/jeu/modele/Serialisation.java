@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import javafx.scene.control.Label;
 import jeu.modele.Partie;
 
 public class Serialisation {
@@ -50,5 +51,48 @@ public class Serialisation {
             }
         }
         return p;
+    }
+    
+    public static void serialiserLabels(String[] textes){
+        ObjectOutputStream oos = null;
+        
+        try {
+            final FileOutputStream fichier = new FileOutputStream("nomsSauvegardes.ser");
+            oos = new ObjectOutputStream(fichier);
+            oos.writeObject(textes);
+            oos.flush();
+        } catch(final java.io.IOException e){
+            e.printStackTrace();
+        } finally {
+            try {
+                if (oos!=null){
+                    oos.flush();
+                    oos.close();
+                }
+            } catch(final IOException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public static String[] recupererLabels(){
+        String[] textes = null;
+        ObjectInputStream ois = null;
+        try {
+            final FileInputStream fichierIn = new FileInputStream("nomsSauvegardes.ser");
+            ois = new ObjectInputStream(fichierIn);
+            textes = (String[]) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if (ois !=null) {
+                ois.close();
+                }
+            }catch(final IOException ex){
+                ex.printStackTrace();
+            }
+        }
+        return textes;
     }
 }

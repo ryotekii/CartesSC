@@ -126,6 +126,7 @@ public class FXMLController {
         
         boutonFinir.setOnAction(event ->{
             partie.getOrdreDeJeu().passerSuivant();
+            partie.setPeutPoser(true);
             this.mettreAJourAffichage();
         });
     }
@@ -197,6 +198,9 @@ public class FXMLController {
         this.mettreAJourViewPaquet();
         this.mettreAJourPseudos();
         this.redefinirEffetsPioche();
+        if (!partie.getPeutPoser()){
+            this.griserMain();
+        }
     }
     
     /**
@@ -222,7 +226,7 @@ public class FXMLController {
             remettreCarteEnPlace();
             partie.getListeJoueurs()[0].piocher();
             this.mettreAJourAffichage();
-            this.griserMain();
+            partie.setPeutPoser(false);
         });
         
         imagePioche.setDisable(false);
