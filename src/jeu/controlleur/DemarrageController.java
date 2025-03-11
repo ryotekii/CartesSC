@@ -44,6 +44,7 @@ public class DemarrageController implements Initializable {
                 ouvrirClassement();
             }catch(Exception e){
                 System.out.println("erreur affichage classement");
+                e.printStackTrace();
             }
         });
         

@@ -1,27 +1,27 @@
 .root {
-    -fx-background-color: white;
+    -fx-background-color: #696969;
 }
 
 .button {
-    -fx-background-color: linear-gradient(to bottom, #ffffff, #d3d3d3);
-    -fx-text-fill: black;
-    -fx-border-color: black;
+    -fx-background-color: linear-gradient(to bottom, #3a3a3a, black);
+    -fx-text-fill: white;
+    -fx-border-color: white;
     -fx-border-width: 1px;
     -fx-border-radius: 2px;
     -fx-padding: 10px;
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(to bottom, #d3d3d3, #c0c0c0);
-    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(to bottom, #555555, #3a3a3a);
+    -fx-text-fill: white;
     -fx-scale-x: 1.02;
     -fx-scale-y: 1.02;
 }
 
 .text-field {
-    -fx-background-color: linear-gradient(to bottom, #ffffff, #fdfdfd);
-    -fx-text-fill: black;
-    -fx-border-color: black;
+    -fx-background-color: linear-gradient(to bottom, #3a3a3a, black);
+    -fx-text-fill: white;
+    -fx-border-color: white;
     -fx-border-width: 1px;
     -fx-border-radius: 2px;
     -fx-padding: 10px;
@@ -45,4 +45,16 @@
 
 .toggle-button:selected {
     -fx-background-color: #bbb;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.text {
+    -fx-text-fill: white;
+}
+
+#parametres, #annuler {
+    -fx-blend-mode: difference;
 }

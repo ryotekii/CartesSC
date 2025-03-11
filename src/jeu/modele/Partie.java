@@ -142,6 +142,32 @@ public class Partie implements Serializable {
     }
     
     /**
+     * Vérifie si un joueur a posé toutes ses cartes (partie finie).
+     * @return <code>true</code> si la partie est finie, <code>false</code> sinon.
+     */
+    public boolean partieFinie(){
+        for(Joueur joueur:joueurs){
+            if (joueur.getPaquetJoueur().getListeCartes().isEmpty()){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Renvoie le joueur qui a gagné la partie.
+     * @return le joueur qui n'a plus de cartes.
+     */
+    public Joueur getGagnant(){
+        for(Joueur joueur:joueurs){
+            if (joueur.getPaquetJoueur().getListeCartes().isEmpty()){
+                return joueur;
+            }
+        }
+        return null;
+    }
+    
+    /**
      * Compare la carte entrée en paramètre avec carteSelectionnée.
      * @param carte la carte à comparer avec la carte gardée en mémoire dans la partie.
      * @return <code>true</code> si les deux cartes sont les mêmes et <code>false</code> sinon.

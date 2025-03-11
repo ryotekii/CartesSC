@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@clair.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.DemarrageController">
    <children>
-      <Button id="boutonReprendre" fx:id="nouvellePartie" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Nouvelle partie" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Button id="boutonReprendre" fx:id="nouvellePartie" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Nouvelle partie" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <Button id="boutonSauvegarder" fx:id="boutonClassement" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Classement" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <Button id="boutonSauvegarder" fx:id="boutonReprendre" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Reprendre" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <Button id="boutonReprendre" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Rejoindre" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />

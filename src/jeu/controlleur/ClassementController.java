@@ -6,15 +6,26 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ClassementController implements Initializable {
     @FXML private Button boutonRetour;
     @FXML private VBox boxClassement;
+    @FXML private Label scorePremier;
+    @FXML private Label scoreDeuxieme;
+    @FXML private Label scoreTroisieme;
+    @FXML private Label pseudoPremier;
+    @FXML private Label pseudoDeuxieme;
+    @FXML private Label pseudoTroisieme;
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -25,6 +36,14 @@ public class ClassementController implements Initializable {
                 System.out.println("erreur retour démarrage");
             }
         });
+        ajouterJoueur("test1",155);
+        ajouterJoueur("test2",155);
+        ajouterJoueur("test3",155);
+        ajouterJoueur("test1",155);
+        ajouterJoueur("test1",155);
+        ajouterJoueur("test1",155);
+        ajouterJoueur("test1",155);
+        ajouterJoueur("test1",155);
     }
     
     /**
@@ -48,5 +67,49 @@ public class ClassementController implements Initializable {
     
     private void afficherClassement(){
         
+    }
+    
+    private void ajouterJoueur(String pseudo, int points){
+        if (pseudoPremier.getText().equals("Label")){
+            pseudoPremier.setText(pseudo);
+            scorePremier.setText(points + " parties gagnées");
+        } else if (scoreDeuxieme.getText().equals("Label")){
+            pseudoDeuxieme.setText(pseudo);
+            scoreDeuxieme.setText(points + " parties gagnées");
+        } else if (pseudoTroisieme.getText().equals("Label")){
+            pseudoTroisieme.setText(pseudo);
+            scoreTroisieme.setText(points + " parties gagnées");
+        } else {
+            ajouterJoueurApresTop(pseudo,points);
+        }
+    }
+    
+    private void ajouterJoueurApresTop(String pseudo, int points){
+        if (boxClassement.getChildren().size() <7){
+            HBox joueur = new HBox(20);
+            joueur.setStyle("-fx-alignment: center;"); 
+            Label zonePseudo = new Label();
+            Label zoneClassement = new Label();
+            Label zoneScore = new Label();
+            
+            zonePseudo.setText(pseudo);
+            zoneClassement.setText(boxClassement.getChildren().size()+3 + "e");
+            zoneScore.setText(points + " parties gagnées");
+            
+            zonePseudo.setStyle("-fx-font-size: 18px;");
+            zoneClassement.setStyle("-fx-font-size: 18px;");
+            zoneScore.setStyle("-fx-font-size: 18px;");
+            
+            HBox.setHgrow(zonePseudo, Priority.ALWAYS);
+            VBox.setVgrow(joueur, Priority.ALWAYS);
+            zonePseudo.setMaxWidth(Double.MAX_VALUE);
+
+            zoneClassement.setAlignment(Pos.CENTER);
+            zonePseudo.setAlignment(Pos.CENTER);
+            zoneScore.setAlignment(Pos.CENTER);
+
+            joueur.getChildren().addAll(zoneClassement, zonePseudo, zoneScore);
+            boxClassement.getChildren().add(joueur);
+        }
     }
 }

@@ -225,8 +225,8 @@ public class FXMLController {
         imagePioche.setOnMouseClicked(event ->{
             remettreCarteEnPlace();
             partie.getListeJoueurs()[0].piocher();
-            this.mettreAJourAffichage();
             partie.setPeutPoser(false);
+            this.mettreAJourAffichage();
         });
         
         imagePioche.setDisable(false);
@@ -280,6 +280,11 @@ public class FXMLController {
             try {
                 partie.poserCarteSelectionnee();
                 partie.setCarteSelectionnee(null);
+                if (partie.partieFinie()){
+                    try{
+                        ouvrirFinPartie(partie.getGagnant().getPseudo());
+                    }catch(Exception e){}
+                }
             } catch (IOException e) {
                 System.out.println("erreur pose carte");
             }
@@ -560,5 +565,25 @@ public class FXMLController {
         boxPaquet.setDisable(true);
         imagePioche.setEffect(blend);
         imagePioche.setDisable(true);
+    }
+    
+    /**
+     * Ouvre l'écran de fin de partie et annonce le vainqueur.
+     */
+    private void ouvrirFinPartie(String g) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FinDePartie.fxml"));
+        Parent root = loader.load();
+    
+        FinDePartieController controller = loader.getController();
+        controller.setGagnant(g);
+        controller.init();
+
+        Stage stage = new Stage();
+        stage.setTitle("Bravo !");
+        stage.setScene(new Scene(root,800,600));
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonFinir.getScene().getWindow();
+        fenetreBase.close();
     }
 }
