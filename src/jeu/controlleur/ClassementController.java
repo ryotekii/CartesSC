@@ -1,7 +1,8 @@
 package jeu.controlleur;
 
-import java.io.File;
 import java.net.URL;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jeu.modele.BDD;
 
 public class ClassementController implements Initializable {
     @FXML private Button boutonRetour;
@@ -36,14 +37,15 @@ public class ClassementController implements Initializable {
                 System.out.println("erreur retour démarrage");
             }
         });
-        ajouterJoueur("test1",155);
-        ajouterJoueur("test2",155);
-        ajouterJoueur("test3",155);
-        ajouterJoueur("test1",155);
-        ajouterJoueur("test1",155);
-        ajouterJoueur("test1",155);
-        ajouterJoueur("test1",155);
-        ajouterJoueur("test1",155);
+        recupererJoueurs();
+    }
+    
+    private void recupererJoueurs(){
+        LinkedHashMap<String,Integer> joueurs = BDD.recupererJoueurs();
+        
+        for (Map.Entry<String, Integer> joueur : joueurs.entrySet()){
+            ajouterJoueur(joueur.getKey(),joueur.getValue());
+        }
     }
     
     /**
@@ -72,13 +74,13 @@ public class ClassementController implements Initializable {
     private void ajouterJoueur(String pseudo, int points){
         if (pseudoPremier.getText().equals("Label")){
             pseudoPremier.setText(pseudo);
-            scorePremier.setText(points + " parties gagnées");
+            scorePremier.setText(points + " victoires");
         } else if (scoreDeuxieme.getText().equals("Label")){
             pseudoDeuxieme.setText(pseudo);
-            scoreDeuxieme.setText(points + " parties gagnées");
+            scoreDeuxieme.setText(points + " victoires");
         } else if (pseudoTroisieme.getText().equals("Label")){
             pseudoTroisieme.setText(pseudo);
-            scoreTroisieme.setText(points + " parties gagnées");
+            scoreTroisieme.setText(points + " victoires");
         } else {
             ajouterJoueurApresTop(pseudo,points);
         }
@@ -93,8 +95,8 @@ public class ClassementController implements Initializable {
             Label zoneScore = new Label();
             
             zonePseudo.setText(pseudo);
-            zoneClassement.setText(boxClassement.getChildren().size()+3 + "e");
-            zoneScore.setText(points + " parties gagnées");
+            zoneClassement.setText(boxClassement.getChildren().size()+4 + "e");
+            zoneScore.setText(points + " victoires");
             
             zonePseudo.setStyle("-fx-font-size: 18px;");
             zoneClassement.setStyle("-fx-font-size: 18px;");

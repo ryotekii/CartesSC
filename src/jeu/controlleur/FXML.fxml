@@ -17,7 +17,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="558.0" prefWidth="817.0" stylesheets="@clair.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.FXMLController">
    <children>
-      <StackPane id="fenetre" prefHeight="558.0" prefWidth="817.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane id="fenetre" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView id="fleche" fx:id="flecheSens" fitHeight="105.0" fitWidth="292.0" opacity="0.15" pickOnBounds="true" preserveRatio="true">
                <image>
