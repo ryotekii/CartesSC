@@ -6,8 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import jeu.modele.BDD;
 import jeu.modele.Partie;
+import jeu.vue.BoutonTheme;
 
 public class FinDePartieController{
     @FXML private Button boutonQuitter;
@@ -16,13 +19,21 @@ public class FinDePartieController{
     private String gagnant = "";
     @FXML private Label labelGagnant;
     private Partie partie = new Partie();
+    @FXML private StackPane placeBouton;
     
     public void setGagnant(String g){
         this.gagnant=g;
     }
     
     public void init(){
+        placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+                placeBouton.getChildren().add(boutonTheme);
+            }
+        });
         labelGagnant.setText(gagnant + " a remporté la partie !");
+        BDD.ajouterVictoire(gagnant);
         boutonAccueil.setOnAction(event ->{
             try{
                 retournerDemarrage();

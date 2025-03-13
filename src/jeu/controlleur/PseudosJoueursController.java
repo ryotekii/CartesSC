@@ -14,10 +14,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeu.modele.Cartes.Carte;
 import jeu.modele.Partie;
+import jeu.vue.BoutonTheme;
 
 /**
  * Page de définition des pseudos des joueurs.
@@ -28,6 +30,7 @@ public class PseudosJoueursController implements Initializable {
     @FXML private Button boutonAjouter;
     @FXML private Button boutonValider;
     private final ArrayList<TextField> joueurs = new ArrayList<>();
+    @FXML private StackPane placeBouton;
     
     
     private Partie partie;
@@ -41,6 +44,12 @@ public class PseudosJoueursController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+                placeBouton.getChildren().add(boutonTheme);
+            }
+        });
         boutonRetour.setOnMouseClicked(event ->{
             try{
                 retournerDemarrage();

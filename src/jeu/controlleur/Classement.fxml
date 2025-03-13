@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@clair.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.ClassementController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.ClassementController">
    <children>
       <Button fx:id="boutonRetour" mnemonicParsing="false" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0">
          <graphic>
@@ -91,5 +91,6 @@
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Label>
+      <StackPane fx:id="placeBouton" layoutX="660.0" layoutY="-26.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
    </children>
 </AnchorPane>

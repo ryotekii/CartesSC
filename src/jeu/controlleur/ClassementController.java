@@ -14,9 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeu.modele.BDD;
+import jeu.vue.BoutonTheme;
 
 public class ClassementController implements Initializable {
     @FXML private Button boutonRetour;
@@ -27,9 +29,16 @@ public class ClassementController implements Initializable {
     @FXML private Label pseudoPremier;
     @FXML private Label pseudoDeuxieme;
     @FXML private Label pseudoTroisieme;
+    @FXML private StackPane placeBouton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+                placeBouton.getChildren().add(boutonTheme);
+            }
+        });
         boutonRetour.setOnAction(event ->{
             try{
                 retournerDemarrage();

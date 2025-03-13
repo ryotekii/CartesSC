@@ -9,8 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jeu.modele.Partie;
+import jeu.vue.BoutonTheme;
 
 /**
  * La fenêtre d'options en partie.
@@ -22,6 +24,7 @@ public class OptionsController implements Initializable {
     private Stage popupStage;
     private Button boutonFinir;
     @FXML private Button boutonSauvegarder;
+    @FXML private StackPane placeBouton;
     
     /**
      * Définit la partie en cours.
@@ -33,9 +36,16 @@ public class OptionsController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+                placeBouton.getChildren().add(boutonTheme);
+            }
+        });
         boutonReprendre.setOnAction(event ->{
-            Stage stage = (Stage) boutonQuitter.getScene().getWindow();
-            stage.close();
+            try{
+                retournerPartie();
+            } catch (Exception e){}
         });
         
         boutonSauvegarder.setOnAction(event ->{
@@ -109,5 +119,24 @@ public class OptionsController implements Initializable {
         stage.show();
         //Stage fenetreBase = (Stage) boutonReprendre.getScene().getWindow();
         //fenetreBase.close();
+    }
+    
+    private void retournerPartie() throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML.fxml"));
+        Parent root = loader.load();
+    
+        FXMLController controller = loader.getController();
+        controller.setPartie(partie);
+        controller.init();
+
+        Stage stage = new Stage();
+        stage.setTitle("Partie");
+        stage.setScene(new Scene(root,800,600));
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonReprendre.getScene().getWindow();
+        fenetreBase.close();
     }
 }

@@ -8,10 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jeu.modele.Joueur;
 import jeu.modele.Partie;
 import jeu.modele.Serialisation;
+import jeu.vue.BoutonTheme;
 
 public class SauvegardesController{
     @FXML private Button boutonRetour;
@@ -23,8 +25,15 @@ public class SauvegardesController{
     @FXML private Label label2;
     @FXML private Label label3;
     private Partie partie;
+    @FXML private StackPane placeBouton;
     
     public void changerLabelPrincipal(String s){
+        placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+                placeBouton.getChildren().add(boutonTheme);
+            }
+        });
         if (s.equals("sauvegarder")){
             labelSauvegardes.setText("Choisissez un emplacement :");
         } else if (s.equals("reprendre")){

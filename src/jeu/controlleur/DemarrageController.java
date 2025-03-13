@@ -9,11 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jeu.modele.Partie;
+import jeu.vue.BoutonTheme;
 
 public class DemarrageController implements Initializable {
     @FXML private Button nouvellePartie;
@@ -21,9 +23,16 @@ public class DemarrageController implements Initializable {
     @FXML private Button boutonQuitter;
     @FXML private Button boutonClassement;
     @FXML private Button boutonReprendre;
+    @FXML private StackPane placeBouton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
+            placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) { // Vérifier que la scène est bien initialisée
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+                placeBouton.getChildren().add(boutonTheme);
+            }
+        });
         nouvellePartie.setOnMouseClicked(event ->{
             creerPartie();
             System.out.println(this.partie);

@@ -42,6 +42,8 @@ import jeu.modele.Cartes.Tdah;
 import jeu.modele.Cartes.TroubleEquilibre;
 import jeu.modele.Parametres;
 import jeu.modele.Partie;
+import jeu.modele.Serialisation;
+import jeu.vue.BoutonTheme;
 import jeu.vue.CarteView;
 
 /**
@@ -72,6 +74,7 @@ public class FXMLController {
     @FXML private Button boutonInfos;
     @FXML private Tooltip tooltipInfos;
     @FXML private ImageView flecheSens;
+    @FXML private Button annuler;
 
     /**
      * Initialise la table de jeu. Créé les paquets à l'écran en fonction du
@@ -79,6 +82,11 @@ public class FXMLController {
      * à la page correspondante.
      */
     public void init() {
+        flecheSens.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+            }
+        });
         this.partie.setController(this);
         switch (partie.getNombreJoueurs()) {
             case 4 -> {
@@ -104,6 +112,7 @@ public class FXMLController {
         surbrillance.setColor(Color.CORAL);
         surbrillance.setRadius(20);
         surbrillance.setSpread(0.6);
+        annuler.setDisable(true);
         
         mettreAJourAffichage();
         
@@ -127,6 +136,13 @@ public class FXMLController {
         boutonFinir.setOnAction(event ->{
             partie.getOrdreDeJeu().passerSuivant();
             partie.setPeutPoser(true);
+            this.mettreAJourAffichage();
+        });
+        
+        annuler.setOnAction(event ->{
+            partie = Serialisation.recuperer(0);
+            partie.setController(this);
+            annuler.setDisable(true);
             this.mettreAJourAffichage();
         });
     }
@@ -176,6 +192,10 @@ public class FXMLController {
     
         controller.setPopupStage(popupStage);
         popupStage.showAndWait();
+        
+        Stage fenetreBase = (Stage) boutonOptions.getScene().getWindow();
+        fenetreBase.close();
+        
     }
     
     /**
@@ -201,6 +221,7 @@ public class FXMLController {
         if (!partie.getPeutPoser()){
             this.griserMain();
         }
+        boutonFinir.setDisable(partie.getPeutPoser());
     }
     
     /**
@@ -223,6 +244,8 @@ public class FXMLController {
         });
         
         imagePioche.setOnMouseClicked(event ->{
+            annuler.setDisable(false);
+            Serialisation.serialiser(partie, 0);
             remettreCarteEnPlace();
             partie.getListeJoueurs()[0].piocher();
             partie.setPeutPoser(false);
@@ -277,6 +300,8 @@ public class FXMLController {
         });
         
         boxPaquet.setOnMouseClicked(event ->{
+            annuler.setDisable(false);
+            Serialisation.serialiser(partie, 0);
             try {
                 partie.poserCarteSelectionnee();
                 partie.setCarteSelectionnee(null);

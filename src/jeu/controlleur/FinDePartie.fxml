@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@clair.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.FinDePartieController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.FinDePartieController">
    <children>
       <Button id="boutonReprendre" fx:id="boutonRejouer" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" text="Rejouer" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <Button id="boutonSauvegarder" fx:id="boutonAccueil" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Accueil" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
@@ -22,5 +22,6 @@
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>
+      <StackPane fx:id="placeBouton" layoutX="660.0" layoutY="-26.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
    </children>
 </AnchorPane>

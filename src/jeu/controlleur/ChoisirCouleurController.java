@@ -8,6 +8,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import jeu.vue.BoutonTheme;
 
 public class ChoisirCouleurController implements Initializable{
     @FXML private Rectangle choisirBleu;
@@ -21,6 +22,11 @@ public class ChoisirCouleurController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        choisirBleu.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+            }
+        });
         ombre.setColor(Color.BLACK);
         ombre.setWidth(21);
         ombre.setHeight(21);
