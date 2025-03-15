@@ -24,10 +24,11 @@ public class DemarrageController implements Initializable {
     @FXML private Button boutonClassement;
     @FXML private Button boutonReprendre;
     @FXML private StackPane placeBouton;
+    @FXML private Button boutonRejoindre;
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
-            placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+        placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) { // Vérifier que la scène est bien initialisée
                 BoutonTheme boutonTheme = new BoutonTheme(newScene);
                 placeBouton.getChildren().add(boutonTheme);
@@ -53,6 +54,14 @@ public class DemarrageController implements Initializable {
                 ouvrirClassement();
             }catch(Exception e){
                 System.out.println("erreur affichage classement");
+                e.printStackTrace();
+            }
+        });
+        
+        boutonRejoindre.setOnAction(event ->{
+            try{
+                ouvrirRejoindre();
+            }catch(Exception e){
                 e.printStackTrace();
             }
         });
@@ -139,6 +148,23 @@ public class DemarrageController implements Initializable {
         
         stage.show();
         Stage fenetreBase = (Stage) boutonReprendre.getScene().getWindow();
+        fenetreBase.close();
+    }
+    
+    /**
+     * Ouvre la page de multijoueur et ferme celle du démarrage.
+     * @throws Exception si la page du classsement ne s'ouvre pas.
+     */
+    private void ouvrirRejoindre() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Rejoindre.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Sauvegardes");
+        stage.setScene(new Scene(root,800,600));
+        
+        stage.show();
+        Stage fenetreBase = (Stage) boutonRejoindre.getScene().getWindow();
         fenetreBase.close();
     }
 }

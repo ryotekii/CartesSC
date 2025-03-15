@@ -1,6 +1,7 @@
 package jeu.modele;
 
 import java.io.Serializable;
+import java.net.Socket;
 
 public class Joueur implements Serializable {
     private String pseudo;
@@ -8,7 +9,8 @@ public class Joueur implements Serializable {
     /*
     Fonction qui demande le pseudo à chaque joueur.
     */
-    private final Partie partie;
+    private Partie partie;
+    private Socket socket;
     
     /*private String demanderPseudo(int num) {
         String n;
@@ -28,6 +30,14 @@ public class Joueur implements Serializable {
         this.pseudo=p;
     }
     
+    public void setSocket(Socket s){
+        this.socket=s;
+    }
+    
+    public Socket getSocket(){
+        return this.socket;
+    }
+    
     /**
      * Le constructeur.
      * @param p la partie associée.
@@ -35,6 +45,14 @@ public class Joueur implements Serializable {
     public Joueur(Partie p){
         this.partie = p;
         this.main = new PaquetJoueur(this);
+    }
+    
+    public Joueur(){
+        this.main=new PaquetJoueur(this);
+    }
+    
+    public void setPartie(Partie p){
+        this.partie=p;
     }
     
     /**
