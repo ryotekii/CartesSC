@@ -24,6 +24,7 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -73,7 +74,7 @@ public class FXMLController {
     @FXML private Button boutonFinir;
     @FXML private Button boutonInfos;
     @FXML private Tooltip tooltipInfos;
-    @FXML private ImageView flecheSens;
+    @FXML private StackPane flecheSens;
     @FXML private Button annuler;
 
     /**

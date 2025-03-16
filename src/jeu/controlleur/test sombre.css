@@ -55,6 +55,19 @@
     -fx-text-fill: white;
 }
 
-#parametres, #annuler {
-    -fx-blend-mode: difference;
+#imageFleche {
+    -fx-background-image: url('../images/retourblanc.png');
+    -fx-background-size: contain;
+}
+
+#imageOptions {
+    -fx-background-image: url('../images/parametresblanc.png');
+    -fx-background-size: contain;
+}
+
+#flecheSens {
+    -fx-background-image: url('../images/flecheblanche.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }

@@ -21,11 +21,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jeu.modele.Joueur;
-import jeu.modele.Serveur;
+import jeu.vue.BoutonTheme;
 
 public class RejoindreController implements Initializable {
     @FXML private Label label;
@@ -35,6 +34,7 @@ public class RejoindreController implements Initializable {
     @FXML TextField pseudoField;
     @FXML Button boutonQuitter;
     private Joueur joueur = new Joueur();
+    @FXML StackPane placeBouton;
     
     private InetAddress ip;
     
@@ -47,6 +47,13 @@ public class RejoindreController implements Initializable {
             boutonRejoindre.setDisable(newValue.trim().isEmpty());
         });
         
+        placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                BoutonTheme boutonTheme = new BoutonTheme(newScene);
+                placeBouton.getChildren().add(boutonTheme);
+            }
+        });
+        
         boutonRetour.setOnAction(e ->{
             try{
                 retournerDemarrage();
@@ -54,23 +61,18 @@ public class RejoindreController implements Initializable {
                 System.out.println("erreur retour démarrage");
             }
         });
-        boutonTest.setOnAction(e -> {
-            new Thread(() -> Serveur.creerServeur()).start();
-        });
         
         boutonRejoindre.setOnAction(e -> {
             if (voirPartie()) {
                 joueur.setPseudo(pseudoField.getText());
-                Serveur.rejoindrePartie(joueur);
-                boutonRejoindre.setDisable(true);
-                boutonQuitter.setDisable(false);
+                //Serveur.rejoindrePartie(joueur);
             } else {
             label.setText("Aucune partie disponible.");
             }
         });
         
         boutonQuitter.setOnAction(e ->{
-            Serveur.quitterPartie(joueur);
+            //Serveur.quitterPartie(joueur);
         });
 
     }

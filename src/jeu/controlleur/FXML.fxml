@@ -13,17 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="558.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controlleur.FXMLController">
    <children>
       <StackPane id="fenetre" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView id="fleche" fx:id="flecheSens" fitHeight="105.0" fitWidth="292.0" opacity="0.15" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/fleche.png" />
-               </image>
-            </ImageView>
             <ImageView id="imagePioche" fx:id="imagePioche" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-130.0" StackPane.alignment="CENTER">
                <image>
                   <Image url="@../images/dos.png" />
@@ -35,6 +29,7 @@
                   <DropShadow />
                </effect>
             </ImageView>
+            <StackPane fx:id="flecheSens" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" style="-fx-opacity: 0.2;" />
             <HBox id="paquetBox" fx:id="boxPaquet" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: gray;" translateX="130.0" StackPane.alignment="CENTER">
                <children>
                   <ImageView id="imagePaquet" fx:id="imagePaquet" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -62,19 +57,11 @@
       </Button>
       <Button id="boutonRetour" fx:id="annuler" layoutX="51.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="13.0">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/retour.png" />
-               </image>
-            </ImageView>
+            <StackPane fx:id="imageFleche" prefHeight="20.0" prefWidth="20.0" />
          </graphic></Button>
       <Button id="boutonOptions" fx:id="boutonOptions" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="13.0">
          <graphic>
-            <ImageView fx:id="parametres" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/parametres.png" />
-               </image>
-            </ImageView>
+            <StackPane fx:id="imageOptions" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" />
          </graphic></Button>
       <HBox id="cartesJoueurDevant" fx:id="paquetJoueurDevant" prefHeight="121.0" prefWidth="400.0" rotate="180.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="-30.0" />
       <VBox id="cartesJoueurGauche" fx:id="paquetJoueurGauche" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="-20.0" AnchorPane.topAnchor="150.0" />
@@ -88,16 +75,16 @@
             <DropShadow />
          </effect>
       </Rectangle>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Couleur actuelle :" textAlignment="RIGHT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <Label text="Couleur actuelle :" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
-      </Text>
+      </Label>
       <Label fx:id="pseudoGauche" alignment="CENTER" contentDisplay="CENTER" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="200.0" />
       <Label fx:id="pseudoDevant" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="90.0" />
       <Label fx:id="pseudoPrincipal" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="50.0" />
       <Label fx:id="pseudoDroit" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" textAlignment="RIGHT" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0" />
-      <Button fx:id="boutonInfos" mnemonicParsing="false" text="?" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="70.0">
+      <Button fx:id="boutonInfos" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="?" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="70.0">
          <tooltip>
             <Tooltip fx:id="tooltipInfos" contentDisplay="CENTER" text="Sélectionnez une carte pour voir son effet !" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
          </tooltip>
