@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jeu.modele.Partie;
-import jeu.vue.BoutonTheme;
 
 /**
  * La fenêtre d'options en partie.
@@ -34,6 +34,11 @@ public class OptionsController implements Initializable {
         this.partie=p;
     }
     
+    /**
+     * Initialise les effets sur les composants graphiques.
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb){
         placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
@@ -74,7 +79,10 @@ public class OptionsController implements Initializable {
         });
     }
     
-    
+    /**
+     * Associe une fenêtre au controlleur.
+     * @param s 
+     */
     public void setPopupStage(Stage s){
         this.popupStage = s;
     }
@@ -83,7 +91,7 @@ public class OptionsController implements Initializable {
      * Retourne à la page d'accueil et quitte la partie en cours.
      * @throws Exception 
      */
-    public void retourAccueil() throws Exception {
+    private void retourAccueil() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Demarrage.fxml"));
         Parent root = loader.load();
     

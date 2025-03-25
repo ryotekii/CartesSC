@@ -69,7 +69,7 @@ public final class Pioche implements Serializable {
      * Renvoie la carte du dessus et la retire de la pioche. Si la pioche est vide,
      * elle est reformée grâce au paquet.
      * @return la carte piochée.
-     * @see refairePaquet().
+     * @see refairePaquet()
      */
     public Carte piocher(){
         if (pioche.isEmpty()){

@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +16,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jeu.modele.Partie;
-import jeu.vue.BoutonTheme;
 
 public class DemarrageController implements Initializable {
     @FXML private Button nouvellePartie;
@@ -26,6 +26,11 @@ public class DemarrageController implements Initializable {
     @FXML private StackPane placeBouton;
     @FXML private Button boutonRejoindre;
     
+    /**
+     * Initialise les effets sur les composants graphiques.
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb){
         placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {

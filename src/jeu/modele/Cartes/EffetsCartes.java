@@ -9,10 +9,18 @@ import jeu.modele.Partie;
 public class EffetsCartes implements Serializable {
     private Partie partie;
     
+    /**
+     * Le constructeur.
+     * @param p la partie.
+     */
     public EffetsCartes(Partie p){
         this.partie = p;
     }
     
+    /**
+     * Applique les effets associés aux cartes lorsqu'on en pose une sur le paquet.
+     * @param c la carte à poser.
+     */
     public void appliquerEffets(Carte c){
         if (c instanceof CriseEpileptique){
             partie.distribuer(1, partie.getOrdreDeJeu().getJoueurActuel());
@@ -39,7 +47,7 @@ public class EffetsCartes implements Serializable {
             partie.setCouleur(aleatoire.getCouleur());
             partie.getOrdreDeJeu().sauterSuivant();
             partie.getEffets().appliquerEffets(aleatoire);
-//vérifier si possible ce qui se passe lorsque la carte jouée est à son tour amnésie sélective ?
+
         } else if (c instanceof BlocageMoteur){
             partie.getOrdreDeJeu().sauterSuivant();
         } else if (c instanceof Narcolepsie){
@@ -54,9 +62,6 @@ public class EffetsCartes implements Serializable {
             partie.getOrdreDeJeu().sauterSuivant();
         }
         
-        /*
-        Modifier main étrangère pour si elle est jouée en dernier ? Ou les rgèles d'effets ?
-        */
         if (!(c instanceof Tdah)){
             partie.setPeutPoser(false);
         }

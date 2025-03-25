@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jeu.modele.BDD;
 import jeu.modele.Partie;
-import jeu.vue.BoutonTheme;
 
 public class FinDePartieController{
     @FXML private Button boutonQuitter;
@@ -21,10 +21,17 @@ public class FinDePartieController{
     private Partie partie = new Partie();
     @FXML private StackPane placeBouton;
     
+    /**
+     * Définit le gagnant.
+     * @param g le gagnant.
+     */
     public void setGagnant(String g){
         this.gagnant=g;
     }
     
+    /**
+     * Initialise la page avec le nom du gagnant.
+     */
     public void init(){
         placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {

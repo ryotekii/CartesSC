@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,7 +19,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeu.modele.BDD;
-import jeu.vue.BoutonTheme;
 
 public class ClassementController implements Initializable {
     @FXML private Button boutonRetour;
@@ -31,6 +31,11 @@ public class ClassementController implements Initializable {
     @FXML private Label pseudoTroisieme;
     @FXML private StackPane placeBouton;
     
+    /**
+     * Initialise les effets sur les éléments graphiques.
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb){
         placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
@@ -49,6 +54,9 @@ public class ClassementController implements Initializable {
         recupererJoueurs();
     }
     
+    /**
+     * Récupère les joueurs dans la base de données et les ajoute.
+     */
     private void recupererJoueurs(){
         LinkedHashMap<String,Integer> joueurs = BDD.recupererJoueurs();
         
@@ -76,10 +84,11 @@ public class ClassementController implements Initializable {
         fenetreBase.close();
     }
     
-    private void afficherClassement(){
-        
-    }
-    
+    /**
+     * Ajoute un joueur dans le classement.
+     * @param pseudo le pseudo du joueur.
+     * @param points le nombre de victoires du joueur.
+     */
     private void ajouterJoueur(String pseudo, int points){
         if (pseudoPremier.getText().equals("Label")){
             pseudoPremier.setText(pseudo);
@@ -95,6 +104,12 @@ public class ClassementController implements Initializable {
         }
     }
     
+    /**
+     * Ajoute un joueur lorsqu'il y en a déjà 3 sur le podium. Créé une ligne
+     * dans l'espace prévu pour et affiche les informations du joueur.
+     * @param pseudo le pseudo du joueur.
+     * @param points le nombre de victoires du joueur.
+     */
     private void ajouterJoueurApresTop(String pseudo, int points){
         if (boxClassement.getChildren().size() <7){
             HBox joueur = new HBox(20);

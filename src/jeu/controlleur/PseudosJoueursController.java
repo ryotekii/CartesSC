@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeu.modele.Cartes.Carte;
 import jeu.modele.Partie;
-import jeu.vue.BoutonTheme;
 
 /**
  * Page de définition des pseudos des joueurs.

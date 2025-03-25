@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -44,7 +45,6 @@ import jeu.modele.Cartes.TroubleEquilibre;
 import jeu.modele.Parametres;
 import jeu.modele.Partie;
 import jeu.modele.Serialisation;
-import jeu.vue.BoutonTheme;
 import jeu.vue.CarteView;
 
 /**
@@ -157,7 +157,7 @@ public class FXMLController {
     }
     
     /**
-     * Remplace l'image au-dessus du paquet par l'image de la carte la plus au-dessus du paquet.
+     * Remplace l'image du paquet par l'image de la carte la plus au-dessus du paquet.
      */
     public void mettreAJourViewPaquet() {
         CarteView nouvelleCarteView = new CarteView(partie.getPaquet().voirCarteSup(),500);
@@ -176,7 +176,7 @@ public class FXMLController {
      * Ouvre la page des options.
      * @throws Exception si la page ne s'ouvre pas.
      */
-    public void ouvrirOptions() throws Exception {
+    private void ouvrirOptions() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Options.fxml"));
         Parent root = loader.load();
     
@@ -481,7 +481,7 @@ public class FXMLController {
         hb.getChildren().clear();
         hb.setAlignment(Pos.CENTER);
         for (int i=0;i<nb;i++) {
-            ImageView image = new ImageView(new Image(Parametres.IMAGES+"dos.png"));
+            ImageView image = new ImageView(new Image(getClass().getResource(Parametres.IMAGES+"dos.png").toExternalForm()));
             image.setFitWidth(largeurCarte);
             image.setPreserveRatio(true);
             image.setEffect(ombreCarte);
@@ -509,7 +509,7 @@ public class FXMLController {
         vb.getChildren().clear();
         vb.setAlignment(Pos.CENTER);
         for (int i=0;i<nb;i++) {
-            ImageView image = new ImageView(new Image(Parametres.IMAGES+"dos.png"));
+            ImageView image = new ImageView(new Image(getClass().getResource(Parametres.IMAGES+"dos.png").toExternalForm()));
             image.setFitWidth(largeurCarte);
             image.setPreserveRatio(true);
             image.setEffect(ombreCarte);
@@ -538,7 +538,7 @@ public class FXMLController {
         vb.getChildren().clear();
         vb.setAlignment(Pos.CENTER);
         for (int i=0;i<nb;i++) {
-            ImageView image = new ImageView(new Image(Parametres.IMAGES+"dos.png"));
+            ImageView image = new ImageView(new Image(getClass().getResource(Parametres.IMAGES+"dos.png").toExternalForm()));
             image.setFitWidth(largeurCarte);
             image.setPreserveRatio(true);
             image.setEffect(ombreCarte);
@@ -547,6 +547,9 @@ public class FXMLController {
         }
     }
     
+    /**
+     * Change le texte du tooltip d'informations en fonction de la carte sélectionnée.
+     */
     private void afficherInfosCarte(){
         if (partie.getCarteSelectionnee()==null){
             tooltipInfos.setText("Sélectionnez une carte pour voir son effet !");
@@ -573,6 +576,9 @@ public class FXMLController {
         }
     }
     
+    /**
+     * Désactive le paquet, la pioche et la main du joueur.
+     */
     public void griserMain(){
         HBox hb = paquetJoueurPrincipal;
         ColorAdjust ca = new ColorAdjust(0,-0.5,-0.5,0);

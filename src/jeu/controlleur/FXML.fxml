@@ -84,7 +84,7 @@
       <Label fx:id="pseudoDevant" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="90.0" />
       <Label fx:id="pseudoPrincipal" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="50.0" />
       <Label fx:id="pseudoDroit" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" textAlignment="RIGHT" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0" />
-      <Button fx:id="boutonInfos" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="?" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="70.0">
+      <Button fx:id="boutonInfos" maxHeight="30.0" maxWidth="30.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="?" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="70.0">
          <tooltip>
             <Tooltip fx:id="tooltipInfos" contentDisplay="CENTER" text="Sélectionnez une carte pour voir son effet !" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
          </tooltip>

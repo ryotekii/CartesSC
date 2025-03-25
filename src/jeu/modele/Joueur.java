@@ -6,9 +6,6 @@ import java.net.Socket;
 public class Joueur implements Serializable {
     private String pseudo;
     private final PaquetJoueur main;
-    /*
-    Fonction qui demande le pseudo à chaque joueur.
-    */
     private Partie partie;
     private Socket socket;
     

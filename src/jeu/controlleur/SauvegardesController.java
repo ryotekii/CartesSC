@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXML;
@@ -13,7 +14,6 @@ import javafx.stage.Stage;
 import jeu.modele.Joueur;
 import jeu.modele.Partie;
 import jeu.modele.Serialisation;
-import jeu.vue.BoutonTheme;
 
 public class SauvegardesController{
     @FXML private Button boutonRetour;
@@ -27,6 +27,10 @@ public class SauvegardesController{
     private Partie partie;
     @FXML private StackPane placeBouton;
     
+    /**
+     * Définit le texte du label principal en fonction de la page par laquelle on y accède.
+     * @param s la provenance du clic.
+     */
     public void changerLabelPrincipal(String s){
         placeBouton.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {
@@ -41,6 +45,13 @@ public class SauvegardesController{
         }
     }
     
+    /**
+     * Sérialise la partie dans l'emplacement choisi.
+     * Remplace le label de la sauvegarde choisi par les informations de la partie
+     * (pseudos, date).
+     * @param n l'emplacement de la sauvegarde.
+     * @param p la partie à sérialiser.
+     */
     public void definirSauvegarde(int n,Partie p){
         Label[] labels = new Label[]{label1,label2,label3};
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm"));
@@ -54,9 +65,17 @@ public class SauvegardesController{
         Serialisation.serialiserLabels(textesLabels);
     }
     
+    /**
+     * Définit la partie en cours lorsqu'on vient de FXML.
+     * @param p la partie.
+     */
     public void setPartie(Partie p){
         this.partie=p;
     }
+    
+    /**
+     * Initialise l'affichage lorsqu'on veut créer des sauvegardes.
+     */
     public void initSauvegarder(){
         try{
             mettreAJourLabels();
@@ -76,6 +95,10 @@ public class SauvegardesController{
         });
     }
     
+    
+    /**
+     * Initialise l'affichage lorsqu'on veut reprendre une partie.
+     */
     public void initReprendre(){
         try{
             mettreAJourLabels();
@@ -128,17 +151,28 @@ public class SauvegardesController{
         fenetreBase.close();
     }
     
+    /**
+     * Ferme la fenêtre actuelle.
+     */
     private void retournerOptions(){
         Stage stage = (Stage) boutonRetour.getScene().getWindow();
         stage.close();
     }
     
+    /**
+     * Met à jour les informations sur les parties sauvegardées.
+     */
     private void mettreAJourLabels(){
         label1.setText(Serialisation.recupererLabels()[0]);
         label2.setText(Serialisation.recupererLabels()[1]);
         label3.setText(Serialisation.recupererLabels()[2]);
     }
     
+    /**
+     * Lance la partie associée au bouton n.
+     * @param n le numéro de la sauvegarde.
+     * @throws Exception 
+     */
     private void relancerPartie(int n) throws Exception {
         Partie partie = Serialisation.recuperer(n);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML.fxml"));

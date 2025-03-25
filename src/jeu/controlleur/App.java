@@ -10,6 +10,10 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.ColorAdjust;
 import javafx.stage.Stage;
 
+/**
+ *
+ * @author salom
+ */
 public class App extends Application {
     
     /**
@@ -28,7 +32,10 @@ public class App extends Application {
         stage.show();
     }
     
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args){
         launch(args);
     }

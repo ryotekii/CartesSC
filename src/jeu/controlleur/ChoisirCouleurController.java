@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -8,7 +9,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import jeu.vue.BoutonTheme;
 
 public class ChoisirCouleurController implements Initializable{
     @FXML private Rectangle choisirBleu;
@@ -20,6 +20,11 @@ public class ChoisirCouleurController implements Initializable{
     private final DropShadow ombre = new DropShadow();
     private final DropShadow surbrillance = new DropShadow();
     
+    /**
+     * Initialise les effets sur les composants graphiques.
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb){
         choisirBleu.sceneProperty().addListener((obs, oldScene, newScene) -> {

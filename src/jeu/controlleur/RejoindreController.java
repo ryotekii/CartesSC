@@ -1,5 +1,6 @@
 package jeu.controlleur;
 
+import jeu.vue.BoutonTheme;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,7 +25,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jeu.modele.Joueur;
-import jeu.vue.BoutonTheme;
 
 public class RejoindreController implements Initializable {
     @FXML private Label label;
@@ -38,7 +38,11 @@ public class RejoindreController implements Initializable {
     
     private InetAddress ip;
     
-    
+    /**
+     * Ajoute les effets sur les éléments graphiques.
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         boutonRejoindre.setDisable(true);
@@ -77,6 +81,9 @@ public class RejoindreController implements Initializable {
 
     }
     
+    /**
+     * Récupère l'IP de l'ordinateur.
+     */
     private void getIp(){
         try {
             ip = InetAddress.getLocalHost();
@@ -86,6 +93,10 @@ public class RejoindreController implements Initializable {
         }
     }
     
+    /**
+     * Permet de savoir s'il y a une partie en cours.
+     * @return true ou false.
+     */
     private boolean voirPartie() {
         getIp();
         try (Socket socket = new Socket(ip, 5000)) {
@@ -97,7 +108,7 @@ public class RejoindreController implements Initializable {
 
     
     /**
-     * Ouvre la fenêtre de démarrage et ferme celle des sauvegardes.
+     * Ouvre la fenêtre de démarrage et ferme celle du multijoueur.
      * @throws Exception si la fenêtre de démarrage ne s'ouvre pas.
      */
     private void retournerDemarrage() throws Exception {

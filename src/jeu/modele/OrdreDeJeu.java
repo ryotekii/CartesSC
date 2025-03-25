@@ -27,15 +27,26 @@ public class OrdreDeJeu implements Serializable {
         }
     }
     
+    /**
+     * Renvoie le joueur dont c'est le tour.
+     * @return le joueur.
+     */
     public Joueur getJoueurActuel(){
         return this.partie.getListeJoueurs()[0];
     }
     
+    /**
+     * Change le sens de jeu.
+     */
     public void changerSens(){
         sens = !sens;
         partie.getController().retournerFleche();
     }
     
+    /**
+     * Renvoie le prochain joueur.
+     * @return le prochain joueur.
+     */
     public Joueur getJoueurSuivant(){
         if (sens){
             return this.partie.getListeJoueurs()[1];
@@ -68,6 +79,9 @@ public class OrdreDeJeu implements Serializable {
         n = 1;
     }
     
+    /**
+     * Lors du prochain appel à passerSuivant(), le prochain joueur sera ignoré.
+     */
     public void sauterSuivant(){
         n = 2;
     }

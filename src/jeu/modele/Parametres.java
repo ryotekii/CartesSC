@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class Parametres {
     public static final String[] COULEURS = {"Rouge","Bleu","Vert"};
-    public static final String IMAGES = "\\jeu\\images\\";
+    public static String IMAGES = "/jeu/images/";
     
     /**
      * Retourne un entier aléatoire entre min et max inclus.

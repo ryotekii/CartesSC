@@ -76,6 +76,10 @@ public class Partie implements Serializable {
         this.controller=c;
     }
     
+    /**
+     * Renvoie les effets de cartes associés à la partie.
+     * @return les effets.
+     */
     public EffetsCartes getEffets(){
         return this.effets;
     }
@@ -88,10 +92,18 @@ public class Partie implements Serializable {
         return this.paquet;
     }
     
+    /**
+     * Change l'état de l'attribut peutPoser.
+     * @param b true ou false.
+     */
     public void setPeutPoser(Boolean b){
         peutPoser=b;
     }
     
+    /**
+     * Renvoie l'état du booléen peutPoser.
+     * @return true ou false, selon l'état de l'attribut.
+     */
     public boolean getPeutPoser(){
         return this.peutPoser;
     }
