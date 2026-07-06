@@ -1,0 +1,65 @@
+.root {
+    -fx-background-color: white;
+}
+
+.button {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #d3d3d3);
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-padding: 10px;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #d3d3d3, #c0c0c0);
+    -fx-text-fill: black;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.text-field {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #fdfdfd);
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-padding: 10px;
+}
+
+.toggle-button {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #d3d3d3);
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-padding: 10px;
+}
+
+.toggle-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
+    -fx-text-fill: black;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #bbb;
+}
+
+#imageFleche {
+    -fx-background-image: url('../images/retour.png');
+    -fx-background-size: contain;
+}
+
+#imageOptions {
+    -fx-background-image: url('../images/parametres.png');
+    -fx-background-size: contain;
+}
+
+#flecheSens {
+    -fx-background-image: url('../images/fleche.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

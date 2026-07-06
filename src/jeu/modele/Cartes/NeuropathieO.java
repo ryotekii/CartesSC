@@ -1,0 +1,15 @@
+package jeu.modele.Cartes;
+
+import java.io.Serializable;
+
+public class NeuropathieO extends CarteSpeciale implements Serializable {
+    //Change la couleur en jeu.
+    public NeuropathieO(){
+        super("Joker");
+    }
+    
+    @Override
+    public String toString(){
+        return "Neuropathie optique";
+    }
+}
